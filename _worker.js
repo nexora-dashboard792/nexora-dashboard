@@ -4,36 +4,50 @@ export default {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora — Demo Account Platform</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NEXORA — Demo Account Platform</title>
 
 <style>
 *{box-sizing:border-box}
 
 :root{
-  --bg:#070b14;
-  --panel:#0e1524;
-  --panel2:#111a2c;
-  --border:rgba(255,255,255,.08);
-  --text:#f8fafc;
-  --muted:#94a3b8;
+  --bg:#07111f;
+  --panel:#0d1a2b;
+  --panel2:#102238;
+  --line:rgba(255,255,255,.09);
+  --text:#eef6ff;
+  --muted:#91a4ba;
   --blue:#3b82f6;
-  --cyan:#22d3ee;
+  --blue2:#60a5fa;
   --green:#22c55e;
   --red:#ef4444;
-  --gold:#f59e0b;
+  --yellow:#f59e0b;
 }
 
-html,body{
+html{scroll-behavior:smooth}
+
+body{
   margin:0;
-  min-height:100%;
   font-family:Inter,Arial,sans-serif;
   background:
-    radial-gradient(circle at 15% 10%,rgba(59,130,246,.15),transparent 28%),
-    radial-gradient(circle at 85% 15%,rgba(34,211,238,.09),transparent 25%),
-    radial-gradient(circle at 50% 90%,rgba(99,102,241,.08),transparent 32%),
-    var(--bg);
+    radial-gradient(circle at 15% 10%,rgba(59,130,246,.18),transparent 30%),
+    radial-gradient(circle at 85% 15%,rgba(14,165,233,.12),transparent 28%),
+    radial-gradient(circle at 50% 90%,rgba(99,102,241,.12),transparent 35%),
+    linear-gradient(135deg,#050b14,#091625 50%,#07111f);
   color:var(--text);
+  min-height:100vh;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:42px 42px;
 }
 
 button,input{
@@ -46,112 +60,111 @@ button{
 
 input{
   width:100%;
-  padding:14px 15px;
+  padding:14px;
   margin:7px 0;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:#0a1120;
+  border:1px solid #26384e;
+  border-radius:10px;
+  background:#0b1727;
   color:white;
   outline:none;
 }
 
-input::placeholder{
-  color:#64748b;
-}
-
 input:focus{
-  border-color:rgba(59,130,246,.8);
+  border-color:var(--blue);
   box-shadow:0 0 0 3px rgba(59,130,246,.12);
 }
+
+.hidden{
+  display:none!important;
+}
+
+/* AUTH */
 
 #auth{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:24px;
-  background:
-    radial-gradient(circle at 20% 20%,rgba(59,130,246,.2),transparent 30%),
-    radial-gradient(circle at 80% 80%,rgba(34,211,238,.12),transparent 28%),
-    #050912;
+  padding:20px;
+  position:relative;
+  z-index:1;
 }
 
 .auth-card{
   width:100%;
-  max-width:430px;
-  padding:34px;
-  border:1px solid var(--border);
+  max-width:440px;
+  padding:36px;
+  border:1px solid var(--line);
   border-radius:24px;
-  background:rgba(14,21,36,.92);
-  box-shadow:0 30px 100px rgba(0,0,0,.5);
+  background:rgba(10,23,39,.88);
   backdrop-filter:blur(20px);
+  box-shadow:0 30px 100px rgba(0,0,0,.45);
 }
 
 .brand{
+  text-align:center;
   font-size:30px;
   font-weight:900;
-  letter-spacing:2px;
-  text-align:center;
+  letter-spacing:3px;
 }
 
-.brand-mark{
-  display:inline-flex;
-  width:42px;
-  height:42px;
-  align-items:center;
-  justify-content:center;
-  border-radius:13px;
-  margin-right:8px;
-  background:linear-gradient(135deg,var(--blue),var(--cyan));
-  box-shadow:0 10px 30px rgba(59,130,246,.3);
+.brand span{
+  color:var(--blue2);
 }
 
-.auth-subtitle{
+.auth-sub{
   text-align:center;
   color:var(--muted);
-  margin:12px 0 28px;
+  margin:9px 0 28px;
+  font-size:14px;
 }
 
 .auth-button{
   width:100%;
-  margin-top:12px;
-  padding:14px;
   border:0;
-  border-radius:12px;
+  border-radius:10px;
+  padding:14px;
+  margin-top:10px;
   color:white;
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
   font-weight:800;
-  background:linear-gradient(135deg,#2563eb,#0891b2);
+}
+
+.auth-button:hover{
+  filter:brightness(1.1);
 }
 
 .auth-switch{
   text-align:center;
   color:var(--muted);
-  font-size:14px;
   margin-top:20px;
+  font-size:14px;
 }
 
 .auth-switch button{
   border:0;
   background:none;
-  color:#60a5fa;
+  color:var(--blue2);
   font-weight:700;
 }
 
 .auth-message{
-  min-height:22px;
   text-align:center;
-  margin-top:14px;
+  min-height:20px;
+  margin-top:15px;
   font-size:14px;
 }
 
 .success{color:var(--green);font-weight:700}
 .error{color:#f87171;font-weight:700}
+.warning{color:#fbbf24;font-weight:700}
 
 /* APP */
 
 #app{
-  display:none;
   min-height:100vh;
+  position:relative;
+  z-index:1;
 }
 
 .sidebar{
@@ -160,61 +173,46 @@ input:focus{
   top:0;
   bottom:0;
   width:255px;
-  padding:25px 17px;
-  background:rgba(5,10,19,.96);
-  border-right:1px solid var(--border);
-  z-index:20;
+  padding:27px 17px;
+  background:rgba(5,14,26,.96);
+  border-right:1px solid var(--line);
+  z-index:10;
 }
 
-.side-brand{
-  padding:5px 12px 30px;
-  font-size:22px;
+.logo{
+  font-size:25px;
   font-weight:900;
-  letter-spacing:1.5px;
+  letter-spacing:2px;
+  padding:0 10px;
+  margin-bottom:35px;
 }
 
-.side-brand span{
-  color:#60a5fa;
-}
-
-.demo-label{
-  margin:0 10px 20px;
-  padding:8px 10px;
-  border:1px solid rgba(245,158,11,.18);
-  border-radius:8px;
-  background:rgba(245,158,11,.08);
-  color:#fbbf24;
-  font-size:11px;
-  font-weight:800;
-  text-align:center;
+.logo span{
+  color:var(--blue2);
 }
 
 .nav{
-  display:block;
   width:100%;
-  margin:5px 0;
-  padding:13px 14px;
   border:0;
-  border-radius:11px;
+  border-radius:10px;
   background:transparent;
-  color:#94a3b8;
+  color:#8da0b7;
+  padding:13px 14px;
+  margin-bottom:7px;
   text-align:left;
   transition:.2s;
 }
 
-.nav:hover{
-  background:rgba(59,130,246,.1);
-  color:white;
-}
-
+.nav:hover,
 .nav.active{
-  background:linear-gradient(135deg,rgba(59,130,246,.95),rgba(37,99,235,.75));
   color:white;
-  box-shadow:0 10px 25px rgba(37,99,235,.2);
+  background:linear-gradient(90deg,#2563eb,#1d4ed8);
+  box-shadow:0 8px 25px rgba(37,99,235,.22);
 }
 
 .logout{
-  margin-top:25px;
+  margin-top:22px;
+  background:rgba(239,68,68,.12);
   color:#fca5a5;
 }
 
@@ -223,35 +221,15 @@ input:focus{
   padding:0 38px 50px;
 }
 
-.topbar{
-  height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-}
-
-.status{
-  color:#94a3b8;
-  font-size:13px;
-}
-
-.status-dot{
-  display:inline-block;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--green);
-  margin-right:7px;
-  box-shadow:0 0 10px var(--green);
-}
-
-.user-chip{
-  padding:8px 12px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  color:#cbd5e1;
-  font-size:13px;
+.banner{
+  margin:0 -38px;
+  padding:9px 15px;
+  text-align:center;
+  font-size:12px;
+  font-weight:700;
+  color:#fbbf24;
+  background:rgba(120,75,10,.24);
+  border-bottom:1px solid rgba(245,158,11,.12);
 }
 
 .page{
@@ -263,139 +241,68 @@ input:focus{
 }
 
 .header{
-  padding:38px 0 25px;
+  padding-top:38px;
+  margin-bottom:25px;
 }
 
 .header h1{
   margin:0;
-  font-size:34px;
+  font-size:35px;
   letter-spacing:-1px;
 }
 
 .header p{
   color:var(--muted);
-  margin:8px 0 0;
+  margin-top:8px;
 }
 
 /* DASHBOARD */
-
-.balance-card{
-  position:relative;
-  overflow:hidden;
-  padding:30px;
-  border:1px solid rgba(96,165,250,.18);
-  border-radius:22px;
-  background:
-    radial-gradient(circle at 90% 10%,rgba(34,211,238,.15),transparent 30%),
-    linear-gradient(135deg,#101b32,#0b1425);
-  box-shadow:0 25px 60px rgba(0,0,0,.25);
-}
-
-.balance-card:after{
-  content:"";
-  position:absolute;
-  width:180px;
-  height:180px;
-  right:-70px;
-  bottom:-90px;
-  border-radius:50%;
-  background:rgba(59,130,246,.12);
-}
-
-.balance-label{
-  color:#94a3b8;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  font-weight:800;
-}
-
-.balance{
-  font-size:48px;
-  font-weight:900;
-  margin:12px 0;
-  letter-spacing:-2px;
-}
-
-.balance-note{
-  color:#64748b;
-  font-size:13px;
-}
-
-.quick-actions{
-  display:flex;
-  gap:10px;
-  margin-top:25px;
-}
-
-.primary{
-  border:0;
-  padding:12px 18px;
-  border-radius:11px;
-  background:linear-gradient(135deg,#2563eb,#0891b2);
-  color:white;
-  font-weight:800;
-}
-
-.secondary{
-  border:1px solid var(--border);
-  padding:12px 18px;
-  border-radius:11px;
-  background:#111827;
-  color:#e2e8f0;
-  font-weight:700;
-}
-
-.danger{
-  border:0;
-  padding:12px 18px;
-  border-radius:11px;
-  background:#7f1d1d;
-  color:white;
-  font-weight:700;
-}
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:18px;
-  margin-top:20px;
-}
-
-.card,.panel{
-  border:1px solid var(--border);
-  border-radius:18px;
-  background:rgba(14,21,36,.86);
-  box-shadow:0 15px 40px rgba(0,0,0,.18);
 }
 
 .card{
-  padding:22px;
+  padding:23px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:linear-gradient(
+    145deg,
+    rgba(17,36,58,.92),
+    rgba(9,24,41,.92)
+  );
+  box-shadow:0 15px 35px rgba(0,0,0,.16);
 }
 
-.card-title{
-  color:#64748b;
-  font-size:11px;
-  font-weight:800;
+.card-label{
+  color:var(--muted);
+  font-size:12px;
   text-transform:uppercase;
   letter-spacing:.8px;
+  font-weight:700;
 }
 
-.card-number{
-  font-size:27px;
+.card-value{
+  font-size:30px;
   font-weight:900;
-  margin-top:9px;
+  margin-top:12px;
 }
 
-.card-small{
-  color:#64748b;
-  font-size:12px;
+.card-note{
   margin-top:7px;
+  color:#60a5fa;
+  font-size:13px;
 }
 
 .panel{
-  padding:25px;
-  margin-top:20px;
+  margin-top:22px;
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:rgba(13,26,43,.86);
+  box-shadow:0 15px 40px rgba(0,0,0,.14);
 }
 
 .panel h2{
@@ -404,102 +311,143 @@ input:focus{
 
 .panel p{
   color:var(--muted);
+  line-height:1.6;
 }
 
-.grid-two{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+.balance{
+  font-size:46px;
+  font-weight:900;
+  letter-spacing:-1.5px;
+  margin-top:10px;
 }
+
+.balance-label{
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.action-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.primary{
+  border:0;
+  padding:12px 18px;
+  border-radius:10px;
+  background:#2563eb;
+  color:white;
+  font-weight:800;
+}
+
+.secondary{
+  border:1px solid #2b425d;
+  padding:12px 18px;
+  border-radius:10px;
+  background:#0b1727;
+  color:#dbeafe;
+  font-weight:700;
+}
+
+.danger{
+  border:0;
+  padding:12px 18px;
+  border-radius:10px;
+  background:#991b1b;
+  color:white;
+  font-weight:800;
+}
+
+/* TRANSACTIONS */
 
 .transaction{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:15px;
   padding:17px 0;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid var(--line);
 }
 
 .transaction:last-child{
   border-bottom:0;
 }
 
-.tx-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.tx-icon{
-  width:40px;
-  height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:#111c30;
-}
-
-.tx-name{
+.transaction-title{
   font-weight:800;
 }
 
-.tx-date{
-  color:#64748b;
-  font-size:11px;
-  margin-top:4px;
+.transaction-date{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:5px;
 }
 
-.tx-amount{
+.transaction-amount{
+  font-weight:900;
   text-align:right;
-  font-weight:800;
 }
 
-.deposit-text{color:var(--green)}
-.withdraw-text{color:#f87171}
-.pending-text{color:var(--gold)}
+.deposit{
+  color:#4ade80;
+}
+
+.withdrawal{
+  color:#f87171;
+}
 
 .pending{
-  padding:14px;
-  margin-top:10px;
-  border:1px solid rgba(245,158,11,.18);
-  border-radius:12px;
-  background:rgba(245,158,11,.08);
   color:#fbbf24;
 }
 
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:11px;
+  background:rgba(245,158,11,.12);
+  color:#fbbf24;
+}
+
+/* EMPTY */
+
 .empty{
-  color:#64748b;
-  padding:15px 0;
+  text-align:center;
+  padding:25px;
+  color:var(--muted);
 }
 
 /* MOBILE */
 
-@media(max-width:850px){
+@media(max-width:800px){
 
   .sidebar{
     position:relative;
     width:100%;
     height:auto;
-    bottom:auto;
+    padding:18px;
+  }
+
+  .logo{
+    margin-bottom:15px;
   }
 
   .main{
     margin-left:0;
-    padding:0 18px 40px;
+    padding:0 20px 35px;
   }
 
-  .side-brand{
-    padding-bottom:18px;
+  .banner{
+    margin:0 -20px;
   }
 
-  .cards,
-  .grid-two{
+  .cards{
     grid-template-columns:1fr;
-  }
-
-  .topbar{
-    height:60px;
   }
 
   .header h1{
@@ -507,11 +455,11 @@ input:focus{
   }
 
   .balance{
-    font-size:38px;
+    font-size:36px;
   }
 
-  .quick-actions{
-    flex-wrap:wrap;
+  .transaction{
+    align-items:flex-start;
   }
 }
 </style>
@@ -519,97 +467,100 @@ input:focus{
 
 <body>
 
+<!-- AUTH -->
+
 <div id="auth">
+
   <div class="auth-card">
 
     <div class="brand">
-      <span class="brand-mark">N</span>NEXORA
+      NEX<span>ORA</span>
     </div>
 
-    <div class="auth-subtitle">
-      Premium demo account platform
+    <div class="auth-sub" id="authSub">
+      Create your NEXORA demo account.
     </div>
 
-    <div id="loginForm">
+    <form id="authForm">
 
-      <input id="loginEmail" type="email" placeholder="Email">
+      <input
+        id="name"
+        placeholder="Full name"
+        required
+      >
 
-      <input id="loginPassword" type="password" placeholder="Password">
+      <input
+        id="email"
+        type="email"
+        placeholder="Email address"
+        required
+      >
 
-      <button class="auth-button" onclick="login()">
-        Sign In
+      <input
+        id="password"
+        type="password"
+        minlength="6"
+        placeholder="Password"
+        required
+      >
+
+      <button class="auth-button" id="authBtn">
+        Create account
       </button>
 
-      <div class="auth-switch">
-        New to Nexora?
-        <button onclick="showSignup()">Create demo account</button>
-      </div>
+    </form>
 
-    </div>
+    <div class="auth-switch">
 
-    <div id="signupForm" style="display:none">
-
-      <input id="signupName" placeholder="Full name">
-
-      <input id="signupEmail" type="email" placeholder="Email">
-
-      <input id="signupPassword" type="password" placeholder="Password">
-
-      <button class="auth-button" onclick="signup()">
-        Create Demo Account
+      <button id="switchMode">
+        Already have an account? Login
       </button>
-
-      <div class="auth-switch">
-        Already registered?
-        <button onclick="showLogin()">Sign in</button>
-      </div>
 
     </div>
 
     <div id="authMessage" class="auth-message"></div>
 
   </div>
+
 </div>
 
 
-<div id="app">
+<!-- APP -->
+
+<div id="app" class="hidden">
 
   <aside class="sidebar">
 
-    <div class="side-brand">
-      NEXORA <span>•</span>
-    </div>
-
-    <div class="demo-label">
-      DEMO ENVIRONMENT
+    <div class="logo">
+      NEX<span>ORA</span>
     </div>
 
     <button class="nav active" onclick="showPage('dashboard',this)">
-      ◈ &nbsp; Overview
+      🏠 Dashboard
     </button>
 
     <button class="nav" onclick="showPage('wallet',this)">
-      ◇ &nbsp; Wallet
+      💳 Wallet
     </button>
 
     <button class="nav" onclick="showPage('transactions',this)">
-      ≡ &nbsp; Activity
+      📋 Transactions
     </button>
 
     <button class="nav" onclick="showPage('profile',this)">
-      ◎ &nbsp; Profile
+      👤 Profile
     </button>
 
     <button class="nav" onclick="showPage('projects',this)">
-      ◫ &nbsp; Projects
+      📁 Projects
     </button>
 
     <button class="nav" onclick="showPage('settings',this)">
-      ⚙ &nbsp; Settings
+      ⚙️ Settings
     </button>
 
     <button class="nav logout" onclick="logout()">
-      ↪ &nbsp; Sign Out
+      🚪 Logout
     </button>
 
   </aside>
@@ -617,50 +568,24 @@ input:focus{
 
   <main class="main">
 
-    <div class="topbar">
-      <div class="status">
-        <span class="status-dot"></span>
-        Demo platform online
-      </div>
-
-      <div class="user-chip" id="topUser">
-        Account
-      </div>
+    <div class="banner">
+      DEMO ENVIRONMENT — All balances and wallet activity are simulated.
     </div>
 
 
-    <!-- OVERVIEW -->
+    <!-- DASHBOARD -->
 
     <section id="dashboard" class="page active">
 
       <div class="header">
-        <h1 id="welcomeTitle">Welcome</h1>
-        <p>Overview of your Nexora demo account.</p>
-      </div>
 
-      <div class="balance-card">
+        <h1>
+          Welcome, <span id="welcomeName">User</span>
+        </h1>
 
-        <div class="balance-label">
-          Simulated available balance
-        </div>
-
-        <div class="balance" id="dashboardBalance">
-          $0.00
-        </div>
-
-        <div class="balance-note">
-          Demonstration value — no real funds are held.
-        </div>
-
-        <div class="quick-actions">
-          <button class="primary" onclick="openWallet()">
-            Add Demo Funds
-          </button>
-
-          <button class="secondary" onclick="openTransactions()">
-            View Activity
-          </button>
-        </div>
+        <p>
+          Here's an overview of your NEXORA demo account.
+        </p>
 
       </div>
 
@@ -668,41 +593,85 @@ input:focus{
       <div class="cards">
 
         <div class="card">
-          <div class="card-title">Balance</div>
-          <div class="card-number" id="dashboardCardBalance">
+
+          <div class="card-label">
+            Demo Balance
+          </div>
+
+          <div class="card-value" id="dashboardBalance">
             $0.00
           </div>
-          <div class="card-small">Simulated funds</div>
+
+          <div class="card-note">
+            ● Simulated funds
+          </div>
+
         </div>
 
-        <div class="card">
-          <div class="card-title">Projects</div>
-          <div class="card-number" id="projectCount">0</div>
-          <div class="card-small">Active demo projects</div>
-        </div>
 
         <div class="card">
-          <div class="card-title">Account</div>
-          <div class="card-number">Active</div>
-          <div class="card-small">Demo account status</div>
+
+          <div class="card-label">
+            Transactions
+          </div>
+
+          <div class="card-value" id="transactionCount">
+            0
+          </div>
+
+          <div class="card-note">
+            Account activity
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-label">
+            Projects
+          </div>
+
+          <div class="card-value" id="projectCount">
+            0
+          </div>
+
+          <div class="card-note">
+            Active workspace
+          </div>
+
         </div>
 
       </div>
 
 
-      <div class="grid-two">
+      <div class="panel">
 
-        <div class="panel">
-          <h2>Recent activity</h2>
-          <div id="dashboardTransactions"></div>
-        </div>
+        <h2>Account overview</h2>
 
-        <div class="panel">
-          <h2>Platform notice</h2>
-          <p>
-            Nexora is currently running as a browser-based demonstration.
-            Wallet balances and transactions are illustrative only.
-          </p>
+        <p>
+          NEXORA is currently running in demonstration mode.
+          Wallet activity shown here is illustrative and does not
+          represent real money, investments, financial returns,
+          or a real bank account.
+        </p>
+
+        <div class="action-row">
+
+          <button
+            class="primary"
+            onclick="showPageByName('wallet')"
+          >
+            Open Wallet
+          </button>
+
+          <button
+            class="secondary"
+            onclick="showPageByName('transactions')"
+          >
+            View Transactions
+          </button>
+
         </div>
 
       </div>
@@ -715,124 +684,143 @@ input:focus{
     <section id="wallet" class="page">
 
       <div class="header">
+
         <h1>Wallet</h1>
-        <p>Manage simulated funds in your demo account.</p>
+
+        <p>
+          Manage your simulated demo balance.
+        </p>
+
       </div>
 
-      <div class="balance-card">
+
+      <div class="panel">
 
         <div class="balance-label">
-          Simulated balance
+          Available Demo Balance
         </div>
 
         <div class="balance" id="walletBalance">
           $0.00
         </div>
 
-        <div class="balance-note">
-          Demo value only. No real money is transferred.
-        </div>
+        <p>
+          This balance is stored locally in your browser and
+          has no monetary value.
+        </p>
 
       </div>
 
 
-      <div class="grid-two">
+      <!-- DEPOSIT -->
 
-        <div class="panel">
+      <div class="panel">
 
-          <h2>Add demo funds</h2>
+        <h2>Demo Deposit</h2>
 
-          <p>
-            Increase your simulated balance for testing the interface.
-          </p>
+        <p>
+          Add illustrative funds to your demo wallet.
+        </p>
 
-          <input
-            id="depositAmount"
-            type="number"
-            min="0.01"
-            step="0.01"
-            placeholder="Amount"
-          >
+        <input
+          id="depositAmount"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="Enter demo amount"
+        >
 
-          <button class="primary" onclick="deposit()">
-            Add Demo Funds
-          </button>
+        <button
+          class="primary"
+          onclick="deposit()"
+        >
+          Add Demo Funds
+        </button>
 
-          <p id="depositMessage"></p>
-
-        </div>
-
-
-        <div class="panel">
-
-          <h2>Demo withdrawal</h2>
-
-          <p>
-            Withdrawal requests are simulated and remain pending.
-          </p>
-
-          <input
-            id="withdrawAmount"
-            type="number"
-            min="0.01"
-            step="0.01"
-            placeholder="Amount"
-          >
-
-          <input
-            id="withdrawPin"
-            type="password"
-            inputmode="numeric"
-            maxlength="6"
-            placeholder="Withdrawal PIN"
-          >
-
-          <button class="primary" onclick="withdraw()">
-            Submit Demo Request
-          </button>
-
-          <p id="withdrawMessage"></p>
-
-        </div>
+        <p id="depositMessage"></p>
 
       </div>
 
 
-      <div class="grid-two">
+      <!-- WITHDRAWAL -->
 
-        <div class="panel">
+      <div class="panel">
 
-          <h2>Withdrawal PIN</h2>
+        <h2>Demo Withdrawal</h2>
 
-          <p>
-            Create a 4–6 digit PIN for this browser demo.
-          </p>
+        <p>
+          Withdrawal requests are simulated. Approved requests
+          are not sent to a bank or payment provider.
+        </p>
 
-          <input
-            id="newPin"
-            type="password"
-            inputmode="numeric"
-            maxlength="6"
-            placeholder="4–6 digit PIN"
-          >
+        <input
+          id="withdrawAmount"
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="Enter demo amount"
+        >
 
-          <button class="secondary" onclick="setWithdrawalPin()">
-            Save PIN
-          </button>
+        <input
+          id="withdrawPin"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="Withdrawal PIN"
+        >
 
-          <p id="pinMessage"></p>
+        <button
+          class="primary"
+          onclick="withdraw()"
+        >
+          Submit Demo Withdrawal
+        </button>
 
-        </div>
+        <p id="withdrawMessage"></p>
+
+      </div>
 
 
-        <div class="panel">
+      <!-- PIN -->
 
-          <h2>Pending requests</h2>
+      <div class="panel">
 
-          <div id="pendingList">
-            No pending requests.
+        <h2>Withdrawal PIN</h2>
+
+        <p>
+          Create a 4–6 digit PIN for this browser demo.
+        </p>
+
+        <input
+          id="newPin"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="4–6 digit PIN"
+        >
+
+        <button
+          class="secondary"
+          onclick="setWithdrawalPin()"
+        >
+          Save PIN
+        </button>
+
+        <p id="pinMessage"></p>
+
+      </div>
+
+
+      <!-- PENDING -->
+
+      <div class="panel">
+
+        <h2>Pending Demo Withdrawals</h2>
+
+        <div id="pendingList">
+          <div class="empty">
+            No pending withdrawals.
           </div>
-
         </div>
 
       </div>
@@ -840,17 +828,28 @@ input:focus{
     </section>
 
 
-    <!-- ACTIVITY -->
+    <!-- TRANSACTIONS -->
 
     <section id="transactions" class="page">
 
       <div class="header">
-        <h1>Activity</h1>
-        <p>Your simulated account activity.</p>
+
+        <h1>Transactions</h1>
+
+        <p>
+          Your simulated account activity.
+        </p>
+
       </div>
 
       <div class="panel">
-        <div id="transactionList"></div>
+
+        <div id="transactionList">
+          <div class="empty">
+            No transactions yet.
+          </div>
+        </div>
+
       </div>
 
     </section>
@@ -861,18 +860,33 @@ input:focus{
     <section id="profile" class="page">
 
       <div class="header">
+
         <h1>Profile</h1>
-        <p>Manage your demo account information.</p>
+
+        <p>
+          Manage your demo account information.
+        </p>
+
       </div>
 
       <div class="panel">
 
-        <input id="profileName" placeholder="Full name">
+        <input
+          id="profileName"
+          placeholder="Full name"
+        >
 
-        <input id="profileEmail" disabled placeholder="Email">
+        <input
+          id="profileEmail"
+          disabled
+          placeholder="Email"
+        >
 
-        <button class="primary" onclick="saveProfile()">
-          Save Changes
+        <button
+          class="primary"
+          onclick="saveProfile()"
+        >
+          Save Profile
         </button>
 
         <p id="profileMessage"></p>
@@ -887,8 +901,13 @@ input:focus{
     <section id="projects" class="page">
 
       <div class="header">
+
         <h1>Projects</h1>
-        <p>Manage your demonstration projects.</p>
+
+        <p>
+          Manage your NEXORA workspace.
+        </p>
+
       </div>
 
       <div class="panel">
@@ -898,8 +917,11 @@ input:focus{
           placeholder="Project name"
         >
 
-        <button class="primary" onclick="addProject()">
-          Create Project
+        <button
+          class="primary"
+          onclick="addProject()"
+        >
+          Add Project
         </button>
 
         <div id="projectList"></div>
@@ -914,27 +936,30 @@ input:focus{
     <section id="settings" class="page">
 
       <div class="header">
+
         <h1>Settings</h1>
-        <p>Demo account configuration.</p>
+
+        <p>
+          Account preferences and demo information.
+        </p>
+
       </div>
 
       <div class="panel">
 
-        <h2>Demo environment</h2>
+        <h2>Demo account</h2>
 
         <p>
-          This platform is a browser-only demonstration. It does not
-          process real deposits, withdrawals, investments, mining,
-          financial returns, or other real-money transactions.
+          NEXORA is a browser-only demonstration. It does not
+          process real deposits, withdrawals, investments,
+          cryptocurrency, or financial returns.
         </p>
 
-        <p>
-          Account information and demo activity are stored locally
-          in this browser.
-        </p>
-
-        <button class="danger" onclick="logout()">
-          Sign Out
+        <button
+          class="danger"
+          onclick="logout()"
+        >
+          Log Out
         </button>
 
       </div>
@@ -948,15 +973,24 @@ input:focus{
 
 <script>
 
+const KEY = "nexora_demo_account";
+
+let loginMode = false;
+
+
+/* HELPERS */
+
 function getAccount(){
 
-  const raw=localStorage.getItem("nexoraAccount");
+  const raw = localStorage.getItem(KEY);
 
-  if(!raw)return null;
+  if(!raw){
+    return null;
+  }
 
   try{
     return JSON.parse(raw);
-  }catch(e){
+  }catch(error){
     return null;
   }
 
@@ -966,280 +1000,369 @@ function getAccount(){
 function saveAccount(account){
 
   localStorage.setItem(
-    "nexoraAccount",
+    KEY,
     JSON.stringify(account)
   );
 
 }
 
 
-function showSignup(){
+function money(value){
 
-  document.getElementById("loginForm").style.display="none";
-
-  document.getElementById("signupForm").style.display="block";
-
-  document.getElementById("authMessage").textContent="";
+  return "$" + Number(value || 0).toFixed(2);
 
 }
 
 
-function showLogin(){
+function setMessage(id,text,type){
 
-  document.getElementById("loginForm").style.display="block";
+  const el = document.getElementById(id);
 
-  document.getElementById("signupForm").style.display="none";
+  if(!el){
+    return;
+  }
 
-  document.getElementById("authMessage").textContent="";
+  el.textContent = text;
+
+  el.className = type || "";
 
 }
 
 
-function signup(){
+/* AUTH */
 
-  const name=document.getElementById("signupName").value.trim();
+document.getElementById("switchMode").onclick = function(){
 
-  const email=document.getElementById("signupEmail").value.trim();
+  loginMode = !loginMode;
 
-  const password=document.getElementById("signupPassword").value;
+  document.getElementById("authSub").textContent =
+    loginMode
+      ? "Login to your NEXORA demo account."
+      : "Create your NEXORA demo account.";
 
-  const message=document.getElementById("authMessage");
+  document.getElementById("authBtn").textContent =
+    loginMode
+      ? "Login"
+      : "Create account";
+
+  document.getElementById("switchMode").textContent =
+    loginMode
+      ? "New here? Create an account"
+      : "Already have an account? Login";
+
+  const name =
+    document.getElementById("name");
+
+  name.style.display =
+    loginMode ? "none" : "block";
+
+  name.required = !loginMode;
+
+  document.getElementById("authMessage").textContent = "";
+
+};
 
 
-  if(!name||!email||!password){
+document.getElementById("authForm").onsubmit =
+function(event){
 
-    message.textContent="Please complete all fields.";
+  event.preventDefault();
 
-    message.className="auth-message error";
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("authMessage");
+
+
+  if(loginMode){
+
+    const old = getAccount();
+
+    if(
+      !old ||
+      old.email !== email ||
+      old.password !== password
+    ){
+
+      message.textContent =
+        "Demo login failed. Check your details.";
+
+      message.className =
+        "auth-message error";
+
+      return;
+
+    }
+
+    openApp();
 
     return;
 
   }
 
 
-  if(password.length<6){
+  const name =
+    document.getElementById("name").value.trim();
 
-    message.textContent="Password must contain at least 6 characters.";
 
-    message.className="auth-message error";
+  if(!name){
+
+    message.textContent =
+      "Please enter your name.";
+
+    message.className =
+      "auth-message error";
 
     return;
 
   }
 
 
-  const account={
+  if(password.length < 6){
+
+    message.textContent =
+      "Password must contain at least 6 characters.";
+
+    message.className =
+      "auth-message error";
+
+    return;
+
+  }
+
+
+  const account = {
+
     name:name,
+
     email:email,
+
     password:password,
+
     balance:0,
+
     withdrawalPin:"",
+
     projects:[],
+
     transactions:[],
+
     pendingWithdrawals:[]
+
   };
 
 
   saveAccount(account);
 
-  localStorage.setItem("nexoraLoggedIn","true");
+  openApp();
 
-  openDashboard();
-
-}
+};
 
 
-function login(){
+/* APP */
 
-  const email=document.getElementById("loginEmail").value.trim();
+function openApp(){
 
-  const password=document.getElementById("loginPassword").value;
-
-  const account=getAccount();
-
-  const message=document.getElementById("authMessage");
-
+  const account = getAccount();
 
   if(!account){
-
-    message.textContent="No demo account found. Create one first.";
-
-    message.className="auth-message error";
-
     return;
-
   }
 
 
-  if(email!==account.email||password!==account.password){
+  document.getElementById("auth")
+    .classList.add("hidden");
 
-    message.textContent="Incorrect email or password.";
-
-    message.className="auth-message error";
-
-    return;
-
-  }
+  document.getElementById("app")
+    .classList.remove("hidden");
 
 
-  localStorage.setItem("nexoraLoggedIn","true");
-
-  openDashboard();
-
-}
+  document.getElementById("welcomeName")
+    .textContent = account.name;
 
 
-function openDashboard(){
-
-  const account=getAccount();
-
-  if(!account)return;
+  document.getElementById("profileName")
+    .value = account.name;
 
 
-  document.getElementById("auth").style.display="none";
-
-  document.getElementById("app").style.display="block";
-
-
-  document.getElementById("welcomeTitle").textContent=
-    "Welcome, "+account.name;
+  document.getElementById("profileEmail")
+    .value = account.email;
 
 
-  document.getElementById("topUser").textContent=
-    account.name;
-
-
-  document.getElementById("profileName").value=
-    account.name;
-
-
-  document.getElementById("profileEmail").value=
-    account.email;
-
-
-  updateBalance();
-
-  renderProjects();
-
-  renderTransactions();
-
-  renderDashboardTransactions();
-
-  renderPendingWithdrawals();
+  updateAll();
 
 }
 
 
 function logout(){
 
-  localStorage.removeItem("nexoraLoggedIn");
+  document.getElementById("app")
+    .classList.add("hidden");
 
-  document.getElementById("app").style.display="none";
+  document.getElementById("auth")
+    .classList.remove("hidden");
 
-  document.getElementById("auth").style.display="flex";
+  document.getElementById("authForm")
+    .reset();
 
-  showLogin();
+  loginMode = false;
+
+  document.getElementById("name")
+    .style.display = "block";
+
+  document.getElementById("name")
+    .required = true;
+
+  document.getElementById("authSub")
+    .textContent =
+      "Create your NEXORA demo account.";
+
+  document.getElementById("authBtn")
+    .textContent =
+      "Create account";
+
+  document.getElementById("switchMode")
+    .textContent =
+      "Already have an account? Login";
 
 }
 
 
 function showPage(page,button){
 
-  document.querySelectorAll(".page").forEach(
-    section=>section.classList.remove("active")
-  );
+  document.querySelectorAll(".page")
+    .forEach(function(item){
+
+      item.classList.remove("active");
+
+    });
 
 
-  document.getElementById(page).classList.add("active");
+  const target =
+    document.getElementById(page);
+
+  if(target){
+    target.classList.add("active");
+  }
 
 
-  document.querySelectorAll(".nav").forEach(
-    nav=>nav.classList.remove("active")
-  );
+  document.querySelectorAll(".nav")
+    .forEach(function(item){
+
+      item.classList.remove("active");
+
+    });
 
 
-  if(button)button.classList.add("active");
+  if(button){
+    button.classList.add("active");
+  }
 
 
-  updateBalance();
-
-  renderTransactions();
-
-  renderDashboardTransactions();
-
-  renderPendingWithdrawals();
-
-}
-
-
-function openWallet(){
-
-  const button=[...document.querySelectorAll(".nav")]
-    .find(x=>x.textContent.includes("Wallet"));
-
-  showPage("wallet",button);
+  updateAll();
 
 }
 
 
-function openTransactions(){
+function showPageByName(page){
 
-  const button=[...document.querySelectorAll(".nav")]
-    .find(x=>x.textContent.includes("Activity"));
+  const buttons =
+    document.querySelectorAll(".nav");
 
-  showPage("transactions",button);
+  let found = false;
+
+  buttons.forEach(function(button){
+
+    const text =
+      button.textContent.toLowerCase();
+
+    if(
+      (page === "wallet" && text.includes("wallet")) ||
+      (page === "transactions" && text.includes("transactions"))
+    ){
+
+      showPage(page,button);
+
+      found = true;
+
+    }
+
+  });
+
+
+  if(!found){
+    showPage(page,null);
+  }
 
 }
 
+
+/* BALANCE */
 
 function updateBalance(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  if(!account)return;
-
-
-  const amount=Number(account.balance||0);
-
-  const formatted="$"+amount.toFixed(2);
+  if(!account){
+    return;
+  }
 
 
-  document.getElementById("walletBalance").textContent=formatted;
+  const value =
+    money(account.balance);
 
-  document.getElementById("dashboardBalance").textContent=formatted;
 
-  document.getElementById("dashboardCardBalance").textContent=formatted;
+  document.getElementById("dashboardBalance")
+    .textContent = value;
+
+
+  document.getElementById("walletBalance")
+    .textContent = value;
 
 }
 
 
+/* DEPOSIT */
+
 function deposit(){
 
-  const account=getAccount();
-
-  const input=document.getElementById("depositAmount");
-
-  const message=document.getElementById("depositMessage");
-
-  const amount=Number(input.value);
-
+  const account = getAccount();
 
   if(!account){
 
-    message.textContent="Please sign in first.";
-
-    message.className="error";
+    setMessage(
+      "depositMessage",
+      "Please create an account first.",
+      "error"
+    );
 
     return;
 
   }
 
 
-  if(!Number.isFinite(amount)||amount<=0){
+  const input =
+    document.getElementById("depositAmount");
 
-    message.textContent="Enter a valid amount.";
 
-    message.className="error";
+  const amount =
+    Number(input.value);
+
+
+  if(
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ){
+
+    setMessage(
+      "depositMessage",
+      "Enter a valid demo amount.",
+      "error"
+    );
 
     return;
 
@@ -1247,18 +1370,19 @@ function deposit(){
 
 
   if(!Array.isArray(account.transactions)){
-    account.transactions=[];
+    account.transactions = [];
   }
 
 
-  account.balance=Number(account.balance||0)+amount;
+  account.balance =
+    Number(account.balance || 0) + amount;
 
 
   account.transactions.unshift({
 
     id:Date.now(),
 
-    type:"Deposit",
+    type:"Demo Deposit",
 
     amount:amount,
 
@@ -1271,84 +1395,104 @@ function deposit(){
 
   saveAccount(account);
 
-  input.value="";
+
+  input.value = "";
 
 
-  message.textContent=
-    "$"+amount.toFixed(2)+" added to your simulated balance.";
+  setMessage(
+    "depositMessage",
+    money(amount) +
+      " added to your simulated balance.",
+    "success"
+  );
 
-  message.className="success";
 
-
-  updateBalance();
-
-  renderTransactions();
-
-  renderDashboardTransactions();
+  updateAll();
 
 }
 
 
+/* WITHDRAWAL PIN */
+
 function setWithdrawalPin(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  const input=document.getElementById("newPin");
+  const input =
+    document.getElementById("newPin");
 
-  const message=document.getElementById("pinMessage");
+  const pin =
+    input.value.trim();
 
-  const pin=input.value.trim();
 
-
-  if(!account)return;
+  if(!account){
+    return;
+  }
 
 
   if(!/^[0-9]{4,6}$/.test(pin)){
 
-    message.textContent="PIN must contain 4–6 digits.";
-
-    message.className="error";
+    setMessage(
+      "pinMessage",
+      "PIN must contain 4–6 digits.",
+      "error"
+    );
 
     return;
 
   }
 
 
-  account.withdrawalPin=pin;
+  account.withdrawalPin = pin;
 
   saveAccount(account);
 
-  input.value="";
+  input.value = "";
 
 
-  message.textContent="Demo withdrawal PIN saved.";
-
-  message.className="success";
+  setMessage(
+    "pinMessage",
+    "Demo withdrawal PIN saved.",
+    "success"
+  );
 
 }
 
 
+/* WITHDRAWAL */
+
 function withdraw(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  const amount=Number(
-    document.getElementById("withdrawAmount").value
-  );
-
-  const pin=document.getElementById("withdrawPin").value.trim();
-
-  const message=document.getElementById("withdrawMessage");
+  if(!account){
+    return;
+  }
 
 
-  if(!account)return;
+  const amount =
+    Number(
+      document.getElementById("withdrawAmount")
+        .value
+    );
 
 
-  if(!Number.isFinite(amount)||amount<=0){
+  const pin =
+    document.getElementById("withdrawPin")
+      .value
+      .trim();
 
-    message.textContent="Enter a valid amount.";
 
-    message.className="error";
+  if(
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ){
+
+    setMessage(
+      "withdrawMessage",
+      "Enter a valid demo amount.",
+      "error"
+    );
 
     return;
 
@@ -1357,31 +1501,39 @@ function withdraw(){
 
   if(!account.withdrawalPin){
 
-    message.textContent="Create a withdrawal PIN first.";
-
-    message.className="error";
-
-    return;
-
-  }
-
-
-  if(pin!==account.withdrawalPin){
-
-    message.textContent="Incorrect withdrawal PIN.";
-
-    message.className="error";
+    setMessage(
+      "withdrawMessage",
+      "Set your demo withdrawal PIN first.",
+      "error"
+    );
 
     return;
 
   }
 
 
-  if(amount>Number(account.balance||0)){
+  if(pin !== account.withdrawalPin){
 
-    message.textContent="Insufficient simulated balance.";
+    setMessage(
+      "withdrawMessage",
+      "Incorrect demo withdrawal PIN.",
+      "error"
+    );
 
-    message.className="error";
+    return;
+
+  }
+
+
+  if(
+    amount > Number(account.balance || 0)
+  ){
+
+    setMessage(
+      "withdrawMessage",
+      "Insufficient simulated balance.",
+      "error"
+    );
 
     return;
 
@@ -1389,196 +1541,232 @@ function withdraw(){
 
 
   if(!Array.isArray(account.pendingWithdrawals)){
-    account.pendingWithdrawals=[];
+    account.pendingWithdrawals = [];
   }
 
 
   if(!Array.isArray(account.transactions)){
-    account.transactions=[];
+    account.transactions = [];
   }
 
 
-  account.balance=
-    Number(account.balance||0)-amount;
+  account.balance =
+    Number(account.balance || 0) - amount;
 
 
-  const item={
+  const withdrawal = {
+
     id:Date.now(),
-    type:"Withdrawal",
+
+    type:"Demo Withdrawal",
+
     amount:amount,
+
     status:"Pending",
+
     date:new Date().toLocaleString()
+
   };
 
 
-  account.pendingWithdrawals.unshift(item);
+  account.pendingWithdrawals.unshift(
+    withdrawal
+  );
 
-  account.transactions.unshift(item);
+
+  account.transactions.unshift(
+    withdrawal
+  );
+
 
   saveAccount(account);
 
 
-  document.getElementById("withdrawAmount").value="";
+  document.getElementById("withdrawAmount")
+    .value = "";
 
-  document.getElementById("withdrawPin").value="";
-
-
-  message.textContent=
-    "Demo withdrawal request submitted and marked pending.";
-
-  message.className="success";
+  document.getElementById("withdrawPin")
+    .value = "";
 
 
-  updateBalance();
+  setMessage(
+    "withdrawMessage",
+    "Demo withdrawal submitted and marked pending.",
+    "success"
+  );
 
-  renderTransactions();
 
-  renderDashboardTransactions();
-
-  renderPendingWithdrawals();
+  updateAll();
 
 }
 
 
-function renderPendingWithdrawals(){
+/* PENDING */
 
-  const account=getAccount();
+function renderPending(){
 
-  const list=document.getElementById("pendingList");
+  const account = getAccount();
+
+  const list =
+    document.getElementById("pendingList");
 
 
-  list.innerHTML="";
+  if(!account){
 
-
-  if(
-    !account||
-    !Array.isArray(account.pendingWithdrawals)||
-    account.pendingWithdrawals.length===0
-  ){
-
-    list.innerHTML='<div class="empty">No pending requests.</div>';
+    list.innerHTML =
+      '<div class="empty">No pending withdrawals.</div>';
 
     return;
 
   }
 
 
-  account.pendingWithdrawals.forEach(item=>{
+  const items =
+    Array.isArray(account.pendingWithdrawals)
+      ? account.pendingWithdrawals
+      : [];
 
-    const div=document.createElement("div");
 
-    div.className="pending";
+  if(items.length === 0){
 
-    div.textContent=
-      "Withdrawal $"+
-      Number(item.amount).toFixed(2)+
-      " • Pending • "+
-      item.date;
+    list.innerHTML =
+      '<div class="empty">No pending withdrawals.</div>';
 
-    list.appendChild(div);
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  items.forEach(function(item){
+
+    const row =
+      document.createElement("div");
+
+    row.className = "transaction";
+
+
+    row.innerHTML =
+
+      '<div>' +
+
+        '<div class="transaction-title">' +
+          'Demo Withdrawal' +
+        '</div>' +
+
+        '<div class="transaction-date">' +
+          item.date +
+        '</div>' +
+
+      '</div>' +
+
+      '<div class="transaction-amount">' +
+
+        '<div class="pending">' +
+          money(item.amount) +
+        '</div>' +
+
+        '<span class="badge">' +
+          'Pending' +
+        '</span>' +
+
+      '</div>';
+
+
+    list.appendChild(row);
 
   });
 
 }
 
+
+/* TRANSACTIONS */
 
 function renderTransactions(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  const list=document.getElementById("transactionList");
-
-
-  list.innerHTML="";
+  const list =
+    document.getElementById("transactionList");
 
 
-  if(
-    !account||
-    !Array.isArray(account.transactions)||
-    account.transactions.length===0
-  ){
+  const items =
+    account &&
+    Array.isArray(account.transactions)
+      ? account.transactions
+      : [];
 
-    list.innerHTML='<div class="empty">No activity yet.</div>';
+
+  document.getElementById("transactionCount")
+    .textContent = items.length;
+
+
+  if(items.length === 0){
+
+    list.innerHTML =
+      '<div class="empty">No transactions yet.</div>';
 
     return;
 
   }
 
 
-  account.transactions.forEach(item=>{
-
-    const row=document.createElement("div");
-
-    row.className="transaction";
+  list.innerHTML = "";
 
 
-    const left=document.createElement("div");
+  items.forEach(function(item){
 
-    left.className="tx-left";
+    const row =
+      document.createElement("div");
 
-
-    const icon=document.createElement("div");
-
-    icon.className="tx-icon";
-
-    icon.textContent=
-      item.type==="Deposit"?"↓":"↑";
+    row.className = "transaction";
 
 
-    const info=document.createElement("div");
+    const isDeposit =
+      item.type === "Demo Deposit";
 
 
-    const name=document.createElement("div");
-
-    name.className="tx-name";
-
-    name.textContent=item.type;
-
-
-    const date=document.createElement("div");
-
-    date.className="tx-date";
-
-    date.textContent=item.date;
+    const statusClass =
+      item.status === "Pending"
+        ? "pending"
+        : isDeposit
+          ? "deposit"
+          : "withdrawal";
 
 
-    info.appendChild(name);
+    row.innerHTML =
 
-    info.appendChild(date);
+      '<div>' +
 
-    left.appendChild(icon);
+        '<div class="transaction-title">' +
+          item.type +
+        '</div>' +
 
-    left.appendChild(info);
+        '<div class="transaction-date">' +
+          item.date +
+        '</div>' +
 
+      '</div>' +
 
-    const right=document.createElement("div");
+      '<div class="transaction-amount">' +
 
-    right.className="tx-amount";
+        '<div class="' +
+          statusClass +
+        '">' +
 
-    right.innerHTML=
-      '<div class="'+
-      (item.type==="Deposit"?"deposit-text":"withdraw-text")+
-      '">'+
-      (item.type==="Deposit"?"+":"-")+
-      "$"+Number(item.amount).toFixed(2)+
-      "</div>";
+          (isDeposit ? "+" : "-") +
+          money(item.amount) +
 
+        '</div>' +
 
-    const status=document.createElement("div");
+        '<span class="badge">' +
+          item.status +
+        '</span>' +
 
-    status.className=
-      item.status==="Pending"
-        ?"pending-text"
-        :"tx-date";
+      '</div>';
 
-    status.textContent=item.status;
-
-
-    right.appendChild(status);
-
-    row.appendChild(left);
-
-    row.appendChild(right);
 
     list.appendChild(row);
 
@@ -1587,129 +1775,90 @@ function renderTransactions(){
 }
 
 
-function renderDashboardTransactions(){
-
-  const account=getAccount();
-
-  const list=document.getElementById("dashboardTransactions");
-
-
-  if(!list)return;
-
-
-  list.innerHTML="";
-
-
-  if(
-    !account||
-    !Array.isArray(account.transactions)||
-    account.transactions.length===0
-  ){
-
-    list.innerHTML='<div class="empty">No recent activity.</div>';
-
-    return;
-
-  }
-
-
-  account.transactions.slice(0,4).forEach(item=>{
-
-    const row=document.createElement("div");
-
-    row.className="transaction";
-
-
-    const name=document.createElement("div");
-
-    name.className="tx-name";
-
-    name.textContent=item.type;
-
-
-    const amount=document.createElement("div");
-
-    amount.className="tx-amount "+
-      (item.type==="Deposit"?"deposit-text":"withdraw-text");
-
-    amount.textContent=
-      (item.type==="Deposit"?"+":"-")+
-      "$"+Number(item.amount).toFixed(2);
-
-
-    row.appendChild(name);
-
-    row.appendChild(amount);
-
-    list.appendChild(row);
-
-  });
-
-}
-
+/* PROFILE */
 
 function saveProfile(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  const name=document.getElementById("profileName")
-    .value.trim();
+  if(!account){
+    return;
+  }
 
-  const message=document.getElementById("profileMessage");
+
+  const name =
+    document.getElementById("profileName")
+      .value
+      .trim();
 
 
   if(!name){
 
-    message.textContent="Please enter your name.";
-
-    message.className="error";
+    setMessage(
+      "profileMessage",
+      "Please enter your name.",
+      "error"
+    );
 
     return;
 
   }
 
 
-  account.name=name;
+  account.name = name;
 
   saveAccount(account);
 
 
-  document.getElementById("welcomeTitle").textContent=
-    "Welcome, "+name;
-
-  document.getElementById("topUser").textContent=
-    name;
+  document.getElementById("welcomeName")
+    .textContent = name;
 
 
-  message.textContent="Profile saved successfully.";
-
-  message.className="success";
+  setMessage(
+    "profileMessage",
+    "Profile saved in demo mode.",
+    "success"
+  );
 
 }
 
 
+/* PROJECTS */
+
 function addProject(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  const input=document.getElementById("projectInput");
+  const input =
+    document.getElementById("projectInput");
 
-  const name=input.value.trim();
+  const name =
+    input.value.trim();
 
 
-  if(!account||!name)return;
-
-
-  if(!Array.isArray(account.projects)){
-    account.projects=[];
+  if(!account || !name){
+    return;
   }
 
 
-  account.projects.push(name);
+  if(!Array.isArray(account.projects)){
+    account.projects = [];
+  }
+
+
+  account.projects.push({
+
+    id:Date.now(),
+
+    name:name
+
+  });
+
 
   saveAccount(account);
 
-  input.value="";
+  input.value = "";
+
 
   renderProjects();
 
@@ -1718,105 +1867,162 @@ function addProject(){
 
 function renderProjects(){
 
-  const account=getAccount();
+  const account = getAccount();
 
-  const list=document.getElementById("projectList");
-
-
-  list.innerHTML="";
+  const list =
+    document.getElementById("projectList");
 
 
-  if(
-    !account||
-    !Array.isArray(account.projects)||
-    account.projects.length===0
-  ){
+  const projects =
+    account &&
+    Array.isArray(account.projects)
+      ? account.projects
+      : [];
 
-    list.innerHTML=
+
+  document.getElementById("projectCount")
+    .textContent = projects.length;
+
+
+  if(projects.length === 0){
+
+    list.innerHTML =
       '<div class="empty">No projects yet.</div>';
-
-    updateProjectCount();
 
     return;
 
   }
 
 
-  account.projects.forEach((project,index)=>{
-
-    const row=document.createElement("div");
-
-    row.className="transaction";
+  list.innerHTML = "";
 
 
-    const name=document.createElement("div");
+  projects.forEach(function(project,index){
 
-    name.className="tx-name";
+    const row =
+      document.createElement("div");
 
-    name.textContent=project;
-
-
-    const button=document.createElement("button");
-
-    button.className="danger";
-
-    button.textContent="Delete";
+    row.className = "transaction";
 
 
-    button.onclick=function(){
+    row.innerHTML =
 
-      account.projects.splice(index,1);
+      '<div>' +
 
-      saveAccount(account);
+        '<div class="transaction-title">' +
+          escapeHtml(project.name || project) +
+        '</div>' +
 
-      renderProjects();
+        '<div class="transaction-date">' +
+          'NEXORA workspace project' +
+        '</div>' +
 
-    };
+      '</div>' +
+
+      '<button class="danger" data-index="' +
+        index +
+      '">' +
+        'Delete' +
+      '</button>';
 
 
-    row.appendChild(name);
+    row.querySelector("button")
+      .onclick = function(){
 
-    row.appendChild(button);
+        account.projects.splice(index,1);
+
+        saveAccount(account);
+
+        renderProjects();
+
+      };
+
 
     list.appendChild(row);
 
   });
 
+}
 
-  updateProjectCount();
+
+/* SECURITY HELPER FOR PROJECT NAMES */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-function updateProjectCount(){
+/* UPDATE EVERYTHING */
 
-  const account=getAccount();
+function updateAll(){
 
-  const count=
-    account&&Array.isArray(account.projects)
-      ?account.projects.length
-      :0;
+  const account = getAccount();
+
+  if(!account){
+    return;
+  }
 
 
-  document.getElementById("projectCount").textContent=count;
+  document.getElementById("welcomeName")
+    .textContent = account.name;
+
+
+  document.getElementById("profileName")
+    .value = account.name;
+
+
+  document.getElementById("profileEmail")
+    .value = account.email;
+
+
+  updateBalance();
+
+  renderTransactions();
+
+  renderPending();
+
+  renderProjects();
 
 }
 
 
-if(localStorage.getItem("nexoraLoggedIn")==="true"){
-  openDashboard();
-}
+/* START */
+
+(function(){
+
+  const account = getAccount();
+
+  if(account){
+
+    document.getElementById("auth")
+      .classList.add("hidden");
+
+    document.getElementById("app")
+      .classList.remove("hidden");
+
+    updateAll();
+
+  }
+
+})();
 
 </script>
 
 </body>
 </html>`;
 
-    return new Response(html,{
-      status:200,
-      headers:{
-        "content-type":"text/html; charset=UTF-8",
-        "cache-control":"no-store"
+    return new Response(html, {
+      status: 200,
+      headers: {
+        "content-type": "text/html; charset=UTF-8",
+        "cache-control": "no-store"
       }
     });
   }
