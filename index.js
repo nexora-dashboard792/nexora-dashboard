@@ -6,7 +6,7 @@ export default {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nexora Demo</title>
+<title>Nexora</title>
 
 <style>
 * {
@@ -100,15 +100,15 @@ button {
   font-size: 14px;
 }
 
-/* DEMO BANNER */
+/* TEST ENVIRONMENT NOTICE */
 
 .demo-banner {
   background: #fef3c7;
   color: #92400e;
-  padding: 10px 15px;
+  padding: 8px 15px;
   text-align: center;
-  font-size: 13px;
-  font-weight: bold;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 /* APP */
@@ -325,7 +325,7 @@ button {
     <div class="auth-logo">NEXORA</div>
 
     <div class="auth-subtitle">
-      Demo Account
+      Account
     </div>
 
     <div id="loginForm">
@@ -441,7 +441,7 @@ button {
   <main class="main">
 
     <div class="demo-banner">
-      DEMO MODE — No real money is processed.
+      Test environment — transactions use simulated funds.
     </div>
 
 
@@ -523,7 +523,7 @@ button {
         <h1>Wallet</h1>
 
         <p>
-          Demo wallet management.
+          Wallet management.
         </p>
 
       </div>
@@ -547,10 +547,10 @@ button {
 
       <div class="panel">
 
-        <h2>Demo Deposit</h2>
+        <h2>Deposit</h2>
 
         <p>
-          Add simulated funds to your demo balance.
+          Add simulated funds to your balance.
         </p>
 
         <input
@@ -567,7 +567,7 @@ button {
           class="button"
           onclick="deposit()"
         >
-          Deposit Demo Funds
+          Deposit
         </button>
 
         <p id="depositMessage"></p>
@@ -580,8 +580,9 @@ button {
         <h2>Withdrawal</h2>
 
         <p>
-          Demo withdrawals require your withdrawal PIN
-          and are placed into pending status.
+          Withdrawals use simulated funds and require
+          your withdrawal PIN. Requests are placed into
+          pending status.
         </p>
 
         <input
@@ -621,7 +622,7 @@ button {
         <h2>Withdrawal PIN</h2>
 
         <p>
-          Set a demo PIN for withdrawal requests.
+          Set a PIN for withdrawal requests.
         </p>
 
         <input
@@ -668,7 +669,7 @@ button {
         <h1>Transactions</h1>
 
         <p>
-          Your demo transaction history.
+          Your transaction history.
         </p>
 
       </div>
@@ -785,7 +786,8 @@ button {
         <h2>Account</h2>
 
         <p>
-          This is a demo account.
+          This account is currently operating in a
+          test environment using simulated funds.
         </p>
 
         <button
@@ -1150,7 +1152,7 @@ function deposit() {
 
 
   document.getElementById("depositMessage").textContent =
-    "Demo deposit added successfully ✅";
+    "Deposit added successfully ✅";
 
 
   updateBalance();
@@ -1195,7 +1197,7 @@ function setWithdrawalPin() {
 
 
   document.getElementById("pinMessage").textContent =
-    "Withdrawal PIN saved for this demo account ✅";
+    "Withdrawal PIN saved successfully ✅";
 
 }
 
@@ -1253,7 +1255,7 @@ function withdraw() {
   if (amount > Number(account.balance || 0)) {
 
     message.textContent =
-      "Insufficient demo balance.";
+      "Insufficient balance.";
 
     return;
 
@@ -1261,8 +1263,8 @@ function withdraw() {
 
 
   /*
-    The amount is reserved from the available
-    demo balance and the withdrawal becomes pending.
+    Simulated funds are reserved from the
+    available balance and the request becomes pending.
   */
 
   account.balance =
