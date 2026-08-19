@@ -4,60 +4,37 @@ export default {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NEXORA — Demo Account Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA — Account Platform</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 :root{
-  --bg:#050a12;
-  --bg2:#09111d;
-  --surface:#0c1624;
-  --surface2:#101d2d;
-  --surface3:#142337;
+  --bg:#050911;
+  --panel:#0b1422;
+  --panel2:#101c2c;
+  --panel3:#142238;
   --line:rgba(255,255,255,.075);
-  --text:#f5f8fc;
-  --muted:#8799af;
+  --text:#f4f7fb;
+  --muted:#8091a7;
   --blue:#4d8dff;
-  --cyan:#47d8ff;
-  --green:#39d98a;
-  --amber:#ffb84d;
-  --red:#ff6378;
+  --cyan:#43d9ff;
+  --green:#43dda0;
+  --amber:#ffbd59;
+  --red:#ff667d;
 }
 
-html,
-body{
+html,body{
   margin:0;
   min-height:100%;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
   background:
-    radial-gradient(
-      circle at 12% 8%,
-      rgba(71,216,255,.10),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(77,141,255,.12),
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #050a12,
-      #08111d 50%,
-      #050a12
-    );
+    radial-gradient(circle at 15% 5%,rgba(67,217,255,.10),transparent 25%),
+    radial-gradient(circle at 90% 15%,rgba(77,141,255,.12),transparent 28%),
+    radial-gradient(circle at 50% 100%,rgba(77,141,255,.06),transparent 35%),
+    var(--bg);
   color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 body:before{
@@ -65,119 +42,89 @@ body:before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.17;
+  opacity:.13;
   background-image:
-    linear-gradient(
-      rgba(255,255,255,.025) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.025) 1px,
-      transparent 1px
-    );
-  background-size:54px 54px;
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:48px 48px;
 }
 
-button,
-input{
-  font:inherit;
-}
+button,input{font:inherit}
+button{cursor:pointer}
 
-button{
-  cursor:pointer;
-}
+.hidden{display:none!important}
 
-.hidden{
-  display:none!important;
-}
-
-/* =========================
-   AUTH
-========================= */
+/* AUTH */
 
 #auth{
   min-height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
-  padding:25px;
+  justify-content:center;
+  padding:24px;
 }
 
-.auth-box{
+.auth-card{
   width:100%;
-  max-width:440px;
+  max-width:430px;
   padding:38px;
   border:1px solid var(--line);
-  border-radius:28px;
+  border-radius:26px;
   background:
-    linear-gradient(
-      145deg,
-      rgba(16,31,49,.95),
-      rgba(7,17,29,.96)
-    );
-  box-shadow:
-    0 40px 100px rgba(0,0,0,.55);
+    linear-gradient(145deg,rgba(17,32,51,.97),rgba(6,14,24,.98));
+  box-shadow:0 40px 100px rgba(0,0,0,.55);
 }
 
-.auth-logo{
-  font-size:29px;
+.brand{
+  font-size:27px;
   font-weight:950;
   letter-spacing:5px;
 }
 
-.auth-logo span{
-  color:var(--cyan);
-}
+.brand span{color:var(--cyan)}
 
-.auth-box h1{
-  margin:48px 0 8px;
+.auth-card h1{
+  margin:45px 0 8px;
   font-size:30px;
 }
 
-.auth-box p{
+.auth-card p{
   color:var(--muted);
   line-height:1.6;
 }
 
-.field{
+.input{
   width:100%;
-  padding:15px;
   margin:8px 0;
-  color:white;
-  background:#081422;
+  padding:14px;
   border:1px solid var(--line);
-  border-radius:12px;
+  border-radius:11px;
   outline:none;
+  color:white;
+  background:#07111e;
 }
 
-.field:focus{
+.input:focus{
   border-color:var(--blue);
-  box-shadow:
-    0 0 0 3px rgba(77,141,255,.12);
+  box-shadow:0 0 0 3px rgba(77,141,255,.12);
 }
 
 .primary{
   width:100%;
-  border:0;
-  padding:15px;
   margin-top:12px;
-  border-radius:12px;
+  padding:14px;
+  border:0;
+  border-radius:11px;
   color:white;
-  font-weight:800;
-  background:
-    linear-gradient(
-      135deg,
-      #5a98ff,
-      #3677ee
-    );
+  font-weight:850;
+  background:linear-gradient(135deg,#5c99ff,#3678ee);
 }
 
 .switch{
-  margin-top:22px;
+  margin-top:20px;
   text-align:center;
   color:var(--muted);
-  font-size:14px;
+  font-size:13px;
 }
 
 .switch button{
@@ -187,31 +134,23 @@ button{
   font-weight:800;
 }
 
-/* =========================
-   APPLICATION
-========================= */
+/* APP */
 
-.app{
-  min-height:100vh;
-}
+#app{min-height:100vh}
 
-/* LEFT RAIL */
+/* SIDEBAR */
 
 .sidebar{
   position:fixed;
-  left:0;
   top:0;
   bottom:0;
-  width:235px;
-  padding:28px 17px;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(7,17,29,.98),
-      rgba(5,12,21,.98)
-    );
+  left:0;
+  width:238px;
+  padding:28px 16px;
+  z-index:20;
   border-right:1px solid var(--line);
-  z-index:50;
+  background:
+    linear-gradient(180deg,#07111e,#050b14);
 }
 
 .logo{
@@ -221,25 +160,23 @@ button{
   letter-spacing:4px;
 }
 
-.logo span{
-  color:var(--cyan);
+.logo span{color:var(--cyan)}
+
+.subtitle{
+  padding:8px 14px 35px;
+  color:#50637a;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1.7px;
 }
 
-.logo-sub{
-  padding:7px 14px 35px;
-  color:#52657c;
-  font-size:10px;
-  letter-spacing:1.5px;
+.section-label{
+  padding:0 14px 8px;
+  color:#52677e;
+  font-size:9px;
   text-transform:uppercase;
-}
-
-.nav-label{
-  padding:0 14px 9px;
-  color:#53677e;
-  font-size:10px;
   letter-spacing:1.5px;
-  text-transform:uppercase;
-  font-weight:800;
+  font-weight:900;
 }
 
 .nav{
@@ -249,10 +186,10 @@ button{
   gap:12px;
   margin:4px 0;
   padding:12px 14px;
-  color:#8294aa;
-  background:transparent;
   border:1px solid transparent;
-  border-radius:11px;
+  border-radius:10px;
+  background:transparent;
+  color:#8192a8;
   text-align:left;
   transition:.2s;
 }
@@ -264,64 +201,58 @@ button{
 
 .nav.active{
   color:white;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(77,141,255,.18),
-      rgba(77,141,255,.045)
-    );
-  border-color:rgba(77,141,255,.14);
+  border-color:rgba(77,141,255,.16);
+  background:linear-gradient(90deg,rgba(77,141,255,.18),rgba(77,141,255,.035));
 }
 
 .nav-icon{
   width:20px;
   text-align:center;
-  opacity:.8;
 }
 
-.sidebar-bottom{
+.side-bottom{
   position:absolute;
-  left:17px;
-  right:17px;
-  bottom:25px;
+  left:16px;
+  right:16px;
+  bottom:22px;
 }
 
-.demo-mini{
-  padding:13px;
-  border-radius:12px;
-  background:rgba(255,184,77,.055);
-  border:1px solid rgba(255,184,77,.11);
-  color:#d5a75d;
-  font-size:10px;
-  line-height:1.5;
+.demo-box{
+  padding:12px;
+  border:1px solid rgba(255,189,89,.12);
+  border-radius:10px;
+  color:#c69c58;
+  background:rgba(255,189,89,.04);
+  font-size:9px;
+  line-height:1.6;
 }
 
 .logout{
-  margin-top:10px;
-  color:#9a7180;
+  margin-top:9px;
+  color:#a27582;
 }
 
-/* TOP */
+/* TOPBAR */
 
-.top{
+.topbar{
   position:fixed;
-  left:235px;
-  right:0;
   top:0;
-  height:76px;
-  z-index:40;
+  right:0;
+  left:238px;
+  height:74px;
+  z-index:15;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 38px;
   border-bottom:1px solid var(--line);
-  background:rgba(5,10,18,.76);
+  background:rgba(5,9,17,.78);
   backdrop-filter:blur(20px);
 }
 
 .top-title{
-  color:#8497ad;
-  font-size:13px;
+  color:#8799af;
+  font-size:12px;
 }
 
 .top-right{
@@ -334,11 +265,11 @@ button{
   display:flex;
   align-items:center;
   gap:7px;
-  color:#8fa4bb;
-  font-size:12px;
+  color:#8194aa;
+  font-size:11px;
 }
 
-.live-dot{
+.dot{
   width:7px;
   height:7px;
   border-radius:50%;
@@ -350,189 +281,171 @@ button{
   display:flex;
   align-items:center;
   gap:10px;
-  padding-left:18px;
+  padding-left:17px;
   border-left:1px solid var(--line);
 }
 
 .avatar{
-  width:36px;
-  height:36px;
+  width:35px;
+  height:35px;
   display:grid;
   place-items:center;
   border-radius:50%;
-  background:
-    linear-gradient(
-      135deg,
-      #4d8dff,
-      #47d8ff
-    );
+  background:linear-gradient(135deg,#4d8dff,#43d9ff);
+  color:white;
   font-weight:900;
 }
 
 .user-name{
-  font-size:13px;
-  font-weight:700;
+  font-size:12px;
+  font-weight:800;
 }
 
 /* CONTENT */
 
 .content{
-  margin-left:235px;
-  padding:112px 40px 55px;
+  margin-left:238px;
+  padding:108px 40px 50px;
 }
 
-.content-inner{
-  max-width:1450px;
+.container{
+  max-width:1480px;
   margin:auto;
 }
 
-.notice{
+.demo-banner{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  padding:10px 15px;
-  margin-bottom:25px;
-  border:1px solid rgba(255,184,77,.12);
+  justify-content:space-between;
+  margin-bottom:24px;
+  padding:10px 14px;
+  border:1px solid rgba(255,189,89,.12);
   border-radius:9px;
-  background:rgba(255,184,77,.045);
-  color:#c99b54;
-  font-size:11px;
+  color:#c59b59;
+  background:rgba(255,189,89,.04);
+  font-size:10px;
 }
 
-.page-title{
-  margin-bottom:27px;
+.title{
+  margin-bottom:25px;
 }
 
-.page-title h1{
+.title h1{
   margin:0;
   font-size:36px;
-  letter-spacing:-1.2px;
+  letter-spacing:-1.3px;
 }
 
-.page-title p{
+.title p{
   margin:8px 0 0;
   color:var(--muted);
 }
 
-/* MAIN GRID */
+/* HERO GRID */
 
-.main-grid{
+.hero-grid{
   display:grid;
-  grid-template-columns:
-    minmax(0,1.6fr)
-    minmax(330px,.75fr);
+  grid-template-columns:minmax(0,1.55fr) minmax(340px,.72fr);
   gap:20px;
 }
 
-/* WALLET */
+/* BALANCE CARD */
 
-.wallet{
-  min-height:350px;
+.balance-card{
   position:relative;
+  min-height:355px;
   overflow:hidden;
   padding:34px;
   border:1px solid rgba(77,141,255,.17);
   border-radius:25px;
   background:
-    radial-gradient(
-      circle at 87% 15%,
-      rgba(71,216,255,.17),
-      transparent 24%
-    ),
-    radial-gradient(
-      circle at 15% 90%,
-      rgba(77,141,255,.11),
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #10253d,
-      #0a1727 65%,
-      #09121f
-    );
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.28);
+    radial-gradient(circle at 88% 12%,rgba(67,217,255,.16),transparent 23%),
+    radial-gradient(circle at 15% 95%,rgba(77,141,255,.12),transparent 30%),
+    linear-gradient(135deg,#10243b,#0a1727 65%,#08111e);
+  box-shadow:0 30px 80px rgba(0,0,0,.25);
 }
 
-.wallet:before{
+.balance-card:after{
   content:"";
   position:absolute;
-  width:420px;
-  height:420px;
-  border:1px solid rgba(71,216,255,.07);
+  width:450px;
+  height:450px;
+  right:-280px;
+  top:-270px;
+  border:1px solid rgba(67,217,255,.08);
   border-radius:50%;
-  right:-230px;
-  top:-250px;
   box-shadow:
-    0 0 0 50px rgba(71,216,255,.018),
-    0 0 0 100px rgba(71,216,255,.012);
+    0 0 0 45px rgba(67,217,255,.018),
+    0 0 0 90px rgba(67,217,255,.012);
 }
 
-.wallet-top{
+.card-head{
   display:flex;
-  justify-content:space-between;
   align-items:start;
+  justify-content:space-between;
 }
 
-.wallet-label{
-  color:#8ea3bb;
-  font-size:11px;
-  font-weight:800;
+.card-label{
+  color:#8ba0b7;
+  font-size:10px;
   text-transform:uppercase;
   letter-spacing:1.7px;
+  font-weight:850;
 }
 
-.wallet-status{
+.status{
   padding:6px 10px;
   border-radius:20px;
-  background:rgba(57,217,138,.08);
-  color:#61dda0;
-  font-size:10px;
-  font-weight:800;
+  color:#60dca1;
+  background:rgba(67,221,160,.08);
+  font-size:9px;
+  font-weight:900;
 }
 
-.big-number{
-  position:relative;
-  margin-top:15px;
-  font-size:53px;
+.balance{
+  margin-top:14px;
+  font-size:54px;
+  line-height:1;
   font-weight:950;
-  letter-spacing:-2.8px;
+  letter-spacing:-3px;
 }
 
-.currency{
-  color:#8398b1;
-  font-size:19px;
-  font-weight:700;
+.balance small{
+  color:#8095ad;
+  font-size:18px;
+  letter-spacing:0;
 }
 
-.wallet-note{
-  margin-top:8px;
-  color:#71859e;
-  font-size:12px;
+.balance-description{
+  margin-top:10px;
+  color:#71859c;
+  font-size:11px;
 }
 
-.wallet-actions{
+.quick-actions{
   position:absolute;
   left:34px;
   bottom:30px;
   display:flex;
-  gap:10px;
+  gap:9px;
+  z-index:2;
 }
 
 .action{
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:10px;
-  padding:12px 18px;
-  color:#dce8f5;
-  background:rgba(255,255,255,.055);
-  font-weight:750;
+  padding:11px 17px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;
+  color:#dbe7f4;
+  background:rgba(255,255,255,.045);
+  font-size:11px;
+  font-weight:800;
 }
 
 .action:hover{
   background:rgba(255,255,255,.09);
 }
 
-.action.blue{
+.action.main{
   color:white;
   border-color:#4d8dff;
   background:#4d8dff;
@@ -540,76 +453,73 @@ button{
 
 /* PENDING */
 
-.pending{
-  min-height:350px;
+.pending-card{
+  min-height:355px;
   padding:27px;
-  border:1px solid rgba(255,184,77,.12);
+  border:1px solid rgba(255,189,89,.12);
   border-radius:25px;
   background:
-    linear-gradient(
-      145deg,
-      rgba(24,28,32,.94),
-      rgba(10,19,31,.96)
-    );
+    linear-gradient(145deg,#111c2a,#09121e);
 }
 
 .panel-head{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:18px;
+  margin-bottom:10px;
 }
 
 .panel-head h2{
   margin:0;
-  font-size:17px;
+  font-size:16px;
 }
 
-.count{
+.badge{
   padding:5px 9px;
   border-radius:20px;
-  background:rgba(255,184,77,.09);
-  color:#ffc66b;
-  font-size:10px;
+  color:#ffc463;
+  background:rgba(255,189,89,.08);
+  font-size:9px;
   font-weight:900;
 }
 
 .pending-item{
-  padding:17px 0;
+  padding:16px 0;
   border-top:1px solid var(--line);
 }
 
 .pending-row{
   display:flex;
+  align-items:center;
   justify-content:space-between;
   gap:10px;
 }
 
 .pending-name{
-  font-weight:750;
-  font-size:13px;
+  font-size:12px;
+  font-weight:800;
 }
 
-.pending-money{
-  color:#ffc15a;
+.pending-amount{
+  color:var(--amber);
+  font-size:12px;
   font-weight:900;
-  font-size:13px;
 }
 
-.pending-detail{
-  margin-top:6px;
-  color:#73879e;
-  font-size:11px;
+.pending-info{
+  margin-top:5px;
+  color:#70839a;
+  font-size:10px;
 }
 
-.pending-state{
+.pending-status{
   display:inline-block;
-  margin-top:9px;
+  margin-top:8px;
   padding:4px 7px;
   border-radius:5px;
-  background:rgba(255,184,77,.07);
-  color:#e8ad58;
-  font-size:9px;
+  color:#e9af59;
+  background:rgba(255,189,89,.07);
+  font-size:8px;
   font-weight:900;
   text-transform:uppercase;
 }
@@ -618,53 +528,40 @@ button{
 
 .stats{
   display:grid;
-  grid-template-columns:
-    repeat(4,1fr);
-  gap:17px;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
   margin-top:20px;
 }
 
 .stat{
-  padding:21px;
+  padding:20px;
   border:1px solid var(--line);
-  border-radius:17px;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(16,29,45,.83),
-      rgba(9,18,30,.88)
-    );
+  border-radius:16px;
+  background:rgba(12,22,35,.78);
 }
 
 .stat-label{
-  color:#71859c;
-  font-size:10px;
+  color:#70849b;
+  font-size:9px;
   text-transform:uppercase;
   letter-spacing:1px;
-  font-weight:800;
-}
-
-.stat-value{
-  margin-top:9px;
-  font-size:23px;
   font-weight:900;
 }
 
-.green{
-  color:var(--green);
+.stat-value{
+  margin-top:8px;
+  font-size:22px;
+  font-weight:950;
 }
 
-.amber{
-  color:var(--amber);
-}
+.green{color:var(--green)}
+.amber{color:var(--amber)}
 
-/* BOTTOM */
+/* LOWER GRID */
 
-.bottom-grid{
+.lower{
   display:grid;
-  grid-template-columns:
-    minmax(0,1.4fr)
-    minmax(300px,.6fr);
+  grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);
   gap:20px;
   margin-top:20px;
 }
@@ -672,69 +569,69 @@ button{
 .panel{
   padding:25px;
   border:1px solid var(--line);
-  border-radius:20px;
-  background:rgba(12,22,36,.78);
+  border-radius:19px;
+  background:rgba(11,20,33,.78);
 }
 
 .panel h2{
-  margin:0 0 18px;
-  font-size:17px;
+  margin:0 0 17px;
+  font-size:16px;
 }
 
 .transaction{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:15px 0;
+  padding:14px 0;
   border-top:1px solid var(--line);
 }
 
-.transaction-left{
+.tx-left{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:11px;
 }
 
 .tx-icon{
-  width:38px;
-  height:38px;
+  width:37px;
+  height:37px;
   display:grid;
   place-items:center;
-  border-radius:10px;
+  border-radius:9px;
+  color:#77a7ff;
   background:rgba(77,141,255,.08);
-  color:#74a6ff;
 }
 
 .tx-name{
-  font-size:13px;
-  font-weight:750;
+  font-size:12px;
+  font-weight:800;
 }
 
 .tx-date{
   margin-top:4px;
-  color:#71859c;
-  font-size:10px;
+  color:#70849a;
+  font-size:9px;
 }
 
-.tx-money{
+.tx-value{
+  font-size:12px;
   font-weight:900;
-  font-size:13px;
 }
 
-.profile-row{
+.account-row{
   display:flex;
   justify-content:space-between;
   padding:13px 0;
   border-bottom:1px solid var(--line);
-  font-size:13px;
+  font-size:12px;
 }
 
-.profile-row:last-child{
+.account-row:last-child{
   border-bottom:0;
 }
 
-.profile-row span{
-  color:#71859c;
+.account-row span{
+  color:#71849a;
 }
 
 /* MODAL */
@@ -747,39 +644,60 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:rgba(0,0,0,.7);
+  background:rgba(0,0,0,.72);
   backdrop-filter:blur(8px);
 }
 
-.modal.show{
-  display:flex;
-}
+.modal.show{display:flex}
 
 .modal-box{
   width:100%;
   max-width:450px;
   padding:30px;
   border:1px solid var(--line);
-  border-radius:22px;
-  background:#0c1828;
+  border-radius:20px;
+  background:#0c1827;
   box-shadow:0 35px 100px rgba(0,0,0,.6);
 }
 
 .modal-box h2{
-  margin-top:0;
+  margin:0 35px 10px 0;
 }
 
 .modal-box p{
   color:var(--muted);
   line-height:1.7;
+  font-size:13px;
 }
 
 .close{
   float:right;
   border:0;
   background:none;
-  color:#8396ac;
-  font-size:24px;
+  color:#8295ab;
+  font-size:25px;
+}
+
+.modal-input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid var(--line);
+  border-radius:10px;
+  outline:none;
+  color:white;
+  background:#07111e;
+}
+
+.modal-button{
+  width:100%;
+  margin-top:8px;
+  padding:13px;
+  border:0;
+  border-radius:10px;
+  color:white;
+  background:#4d8dff;
+  font-weight:850;
 }
 
 /* MOBILE */
@@ -790,12 +708,12 @@ button{
     position:relative;
     width:100%;
     height:auto;
-    padding:18px;
+    padding:17px;
   }
 
-  .logo-sub,
-  .nav-label,
-  .sidebar-bottom{
+  .subtitle,
+  .section-label,
+  .side-bottom{
     display:none;
   }
 
@@ -803,17 +721,17 @@ button{
     display:none;
   }
 
-  .top{
+  .topbar{
     left:0;
   }
 
   .content{
     margin-left:0;
-    padding:105px 22px 40px;
+    padding:105px 20px 40px;
   }
 
-  .main-grid,
-  .bottom-grid{
+  .hero-grid,
+  .lower{
     grid-template-columns:1fr;
   }
 
@@ -824,74 +742,64 @@ button{
 
 @media(max-width:650px){
 
-  .top{
-    padding:0 18px;
+  .topbar{
+    padding:0 16px;
   }
 
-  .top-title{
-    display:none;
-  }
-
+  .top-title,
   .user-name{
     display:none;
   }
 
   .content{
-    padding-left:16px;
-    padding-right:16px;
+    padding-left:14px;
+    padding-right:14px;
   }
 
-  .page-title h1{
-    font-size:29px;
+  .title h1{
+    font-size:28px;
   }
 
-  .wallet{
-    min-height:330px;
+  .balance-card{
+    min-height:340px;
     padding:25px;
   }
 
-  .big-number{
+  .balance{
     font-size:39px;
     letter-spacing:-2px;
   }
 
-  .wallet-actions{
+  .quick-actions{
     left:25px;
     right:25px;
     bottom:22px;
+    flex-wrap:wrap;
   }
 
   .action{
     flex:1;
-    padding:11px 8px;
-    font-size:11px;
+    min-width:90px;
+    padding:10px 8px;
   }
 
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .notice{
+  .demo-banner{
     display:block;
     line-height:1.6;
   }
 }
 
-@media(max-width:430px){
+@media(max-width:420px){
 
   .stats{
     grid-template-columns:1fr;
   }
 
-  .wallet-actions{
-    flex-wrap:wrap;
-  }
-
-  .action{
+  .quick-actions .action{
     min-width:100%;
   }
 
-  .auth-box{
+  .auth-card{
     padding:27px;
   }
 }
@@ -900,15 +808,13 @@ button{
 
 <body>
 
-<!-- =========================
-     AUTH
-========================= -->
+<!-- AUTH -->
 
-<section id="auth">
+<div id="auth">
 
-  <div class="auth-box">
+  <div class="auth-card">
 
-    <div class="auth-logo">
+    <div class="brand">
       NEX<span>ORA</span>
     </div>
 
@@ -924,14 +830,14 @@ button{
 
       <input
         id="name"
-        class="field"
+        class="input"
         placeholder="Full name"
         required
       >
 
       <input
         id="email"
-        class="field"
+        class="input"
         type="email"
         placeholder="Email address"
         required
@@ -939,16 +845,16 @@ button{
 
       <input
         id="password"
-        class="field"
+        class="input"
         type="password"
         placeholder="Password"
         required
       >
 
       <button
-        id="authBtn"
         class="primary"
         type="submit"
+        id="authButton"
       >
         Create account
       </button>
@@ -957,7 +863,7 @@ button{
 
     <div class="switch">
 
-      <span id="switchText">
+      <span id="switchLabel">
         Already have an account?
       </span>
 
@@ -972,19 +878,15 @@ button{
 
   </div>
 
-</section>
+</div>
 
 
-<!-- =========================
-     APPLICATION
-========================= -->
+<!-- APP -->
 
-<section
+<div
   id="app"
-  class="app hidden"
+  class="hidden"
 >
-
-  <!-- SIDEBAR -->
 
   <aside class="sidebar">
 
@@ -992,56 +894,47 @@ button{
       NEX<span>ORA</span>
     </div>
 
-    <div class="logo-sub">
+    <div class="subtitle">
       Account platform
     </div>
 
-    <div class="nav-label">
+    <div class="section-label">
       Workspace
     </div>
 
     <button class="nav active">
-
       <span class="nav-icon">⌂</span>
-
       Overview
-
     </button>
 
     <button
       class="nav"
       onclick="openModal('Wallet')"
     >
-
       <span class="nav-icon">◈</span>
-
       Wallet
-
     </button>
 
     <button
       class="nav"
       onclick="openModal('Transactions')"
     >
-
       <span class="nav-icon">↗</span>
-
       Transactions
-
     </button>
 
     <button
       class="nav"
       onclick="openModal('Projects')"
     >
-
       <span class="nav-icon">▦</span>
-
       Projects
-
     </button>
 
-    <div class="nav-label" style="margin-top:25px">
+    <div
+      class="section-label"
+      style="margin-top:24px"
+    >
       Account
     </div>
 
@@ -1049,44 +942,32 @@ button{
       class="nav"
       onclick="openModal('Profile')"
     >
-
       <span class="nav-icon">○</span>
-
       Profile
-
     </button>
 
     <button
       class="nav"
       onclick="openModal('Settings')"
     >
-
       <span class="nav-icon">⚙</span>
-
       Settings
-
     </button>
 
-    <div class="sidebar-bottom">
+    <div class="side-bottom">
 
-      <div class="demo-mini">
-
+      <div class="demo-box">
         <strong>DEMO MODE</strong><br>
-
-        All balances and transactions shown
-        here are simulated.
-
+        Balances and activity displayed here
+        are simulated interface data.
       </div>
 
       <button
         class="nav logout"
         onclick="logout()"
       >
-
         <span class="nav-icon">↪</span>
-
         Sign out
-
       </button>
 
     </div>
@@ -1094,9 +975,7 @@ button{
   </aside>
 
 
-  <!-- TOP BAR -->
-
-  <header class="top">
+  <header class="topbar">
 
     <div class="top-title">
       Account overview
@@ -1105,11 +984,8 @@ button{
     <div class="top-right">
 
       <div class="live">
-
-        <span class="live-dot"></span>
-
+        <span class="dot"></span>
         Demo environment
-
       </div>
 
       <div class="user">
@@ -1132,26 +1008,24 @@ button{
   </header>
 
 
-  <!-- CONTENT -->
-
   <main class="content">
 
-    <div class="content-inner">
+    <div class="container">
 
-      <div class="notice">
+      <div class="demo-banner">
 
         <span>
           Demonstration account — no real money is processed.
         </span>
 
-        <span>
+        <strong>
           SIMULATED DATA
-        </span>
+        </strong>
 
       </div>
 
 
-      <div class="page-title">
+      <div class="title">
 
         <h1>
           Welcome back,
@@ -1161,61 +1035,59 @@ button{
         </h1>
 
         <p>
-          Here's your account at a glance.
+          Your account overview and recent activity.
         </p>
 
       </div>
 
 
-      <!-- MAIN AREA -->
+      <!-- WIDE MAIN SECTION -->
 
-      <div class="main-grid">
+      <div class="hero-grid">
 
 
-        <!-- WALLET CARD -->
+        <!-- BALANCE -->
 
-        <section class="wallet">
+        <section class="balance-card">
 
-          <div class="wallet-top">
+          <div class="card-head">
 
             <div>
 
-              <div class="wallet-label">
+              <div class="card-label">
                 Total demo balance
               </div>
 
-              <div class="big-number">
+              <div class="balance">
                 $1,100,000
-                <span class="currency">
-                  .00
-                </span>
+                <small>.00</small>
               </div>
 
-              <div class="wallet-note">
+              <div class="balance-description">
                 Simulated account value · USD
               </div>
 
             </div>
 
-            <div class="wallet-status">
+            <div class="status">
               ACCOUNT ACTIVE
             </div>
 
           </div>
 
 
-          <div class="wallet-actions">
+          <div class="quick-actions">
 
             <button
-              class="action blue"
-              onclick="openModal('Demo deposit')"
+              class="action main"
+              onclick="openModal('Deposit')"
             >
               + Deposit
             </button>
 
             <button
               class="action"
-              onclick="openModal('Demo withdrawal')"
+              onclick="openModal('Withdrawal')"
             >
               Withdraw
             </button>
@@ -1232,9 +1104,9 @@ button{
         </section>
 
 
-        <!-- PENDING CARD -->
+        <!-- PENDING IS BESIDE BALANCE -->
 
-        <section class="pending">
+        <section class="pending-card">
 
           <div class="panel-head">
 
@@ -1242,8 +1114,8 @@ button{
               Pending activity
             </h2>
 
-            <span class="count">
-              02
+            <span class="badge">
+              02 PENDING
             </span>
 
           </div>
@@ -1257,17 +1129,17 @@ button{
                 Withdrawal request
               </div>
 
-              <div class="pending-money">
+              <div class="pending-amount">
                 $25,000.00
               </div>
 
             </div>
 
-            <div class="pending-detail">
+            <div class="pending-info">
               Submitted today · 08:31
             </div>
 
-            <span class="pending-state">
+            <span class="pending-status">
               Pending
             </span>
 
@@ -1282,17 +1154,17 @@ button{
                 Account review
               </div>
 
-              <div class="pending-money">
+              <div class="pending-amount">
                 Review
               </div>
 
             </div>
 
-            <div class="pending-detail">
+            <div class="pending-info">
               Demonstration account review
             </div>
 
-            <span class="pending-state">
+            <span class="pending-status">
               Pending
             </span>
 
@@ -1304,16 +1176,16 @@ button{
             <div class="pending-row">
 
               <div class="pending-name">
-                Estimated completion
+                Processing status
               </div>
 
-              <div class="pending-money">
-                — 
+              <div class="pending-amount">
+                —
               </div>
 
             </div>
 
-            <div class="pending-detail">
+            <div class="pending-info">
               No real financial processing occurs.
             </div>
 
@@ -1324,7 +1196,7 @@ button{
       </div>
 
 
-      <!-- STAT CARDS -->
+      <!-- STATISTICS -->
 
       <div class="stats">
 
@@ -1344,7 +1216,7 @@ button{
         <div class="stat">
 
           <div class="stat-label">
-            Pending
+            Pending amount
           </div>
 
           <div class="stat-value amber">
@@ -1382,12 +1254,10 @@ button{
       </div>
 
 
-      <!-- LOWER -->
+      <!-- LOWER CONTENT -->
 
-      <div class="bottom-grid">
+      <div class="lower">
 
-
-        <!-- ACTIVITY -->
 
         <section class="panel">
 
@@ -1398,7 +1268,7 @@ button{
 
           <div class="transaction">
 
-            <div class="transaction-left">
+            <div class="tx-left">
 
               <div class="tx-icon">
                 ↓
@@ -1418,7 +1288,7 @@ button{
 
             </div>
 
-            <div class="tx-money green">
+            <div class="tx-value green">
               +$50,000.00
             </div>
 
@@ -1427,7 +1297,7 @@ button{
 
           <div class="transaction">
 
-            <div class="transaction-left">
+            <div class="tx-left">
 
               <div class="tx-icon">
                 ↗
@@ -1447,7 +1317,7 @@ button{
 
             </div>
 
-            <div class="tx-money amber">
+            <div class="tx-value amber">
               $25,000.00
             </div>
 
@@ -1456,7 +1326,7 @@ button{
 
           <div class="transaction">
 
-            <div class="transaction-left">
+            <div class="tx-left">
 
               <div class="tx-icon">
                 ◆
@@ -1476,7 +1346,7 @@ button{
 
             </div>
 
-            <div class="tx-money green">
+            <div class="tx-value green">
               +$75,000.00
             </div>
 
@@ -1485,8 +1355,6 @@ button{
         </section>
 
 
-        <!-- ACCOUNT -->
-
         <section class="panel">
 
           <h2>
@@ -1494,6 +1362,340 @@ button{
           </h2>
 
 
-          <div class="profile-row">
+          <div class="account-row">
+            <span>Account</span>
+            <strong>NEXORA Demo</strong>
+          </div>
 
-           
+          <div class="account-row">
+            <span>Status</span>
+            <strong class="green">Active</strong>
+          </div>
+
+          <div class="account-row">
+            <span>Projects</span>
+            <strong>08</strong>
+          </div>
+
+          <div class="account-row">
+            <span>Environment</span>
+            <strong>Demo</strong>
+          </div>
+
+          <div class="account-row">
+            <span>Currency</span>
+            <strong>USD</strong>
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<!-- MODAL -->
+
+<div
+  id="modal"
+  class="modal"
+  onclick="modalBackground(event)"
+>
+
+  <div class="modal-box">
+
+    <button
+      class="close"
+      onclick="closeModal()"
+    >
+      ×
+    </button>
+
+    <h2 id="modalTitle">
+      Demo action
+    </h2>
+
+    <p id="modalText">
+      This is a demonstration interface. It does not
+      connect to a bank, payment processor, investment
+      service, or cryptocurrency wallet.
+    </p>
+
+    <input
+      id="modalAmount"
+      class="modal-input"
+      type="number"
+      min="0"
+      step="0.01"
+      placeholder="Demo amount"
+    >
+
+    <button
+      class="modal-button"
+      onclick="demoAction()"
+    >
+      Continue in Demo
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+const KEY="nexora_demo_account_v3";
+
+let loginMode=false;
+
+function $(id){
+  return document.getElementById(id);
+}
+
+function getAccount(){
+  try{
+    return JSON.parse(
+      localStorage.getItem(KEY)||"null"
+    );
+  }catch(e){
+    return null;
+  }
+}
+
+function saveAccount(account){
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(account)
+  );
+}
+
+function createAccount(name,email,password){
+
+  const account={
+    name:name,
+    email:email,
+    password:password,
+    createdAt:new Date().toISOString()
+  };
+
+  saveAccount(account);
+  return account;
+}
+
+function showApp(account){
+
+  $("auth").classList.add("hidden");
+  $("app").classList.remove("hidden");
+
+  $("userName").textContent=account.name;
+  $("welcomeName").textContent=account.name;
+
+  const first=account.name
+    .trim()
+    .charAt(0)
+    .toUpperCase();
+
+  $("userName").previousElementSibling.textContent=
+    first||"N";
+}
+
+function logout(){
+
+  localStorage.removeItem(KEY);
+
+  $("app").classList.add("hidden");
+  $("auth").classList.remove("hidden");
+
+  $("authForm").reset();
+
+  loginMode=false;
+
+  updateAuthMode();
+}
+
+function updateAuthMode(){
+
+  $("authTitle").textContent=
+    loginMode
+      ?"Welcome back"
+      :"Create your account";
+
+  $("authSub").textContent=
+    loginMode
+      ?"Login to your NEXORA demonstration account."
+      :"Set up your NEXORA demonstration account.";
+
+  $("authButton").textContent=
+    loginMode
+      ?"Login"
+      :"Create account";
+
+  $("switchLabel").textContent=
+    loginMode
+      ?"New here?"
+      :"Already have an account?";
+
+  $("switchMode").textContent=
+    loginMode
+      ?"Create account"
+      :"Login";
+
+  $("name").style.display=
+    loginMode
+      ?"none"
+      :"block";
+
+  $("name").required=!loginMode;
+}
+
+$("switchMode").onclick=function(){
+
+  loginMode=!loginMode;
+
+  updateAuthMode();
+};
+
+$("authForm").onsubmit=function(event){
+
+  event.preventDefault();
+
+  const email=
+    $("email").value.trim().toLowerCase();
+
+  const password=
+    $("password").value;
+
+  if(loginMode){
+
+    const old=getAccount();
+
+    if(
+      !old||
+      old.email!==email||
+      old.password!==password
+    ){
+
+      alert(
+        "Demo login failed. Use the same details used when creating the demo account."
+      );
+
+      return;
+    }
+
+    showApp(old);
+    return;
+  }
+
+  const name=
+    $("name").value.trim();
+
+  if(!name||!email||!password){
+
+    alert("Please complete all fields.");
+    return;
+  }
+
+  if(password.length<6){
+
+    alert("Use at least 6 characters for the demo password.");
+    return;
+  }
+
+  const account=
+    createAccount(
+      name,
+      email,
+      password
+    );
+
+  showApp(account);
+};
+
+function openModal(title){
+
+  $("modalTitle").textContent=title;
+
+  $("modalAmount").value="";
+
+  $("modal").classList.add("show");
+}
+
+function closeModal(){
+
+  $("modal").classList.remove("show");
+}
+
+function modalBackground(event){
+
+  if(event.target.id==="modal"){
+    closeModal();
+  }
+}
+
+function demoAction(){
+
+  const title=
+    $("modalTitle").textContent;
+
+  const amount=
+    $("modalAmount").value;
+
+  if(
+    ["Deposit","Withdrawal","Transfer"]
+      .includes(title)&&
+    !amount
+  ){
+
+    alert(
+      "Enter a demonstration amount."
+    );
+
+    return;
+  }
+
+  alert(
+    title+
+    " recorded as a simulated demonstration action."+
+    (amount
+      ?" Amount: $"+Number(amount).toFixed(2)
+      :"")
+  );
+
+  closeModal();
+}
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key==="Escape"){
+      closeModal();
+    }
+
+  }
+);
+
+const existing=getAccount();
+
+if(existing){
+  showApp(existing);
+}else{
+  updateAuthMode();
+}
+</script>
+
+</body>
+</html>`;
+
+    return new Response(html,{
+      status:200,
+      headers:{
+        "content-type":"text/html; charset=UTF-8",
+        "cache-control":"no-store"
+      }
+    });
+  }
+};
