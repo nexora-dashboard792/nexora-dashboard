@@ -1,278 +1,221 @@
 export default {
   async fetch(request) {
-    const html = `<!DOCTYPE html>
+    return new Response(`<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nexora</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#f5f7fb;
-  color:#111827;
+  background:#f4f6f8;
+  color:#111827
 }
-
 button,input{font:inherit}
 button{cursor:pointer}
 
-#auth{
+#login{
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:#0f172a;
+  background:#0f172a
 }
 
-.auth-card{
+.box{
   width:100%;
-  max-width:420px;
-  background:#fff;
-  padding:32px;
-  border-radius:18px;
-  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  max-width:400px;
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 20px 50px #0004
 }
 
-.auth-logo{
+.logo{
   text-align:center;
   font-size:30px;
   font-weight:800;
+  margin-bottom:8px
 }
 
-.auth-subtitle{
+.sub{
   text-align:center;
   color:#64748b;
-  margin:8px 0 25px;
+  margin-bottom:25px
 }
 
-.auth-card input{
+input{
   width:100%;
   padding:13px;
-  margin:7px 0;
   border:1px solid #d1d5db;
   border-radius:8px;
+  margin:6px 0
 }
 
-.auth-button{
-  width:100%;
-  margin-top:12px;
-  padding:13px;
+button{
   border:0;
   border-radius:8px;
+  padding:12px 18px;
   background:#2563eb;
-  color:#fff;
-  font-weight:bold;
+  color:white;
+  font-weight:bold
 }
 
-.auth-switch{
-  text-align:center;
-  margin-top:20px;
-  color:#64748b;
+.full{
+  width:100%;
+  margin-top:10px
 }
 
-.auth-switch button{
-  border:0;
+.link{
   background:none;
   color:#2563eb;
-  font-weight:bold;
-}
-
-.auth-message{
-  min-height:20px;
-  margin-top:12px;
-  text-align:center;
-  font-size:14px;
-}
-
-.demo-banner{
-  background:#fef3c7;
-  color:#92400e;
-  padding:8px 15px;
-  text-align:center;
-  font-size:12px;
-  font-weight:600;
+  padding:0
 }
 
 #app{
   display:none;
-  min-height:100vh;
+  min-height:100vh
 }
 
 .sidebar{
-  width:240px;
-  background:#111827;
-  color:#fff;
-  padding:25px 18px;
   position:fixed;
+  left:0;
+  top:0;
+  width:230px;
   height:100vh;
+  padding:25px 15px;
+  background:#111827;
+  color:white
 }
 
-.logo{
+.brand{
   font-size:25px;
   font-weight:800;
-  margin-bottom:30px;
+  margin-bottom:30px
 }
 
 .nav{
   width:100%;
-  padding:13px 15px;
-  margin-bottom:8px;
-  border:0;
-  border-radius:9px;
-  background:transparent;
-  color:#cbd5e1;
   text-align:left;
+  margin:4px 0;
+  background:transparent;
+  color:#cbd5e1
 }
 
-.nav:hover,
-.nav.active{
+.nav.active,.nav:hover{
   background:#2563eb;
-  color:#fff;
+  color:white
 }
 
 .logout{
-  margin-top:20px;
   background:#dc2626;
-  color:#fff;
+  color:white;
+  margin-top:20px
 }
 
-.main{
-  margin-left:240px;
-  width:calc(100% - 240px);
-  padding:0 35px 35px;
+main{
+  margin-left:230px;
+  padding:0 30px 40px
+}
+
+.notice{
+  background:#fef3c7;
+  color:#92400e;
+  padding:9px;
+  text-align:center;
+  font-size:12px;
+  font-weight:bold;
+  margin:0 -30px
 }
 
 .page{display:none}
 .page.active{display:block}
 
-.header{
-  padding-top:35px;
-  margin-bottom:25px;
+header{
+  padding-top:30px;
+  margin-bottom:25px
 }
 
-.header h1{
+header h1{
   margin:0;
-  font-size:32px;
+  font-size:32px
 }
 
-.header p{color:#64748b}
+.muted{color:#64748b}
 
 .cards{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  gap:18px
 }
 
-.card{
-  background:#fff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 5px 20px rgba(0,0,0,.05);
+.card,.panel{
+  background:white;
+  border-radius:14px;
+  padding:22px;
+  margin-top:18px;
+  box-shadow:0 4px 18px #0000000d
 }
 
 .card-title{
   color:#64748b;
-  font-size:14px;
+  font-size:14px
 }
 
-.number{
-  font-size:30px;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.panel{
-  background:#fff;
-  padding:25px;
-  border-radius:15px;
-  margin-top:25px;
-  box-shadow:0 5px 20px rgba(0,0,0,.05);
-}
-
-.panel input{
-  width:100%;
-  max-width:500px;
-  padding:13px;
-  margin:7px 0;
-  border:1px solid #d1d5db;
-  border-radius:8px;
-}
-
-.button{
-  border:0;
-  background:#2563eb;
-  color:#fff;
-  padding:12px 18px;
-  border-radius:8px;
-  font-weight:bold;
-  margin-top:8px;
-}
-
-.button.danger{background:#dc2626}
-.button.secondary{background:#475569}
-
-.balance{
-  font-size:42px;
+.amount{
+  font-size:32px;
   font-weight:800;
-  margin-top:10px;
+  margin-top:8px
+}
+
+.wallet{
+  font-size:42px;
+  font-weight:800
+}
+
+.success{color:#15803d;font-weight:bold}
+.error{color:#dc2626;font-weight:bold}
+
+.tx{
+  padding:14px 0;
+  border-bottom:1px solid #e5e7eb
 }
 
 .pending{
-  background:#fef3c7;
-  color:#92400e;
   padding:12px;
-  border-radius:8px;
   margin-top:10px;
-}
-
-.transaction{
-  padding:15px 0;
-  border-bottom:1px solid #e5e7eb;
-}
-
-.transaction:last-child{border-bottom:0}
-.deposit{color:#15803d}
-.withdrawal{color:#dc2626}
-.pending-text{color:#d97706}
-
-.message-success{
-  color:#15803d;
-  font-weight:600;
-}
-
-.message-error{
-  color:#dc2626;
-  font-weight:600;
+  border-radius:8px;
+  background:#fef3c7;
+  color:#92400e
 }
 
 @media(max-width:700px){
-
   .sidebar{
     position:relative;
     width:100%;
-    height:auto;
-    padding:18px;
+    height:auto
   }
 
-  .logo{margin-bottom:15px}
-
-  .main{
+  main{
     margin-left:0;
-    width:100%;
-    padding:0 20px 25px;
+    padding:0 18px 30px
+  }
+
+  .notice{
+    margin:0 -18px
   }
 
   .cards{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
-  .balance{
-    font-size:34px;
+  .wallet{
+    font-size:34px
   }
 }
 </style>
@@ -280,90 +223,47 @@ button{cursor:pointer}
 
 <body>
 
-<div id="auth">
+<div id="login">
 
-  <div class="auth-card">
+  <div class="box">
 
-    <div class="auth-logo">NEXORA</div>
+    <div class="logo">NEXORA</div>
 
-    <div class="auth-subtitle">
-      Account
-    </div>
+    <div class="sub">Account</div>
 
     <div id="loginForm">
 
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Email"
-      >
+      <input id="email" type="email" placeholder="Email">
 
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Password"
-      >
+      <input id="password" type="password" placeholder="Password">
 
-      <button
-        class="auth-button"
-        type="button"
-        onclick="login()"
-      >
-        Sign In
-      </button>
+      <button class="full" onclick="login()">Sign In</button>
 
-      <div class="auth-switch">
+      <p style="text-align:center">
         Don't have an account?
-        <button
-          type="button"
-          onclick="showSignup()"
-        >
-          Create one
-        </button>
-      </div>
+        <button class="link" onclick="showSignup()">Create one</button>
+      </p>
 
     </div>
 
     <div id="signupForm" style="display:none">
 
-      <input
-        id="signupName"
-        placeholder="Full name"
-      >
+      <input id="name" placeholder="Full name">
 
-      <input
-        id="signupEmail"
-        type="email"
-        placeholder="Email"
-      >
+      <input id="newEmail" type="email" placeholder="Email">
 
-      <input
-        id="signupPassword"
-        type="password"
-        placeholder="Password"
-      >
+      <input id="newPassword" type="password" placeholder="Password">
 
-      <button
-        class="auth-button"
-        type="button"
-        onclick="signup()"
-      >
-        Create Account
-      </button>
+      <button class="full" onclick="signup()">Create Account</button>
 
-      <div class="auth-switch">
+      <p style="text-align:center">
         Already have an account?
-        <button
-          type="button"
-          onclick="showLogin()"
-        >
-          Sign in
-        </button>
-      </div>
+        <button class="link" onclick="showLogin()">Sign in</button>
+      </p>
 
     </div>
 
-    <div id="authMessage" class="auth-message"></div>
+    <div id="authMessage"></div>
 
   </div>
 
@@ -374,142 +274,75 @@ button{cursor:pointer}
 
   <aside class="sidebar">
 
-    <div class="logo">NEXORA</div>
+    <div class="brand">NEXORA</div>
 
-    <button
-      class="nav active"
-      type="button"
-      onclick="showPage('dashboard',this)"
-    >
+    <button class="nav active" onclick="page('dashboard',this)">
       🏠 Dashboard
     </button>
 
-    <button
-      class="nav"
-      type="button"
-      onclick="showPage('wallet',this)"
-    >
+    <button class="nav" onclick="page('wallet',this)">
       💰 Wallet
     </button>
 
-    <button
-      class="nav"
-      type="button"
-      onclick="showPage('transactions',this)"
-    >
+    <button class="nav" onclick="page('transactions',this)">
       📋 Transactions
     </button>
 
-    <button
-      class="nav"
-      type="button"
-      onclick="showPage('profile',this)"
-    >
+    <button class="nav" onclick="page('profile',this)">
       👤 Profile
     </button>
 
-    <button
-      class="nav"
-      type="button"
-      onclick="showPage('projects',this)"
-    >
+    <button class="nav" onclick="page('projects',this)">
       📁 Projects
     </button>
 
-    <button
-      class="nav"
-      type="button"
-      onclick="showPage('settings',this)"
-    >
+    <button class="nav" onclick="page('settings',this)">
       ⚙️ Settings
     </button>
 
-    <button
-      class="nav logout"
-      type="button"
-      onclick="logout()"
-    >
+    <button class="nav logout" onclick="logout()">
       🚪 Logout
     </button>
 
   </aside>
 
 
-  <main class="main">
+  <main>
 
-    <div class="demo-banner">
-      Test environment — transactions use simulated funds.
+    <div class="notice">
+      Test environment — all wallet activity uses simulated funds.
     </div>
 
 
     <section id="dashboard" class="page active">
 
-      <div class="header">
-
-        <h1 id="welcomeTitle">
-          Welcome to Nexora
-        </h1>
-
-        <p>
-          Your account overview.
-        </p>
-
-      </div>
+      <header>
+        <h1 id="welcome">Welcome to Nexora</h1>
+        <p class="muted">Your account overview.</p>
+      </header>
 
       <div class="cards">
 
         <div class="card">
-
-          <div class="card-title">
-            Available Balance
-          </div>
-
-          <div
-            class="number"
-            id="dashboardBalance"
-          >
-            $0.00
-          </div>
-
+          <div class="card-title">Available Balance</div>
+          <div class="amount" id="dashBalance">$0.00</div>
         </div>
 
         <div class="card">
-
-          <div class="card-title">
-            Projects
-          </div>
-
-          <div
-            class="number"
-            id="projectCount"
-          >
-            0
-          </div>
-
+          <div class="card-title">Projects</div>
+          <div class="amount" id="count">0</div>
         </div>
 
         <div class="card">
-
-          <div class="card-title">
-            Account
-          </div>
-
-          <div class="number">
-            Active
-          </div>
-
+          <div class="card-title">Account</div>
+          <div class="amount">Active</div>
         </div>
 
       </div>
 
       <div class="panel">
-
         <h2>Nexora is online 🚀</h2>
-
-        <p id="dashboardMessage">
-          Welcome to your dashboard.
-        </p>
-
+        <p id="dashMessage">Welcome to your dashboard.</p>
       </div>
 
     </section>
@@ -517,29 +350,16 @@ button{cursor:pointer}
 
     <section id="wallet" class="page">
 
-      <div class="header">
-
+      <header>
         <h1>Wallet</h1>
-
-        <p>
-          Wallet management.
-        </p>
-
-      </div>
-
+        <p class="muted">Manage your simulated wallet.</p>
+      </header>
 
       <div class="panel">
 
-        <div class="card-title">
-          Available Balance
-        </div>
+        <div class="card-title">Available Balance</div>
 
-        <div
-          class="balance"
-          id="walletBalance"
-        >
-          $0.00
-        </div>
+        <div class="wallet" id="balance">$0.00</div>
 
       </div>
 
@@ -548,30 +368,25 @@ button{cursor:pointer}
 
         <h2>Deposit</h2>
 
-        <p>
-          Add simulated funds to your balance.
+        <p class="muted">
+          Add simulated funds to your test balance.
         </p>
 
         <input
-          id="depositAmount"
+          id="deposit"
           type="number"
           min="0.01"
           step="0.01"
-          inputmode="decimal"
           placeholder="Amount"
         >
 
         <br>
 
-        <button
-          class="button"
-          type="button"
-          onclick="deposit()"
-        >
+        <button onclick="depositFunds()">
           Deposit
         </button>
 
-        <p id="depositMessage"></p>
+        <p id="depositMsg"></p>
 
       </div>
 
@@ -580,42 +395,31 @@ button{cursor:pointer}
 
         <h2>Withdrawal</h2>
 
-        <p>
-          Withdrawals use simulated funds and require
-          your withdrawal PIN. Requests are placed
-          into pending status.
+        <p class="muted">
+          Withdrawal requests are simulated and remain pending.
         </p>
 
         <input
-          id="withdrawAmount"
+          id="withdraw"
           type="number"
           min="0.01"
           step="0.01"
-          inputmode="decimal"
           placeholder="Amount"
         >
 
-        <br>
-
         <input
-          id="withdrawPin"
+          id="pin"
           type="password"
           inputmode="numeric"
           maxlength="6"
           placeholder="Withdrawal PIN"
         >
 
-        <br>
-
-        <button
-          class="button"
-          type="button"
-          onclick="withdraw()"
-        >
+        <button onclick="withdrawFunds()">
           Request Withdrawal
         </button>
 
-        <p id="withdrawMessage"></p>
+        <p id="withdrawMsg"></p>
 
       </div>
 
@@ -624,29 +428,19 @@ button{cursor:pointer}
 
         <h2>Withdrawal PIN</h2>
 
-        <p>
-          Set a PIN for withdrawal requests.
-        </p>
-
         <input
-          id="newPin"
+          id="setPin"
           type="password"
           inputmode="numeric"
           maxlength="6"
           placeholder="4–6 digit PIN"
         >
 
-        <br>
-
-        <button
-          class="button secondary"
-          type="button"
-          onclick="setWithdrawalPin()"
-        >
+        <button onclick="savePin()">
           Set PIN
         </button>
 
-        <p id="pinMessage"></p>
+        <p id="pinMsg"></p>
 
       </div>
 
@@ -655,7 +449,7 @@ button{cursor:pointer}
 
         <h2>Pending Withdrawals</h2>
 
-        <div id="pendingList">
+        <div id="pending">
           No pending withdrawals.
         </div>
 
@@ -666,22 +460,13 @@ button{cursor:pointer}
 
     <section id="transactions" class="page">
 
-      <div class="header">
-
+      <header>
         <h1>Transactions</h1>
+        <p class="muted">Your transaction history.</p>
+      </header>
 
-        <p>
-          Your transaction history.
-        </p>
-
-      </div>
-
-      <div class="panel">
-
-        <div id="transactionList">
-          No transactions yet.
-        </div>
-
+      <div class="panel" id="transactionsList">
+        No transactions yet.
       </div>
 
     </section>
@@ -689,42 +474,22 @@ button{cursor:pointer}
 
     <section id="profile" class="page">
 
-      <div class="header">
-
+      <header>
         <h1>Profile</h1>
-
-        <p>
-          Manage your profile.
-        </p>
-
-      </div>
+        <p class="muted">Manage your profile.</p>
+      </header>
 
       <div class="panel">
 
-        <input
-          id="profileName"
-          placeholder="Your name"
-        >
+        <input id="profileName" placeholder="Your name">
 
-        <br>
+        <input id="profileEmail" disabled>
 
-        <input
-          id="profileEmail"
-          disabled
-          placeholder="Email"
-        >
-
-        <br>
-
-        <button
-          class="button"
-          type="button"
-          onclick="saveProfile()"
-        >
+        <button onclick="saveProfile()">
           Save Profile
         </button>
 
-        <p id="profileMessage"></p>
+        <p id="profileMsg"></p>
 
       </div>
 
@@ -733,34 +498,20 @@ button{cursor:pointer}
 
     <section id="projects" class="page">
 
-      <div class="header">
-
+      <header>
         <h1>Projects</h1>
-
-        <p>
-          Create and manage projects.
-        </p>
-
-      </div>
+        <p class="muted">Create and manage projects.</p>
+      </header>
 
       <div class="panel">
 
-        <input
-          id="projectInput"
-          placeholder="Project name"
-        >
+        <input id="project" placeholder="Project name">
 
-        <br>
-
-        <button
-          class="button"
-          type="button"
-          onclick="addProject()"
-        >
+        <button onclick="addProject()">
           Add Project
         </button>
 
-        <div id="projectList"></div>
+        <div id="projects"></div>
 
       </div>
 
@@ -769,30 +520,20 @@ button{cursor:pointer}
 
     <section id="settings" class="page">
 
-      <div class="header">
-
+      <header>
         <h1>Settings</h1>
-
-        <p>
-          Account settings.
-        </p>
-
-      </div>
+        <p class="muted">Account settings.</p>
+      </header>
 
       <div class="panel">
 
         <h2>Account</h2>
 
-        <p>
-          This account is operating in a test
-          environment using simulated funds.
+        <p class="muted">
+          This is a test environment using simulated funds.
         </p>
 
-        <button
-          class="button danger"
-          type="button"
-          onclick="logout()"
-        >
+        <button class="logout" onclick="logout()">
           Log Out
         </button>
 
@@ -807,972 +548,633 @@ button{cursor:pointer}
 
 <script>
 
-function getAccount() {
+function account(){
 
-  const data =
-    localStorage.getItem("nexoraAccount");
+  const value=localStorage.getItem("nexora");
 
-  if (!data) {
-    return null;
-  }
+  if(!value)return null;
 
-  try {
-    return JSON.parse(data);
-  } catch (error) {
-    console.error(error);
+  try{
+    return JSON.parse(value);
+  }catch(e){
     return null;
   }
 }
 
 
-function saveAccount(account) {
-
-  localStorage.setItem(
-    "nexoraAccount",
-    JSON.stringify(account)
-  );
-
+function save(a){
+  localStorage.setItem("nexora",JSON.stringify(a));
 }
 
 
-function showSignup() {
+function showSignup(){
 
-  document.getElementById("loginForm").style.display =
-    "none";
+  document.getElementById("loginForm").style.display="none";
 
-  document.getElementById("signupForm").style.display =
-    "block";
+  document.getElementById("signupForm").style.display="block";
 
-  document.getElementById("authMessage").textContent =
-    "";
-
+  document.getElementById("authMessage").textContent="";
 }
 
 
-function showLogin() {
+function showLogin(){
 
-  document.getElementById("loginForm").style.display =
-    "block";
+  document.getElementById("loginForm").style.display="block";
 
-  document.getElementById("signupForm").style.display =
-    "none";
+  document.getElementById("signupForm").style.display="none";
 
-  document.getElementById("authMessage").textContent =
-    "";
-
+  document.getElementById("authMessage").textContent="";
 }
 
 
-function signup() {
+function signup(){
 
-  const name =
-    document.getElementById("signupName").value.trim();
+  const name=document.getElementById("name").value.trim();
 
-  const email =
-    document.getElementById("signupEmail").value.trim();
+  const email=document.getElementById("newEmail").value.trim();
 
-  const password =
-    document.getElementById("signupPassword").value;
+  const password=document.getElementById("newPassword").value;
 
-  const message =
-    document.getElementById("authMessage");
+  const msg=document.getElementById("authMessage");
 
 
-  if (!name || !email || !password) {
+  if(!name||!email||!password){
 
-    message.textContent =
-      "Please complete all fields.";
-
+    msg.textContent="Please complete all fields.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (password.length < 6) {
+  if(password.length<6){
 
-    message.textContent =
-      "Password must contain at least 6 characters.";
-
+    msg.textContent="Password must contain at least 6 characters.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (getAccount()) {
-
-    message.textContent =
-      "An account already exists on this browser. Please sign in.";
-
-    return;
-
-  }
-
-
-  const account = {
-
+  const a={
     name:name,
-
     email:email,
-
     password:password,
-
     balance:0,
-
-    withdrawalPin:"",
-
+    pin:"",
     projects:[],
-
     transactions:[],
-
-    pendingWithdrawals:[]
-
+    pending:[]
   };
 
 
-  saveAccount(account);
+  save(a);
 
+  localStorage.setItem("logged","yes");
 
-  localStorage.setItem(
-    "nexoraLoggedIn",
-    "true"
-  );
-
-
-  openDashboard();
+  open();
 
 }
 
 
-function login() {
+function login(){
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
+  const a=account();
 
-  const password =
-    document.getElementById("loginPassword").value;
+  const email=document.getElementById("email").value.trim();
 
-  const account =
-    getAccount();
+  const password=document.getElementById("password").value;
 
-  const message =
-    document.getElementById("authMessage");
+  const msg=document.getElementById("authMessage");
 
 
-  if (!account) {
+  if(!a){
 
-    message.textContent =
-      "No account found. Create an account first.";
-
+    msg.textContent="No account found. Create an account first.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (
-    email !== account.email ||
-    password !== account.password
-  ) {
+  if(email!==a.email||password!==a.password){
 
-    message.textContent =
-      "Incorrect email or password.";
-
+    msg.textContent="Incorrect email or password.";
+    msg.className="error";
     return;
-
   }
 
 
-  localStorage.setItem(
-    "nexoraLoggedIn",
-    "true"
-  );
+  localStorage.setItem("logged","yes");
 
-
-  openDashboard();
+  open();
 
 }
 
 
-function openDashboard() {
+function open(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-
-  if (!account) {
-    return;
-  }
+  if(!a)return;
 
 
-  document.getElementById("auth").style.display =
-    "none";
+  document.getElementById("login").style.display="none";
 
-  document.getElementById("app").style.display =
-    "flex";
+  document.getElementById("app").style.display="block";
 
 
-  document.getElementById("welcomeTitle").textContent =
-    "Welcome, " + account.name + " 👋";
+  document.getElementById("welcome").textContent=
+    "Welcome, "+a.name+" 👋";
 
 
-  document.getElementById("dashboardMessage").textContent =
-    "Welcome back, " + account.name + ".";
+  document.getElementById("dashMessage").textContent=
+    "Welcome back, "+a.name+".";
 
 
-  document.getElementById("profileName").value =
-    account.name;
+  document.getElementById("profileName").value=a.name;
+
+  document.getElementById("profileEmail").value=a.email;
 
 
-  document.getElementById("profileEmail").value =
-    account.email;
-
-
-  updateBalance();
-  renderProjects();
-  renderTransactions();
-  renderPendingWithdrawals();
+  refresh();
 
 }
 
 
-function logout() {
+function logout(){
 
-  localStorage.removeItem(
-    "nexoraLoggedIn"
-  );
+  localStorage.removeItem("logged");
 
+  document.getElementById("app").style.display="none";
 
-  document.getElementById("app").style.display =
-    "none";
-
-  document.getElementById("auth").style.display =
-    "flex";
+  document.getElementById("login").style.display="flex";
 
   showLogin();
 
 }
 
 
-function showPage(page, button) {
+function page(id,btn){
 
-  document.querySelectorAll(".page")
-    .forEach(function(section) {
+  document.querySelectorAll(".page").forEach(
+    p=>p.classList.remove("active")
+  );
 
-      section.classList.remove("active");
-
-    });
-
-
-  const selected =
-    document.getElementById(page);
+  document.getElementById(id).classList.add("active");
 
 
-  if (selected) {
-    selected.classList.add("active");
-  }
+  document.querySelectorAll(".nav").forEach(
+    n=>n.classList.remove("active")
+  );
 
+  btn.classList.add("active");
 
-  document.querySelectorAll(".nav")
-    .forEach(function(nav) {
-
-      nav.classList.remove("active");
-
-    });
-
-
-  if (button) {
-    button.classList.add("active");
-  }
-
-
-  updateBalance();
-  renderTransactions();
-  renderPendingWithdrawals();
+  refresh();
 
 }
 
 
-function updateBalance() {
+function refresh(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-
-  if (!account) {
-    return;
-  }
+  if(!a)return;
 
 
-  const balance =
-    Number(account.balance || 0);
+  const money=Number(a.balance||0).toFixed(2);
+
+  document.getElementById("balance").textContent="$"+money;
+
+  document.getElementById("dashBalance").textContent="$"+money;
+
+  document.getElementById("count").textContent=
+    Array.isArray(a.projects)?a.projects.length:0;
 
 
-  const formatted =
-    "$" + balance.toFixed(2);
+  renderTransactions();
 
+  renderPending();
 
-  const wallet =
-    document.getElementById("walletBalance");
-
-  const dashboard =
-    document.getElementById("dashboardBalance");
-
-
-  if (wallet) {
-    wallet.textContent = formatted;
-  }
-
-
-  if (dashboard) {
-    dashboard.textContent = formatted;
-  }
+  renderProjects();
 
 }
 
 
 /* DEPOSIT */
 
-function deposit() {
+function depositFunds(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-  const input =
-    document.getElementById("depositAmount");
+  const input=document.getElementById("deposit");
 
-  const message =
-    document.getElementById("depositMessage");
+  const msg=document.getElementById("depositMsg");
 
+  if(!a){
 
-  if (!account) {
-
-    message.textContent =
-      "Please sign in first.";
-
-    message.className =
-      "message-error";
-
+    msg.textContent="Please sign in first.";
+    msg.className="error";
     return;
-
   }
 
 
-  const amount =
-    Number(input.value);
+  const amount=Number(input.value);
 
 
-  if (
-    !Number.isFinite(amount) ||
-    amount <= 0
-  ) {
+  if(!Number.isFinite(amount)||amount<=0){
 
-    message.textContent =
-      "Enter a valid amount.";
-
-    message.className =
-      "message-error";
-
+    msg.textContent="Enter a valid amount.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (!Array.isArray(account.transactions)) {
-    account.transactions = [];
-  }
+  if(!Array.isArray(a.transactions))
+    a.transactions=[];
 
 
-  if (!Array.isArray(account.pendingWithdrawals)) {
-    account.pendingWithdrawals = [];
-  }
+  a.balance=Number(a.balance||0)+amount;
 
 
-  if (!Number.isFinite(Number(account.balance))) {
-    account.balance = 0;
-  }
-
-
-  account.balance =
-    Number(account.balance) + amount;
-
-
-  account.transactions.unshift({
-
-    id:Date.now(),
+  a.transactions.unshift({
 
     type:"Deposit",
-
     amount:amount,
-
     status:"Completed",
-
     date:new Date().toLocaleString()
 
   });
 
 
-  saveAccount(account);
+  save(a);
 
 
-  input.value = "";
+  input.value="";
 
 
-  updateBalance();
-  renderTransactions();
+  msg.textContent=
+    "$"+amount.toFixed(2)+" was added to your simulated balance.";
+
+  msg.className="success";
 
 
-  message.textContent =
-    "$" +
-    amount.toFixed(2) +
-    " added to your simulated balance successfully.";
-
-  message.className =
-    "message-success";
+  refresh();
 
 }
 
 
-/* WITHDRAWAL PIN */
+/* PIN */
 
-function setWithdrawalPin() {
+function savePin(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-  const input =
-    document.getElementById("newPin");
+  const value=document.getElementById("setPin").value.trim();
 
-  const message =
-    document.getElementById("pinMessage");
+  const msg=document.getElementById("pinMsg");
 
 
-  if (!account) {
+  if(!/^[0-9]{4,6}$/.test(value)){
 
-    message.textContent =
-      "Please sign in first.";
-
+    msg.textContent="PIN must contain 4–6 digits.";
+    msg.className="error";
     return;
-
   }
 
 
-  const pin =
-    input.value.trim();
+  a.pin=value;
+
+  save(a);
 
 
-  if (!/^[0-9]{4,6}$/.test(pin)) {
+  document.getElementById("setPin").value="";
 
-    message.textContent =
-      "PIN must contain 4–6 digits.";
-
-    return;
-
-  }
-
-
-  account.withdrawalPin =
-    pin;
-
-
-  saveAccount(account);
-
-
-  input.value = "";
-
-
-  message.textContent =
-    "Withdrawal PIN saved successfully.";
+  msg.textContent="Withdrawal PIN saved.";
+  msg.className="success";
 
 }
 
 
 /* WITHDRAW */
 
-function withdraw() {
+function withdrawFunds(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-  const amount =
-    Number(
-      document.getElementById("withdrawAmount").value
-    );
+  const amount=Number(
+    document.getElementById("withdraw").value
+  );
 
-  const pin =
-    document.getElementById("withdrawPin").value.trim();
+  const pin=document.getElementById("pin").value.trim();
 
-  const message =
-    document.getElementById("withdrawMessage");
+  const msg=document.getElementById("withdrawMsg");
 
 
-  if (!account) {
+  if(!Number.isFinite(amount)||amount<=0){
 
-    message.textContent =
-      "Please sign in first.";
-
+    msg.textContent="Enter a valid amount.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (
-    !Number.isFinite(amount) ||
-    amount <= 0
-  ) {
+  if(!a.pin){
 
-    message.textContent =
-      "Enter a valid withdrawal amount.";
-
+    msg.textContent="Set a withdrawal PIN first.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (!account.withdrawalPin) {
+  if(pin!==a.pin){
 
-    message.textContent =
-      "Set a withdrawal PIN first.";
-
+    msg.textContent="Incorrect withdrawal PIN.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (pin !== account.withdrawalPin) {
+  if(amount>Number(a.balance||0)){
 
-    message.textContent =
-      "Incorrect withdrawal PIN.";
-
+    msg.textContent="Insufficient balance.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (
-    amount >
-    Number(account.balance || 0)
-  ) {
+  if(!Array.isArray(a.pending))
+    a.pending=[];
 
-    message.textContent =
-      "Insufficient balance.";
-
-    return;
-
-  }
+  if(!Array.isArray(a.transactions))
+    a.transactions=[];
 
 
-  if (!Array.isArray(account.pendingWithdrawals)) {
-    account.pendingWithdrawals = [];
-  }
+  a.balance=Number(a.balance)-amount;
 
 
-  if (!Array.isArray(account.transactions)) {
-    account.transactions = [];
-  }
-
-
-  account.balance =
-    Number(account.balance) - amount;
-
-
-  const withdrawal = {
-
-    id:Date.now(),
-
+  const item={
     type:"Withdrawal",
-
     amount:amount,
-
     status:"Pending",
-
     date:new Date().toLocaleString()
-
   };
 
 
-  account.pendingWithdrawals.unshift(
-    withdrawal
-  );
+  a.pending.unshift(item);
+
+  a.transactions.unshift(item);
 
 
-  account.transactions.unshift(
-    withdrawal
-  );
+  save(a);
 
 
-  saveAccount(account);
+  document.getElementById("withdraw").value="";
+
+  document.getElementById("pin").value="";
 
 
-  document.getElementById("withdrawAmount").value =
-    "";
+  msg.textContent=
+    "Withdrawal request submitted and marked pending.";
 
-  document.getElementById("withdrawPin").value =
-    "";
-
-
-  message.textContent =
-    "Withdrawal submitted and is now pending.";
-
-  message.className =
-    "message-success";
+  msg.className="success";
 
 
-  updateBalance();
-  renderTransactions();
-  renderPendingWithdrawals();
+  refresh();
 
 }
 
 
-/* PENDING */
+function renderPending(){
 
-function renderPendingWithdrawals() {
+  const a=account();
 
-  const account =
-    getAccount();
+  const box=document.getElementById("pending");
 
-  const list =
-    document.getElementById("pendingList");
+  box.innerHTML="";
 
 
-  if (!list) {
+  if(!a||!a.pending||a.pending.length===0){
+
+    box.textContent="No pending withdrawals.";
     return;
   }
 
 
-  list.innerHTML = "";
+  a.pending.forEach(item=>{
 
+    const div=document.createElement("div");
 
-  if (
-    !account ||
-    !Array.isArray(account.pendingWithdrawals) ||
-    account.pendingWithdrawals.length === 0
-  ) {
+    div.className="pending";
 
-    list.textContent =
-      "No pending withdrawals.";
+    div.textContent=
+      "Withdrawal: $"+
+      Number(item.amount).toFixed(2)+
+      " — Pending — "+
+      item.date;
 
-    return;
+    box.appendChild(div);
 
-  }
-
-
-  account.pendingWithdrawals.forEach(
-    function(item) {
-
-      const div =
-        document.createElement("div");
-
-      div.className =
-        "pending";
-
-      div.innerHTML =
-        "<strong>Withdrawal: $" +
-        Number(item.amount).toFixed(2) +
-        "</strong><br>" +
-        "Status: Pending<br>" +
-        "<small>" +
-        escapeHtml(item.date) +
-        "</small>";
-
-      list.appendChild(div);
-
-    }
-  );
+  });
 
 }
 
 
-/* TRANSACTIONS */
+function renderTransactions(){
 
-function renderTransactions() {
+  const a=account();
 
-  const account =
-    getAccount();
+  const box=document.getElementById("transactionsList");
 
-  const list =
-    document.getElementById("transactionList");
+  box.innerHTML="";
 
 
-  if (!list) {
+  if(!a||!a.transactions||a.transactions.length===0){
+
+    box.textContent="No transactions yet.";
     return;
   }
 
 
-  list.innerHTML = "";
+  a.transactions.forEach(item=>{
+
+    const div=document.createElement("div");
+
+    div.className="tx";
 
 
-  if (
-    !account ||
-    !Array.isArray(account.transactions) ||
-    account.transactions.length === 0
-  ) {
+    const title=document.createElement("strong");
 
-    list.textContent =
-      "No transactions yet.";
-
-    return;
-
-  }
+    title.textContent=item.type;
 
 
-  account.transactions.forEach(
-    function(item) {
+    const line=document.createElement("div");
 
-      const div =
-        document.createElement("div");
-
-      div.className =
-        "transaction";
-
-
-      const typeClass =
-        item.type === "Deposit"
-          ? "deposit"
-          : "withdrawal";
+    line.textContent=
+      "$"+
+      Number(item.amount).toFixed(2)+
+      " — "+
+      item.status;
 
 
-      const statusClass =
-        item.status === "Pending"
-          ? "pending-text"
-          : "";
+    const date=document.createElement("small");
+
+    date.textContent=item.date;
 
 
-      div.innerHTML =
-        "<strong class='" +
-        typeClass +
-        "'>" +
-        escapeHtml(item.type) +
-        "</strong><br>" +
-        "$" +
-        Number(item.amount).toFixed(2) +
-        " — <span class='" +
-        statusClass +
-        "'>" +
-        escapeHtml(item.status) +
-        "</span><br>" +
-        "<small>" +
-        escapeHtml(item.date) +
-        "</small>";
+    div.appendChild(title);
+
+    div.appendChild(document.createElement("br"));
+
+    div.appendChild(line);
+
+    div.appendChild(date);
 
 
-      list.appendChild(div);
+    box.appendChild(div);
 
-    }
-  );
+  });
 
 }
 
 
 /* PROFILE */
 
-function saveProfile() {
+function saveProfile(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-  const name =
-    document.getElementById("profileName")
-      .value
-      .trim();
+  const name=document.getElementById("profileName").value.trim();
 
-  const message =
-    document.getElementById("profileMessage");
+  const msg=document.getElementById("profileMsg");
 
 
-  if (!account) {
+  if(!name){
 
-    message.textContent =
-      "Please sign in first.";
-
+    msg.textContent="Enter your name.";
+    msg.className="error";
     return;
-
   }
 
 
-  if (!name) {
+  a.name=name;
 
-    message.textContent =
-      "Please enter your name.";
-
-    return;
-
-  }
+  save(a);
 
 
-  account.name =
-    name;
+  document.getElementById("welcome").textContent=
+    "Welcome, "+name+" 👋";
 
 
-  saveAccount(account);
+  document.getElementById("dashMessage").textContent=
+    "Welcome back, "+name+".";
 
 
-  document.getElementById("welcomeTitle").textContent =
-    "Welcome, " + name + " 👋";
+  msg.textContent="Profile saved.";
 
-
-  document.getElementById("dashboardMessage").textContent =
-    "Welcome back, " + name + ".";
-
-
-  message.textContent =
-    "Profile saved successfully.";
+  msg.className="success";
 
 }
 
 
 /* PROJECTS */
 
-function addProject() {
+function addProject(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-  const input =
-    document.getElementById("projectInput");
+  const input=document.getElementById("project");
 
-  const name =
-    input.value.trim();
+  const value=input.value.trim();
 
 
-  if (!account || !name) {
-    return;
-  }
+  if(!value)return;
 
 
-  if (!Array.isArray(account.projects)) {
-    account.projects = [];
-  }
+  if(!Array.isArray(a.projects))
+    a.projects=[];
 
 
-  account.projects.push(name);
+  a.projects.push(value);
 
-  saveAccount(account);
+  save(a);
 
-  input.value = "";
+  input.value="";
 
-  renderProjects();
+  refresh();
 
 }
 
 
-function renderProjects() {
+function renderProjects(){
 
-  const account =
-    getAccount();
+  const a=account();
 
-  const list =
-    document.getElementById("projectList");
+  const box=document.getElementById("projects");
 
-
-  if (!list) {
-    return;
-  }
+  box.innerHTML="";
 
 
-  list.innerHTML = "";
+  if(!a||!a.projects)return;
 
 
-  if (
-    !account ||
-    !Array.isArray(account.projects)
-  ) {
+  a.projects.forEach((name,index)=>{
 
-    document.getElementById("projectCount").textContent =
-      "0";
+    const div=document.createElement("div");
 
-    return;
+    div.style.padding="12px 0";
 
-  }
+    div.style.borderBottom="1px solid #e5e7eb";
 
 
-  account.projects.forEach(
-    function(project,index) {
+    const text=document.createElement("strong");
 
-      const item =
-        document.createElement("div");
-
-      item.style.padding =
-        "15px 0";
-
-      item.style.borderBottom =
-        "1px solid #e5e7eb";
+    text.textContent=name;
 
 
-      item.innerHTML =
-        "<strong>" +
-        escapeHtml(project) +
-        "</strong><br>" +
-        '<button class="button danger" type="button" onclick="deleteProject(' +
-        index +
-        ')">Delete</button>';
+    const br=document.createElement("br");
 
 
-      list.appendChild(item);
+    const btn=document.createElement("button");
 
-    }
-  );
+    btn.textContent="Delete";
 
+    btn.style.background="#dc2626";
 
-  document.getElementById("projectCount").textContent =
-    account.projects.length;
-
-}
+    btn.style.marginTop="7px";
 
 
-function deleteProject(index) {
+    btn.onclick=function(){
 
-  const account =
-    getAccount();
+      a.projects.splice(index,1);
 
+      save(a);
 
-  if (
-    !account ||
-    !Array.isArray(account.projects)
-  ) {
-    return;
-  }
+      refresh();
+
+    };
 
 
-  account.projects.splice(index,1);
+    div.appendChild(text);
 
-  saveAccount(account);
+    div.appendChild(br);
 
-  renderProjects();
+    div.appendChild(btn);
 
-}
+    box.appendChild(div);
 
-
-/* HTML ESCAPE */
-
-function escapeHtml(value) {
-
-  const div =
-    document.createElement("div");
-
-  div.textContent =
-    String(value);
-
-  return div.innerHTML;
+  });
 
 }
 
 
 /* AUTO LOGIN */
 
-if (
-  localStorage.getItem("nexoraLoggedIn") === "true"
-) {
-
-  openDashboard();
-
+if(localStorage.getItem("logged")==="yes"){
+  open();
 }
 
 </script>
 
 </body>
-</html>`;
-
-    return new Response(html, {
+</html>`, {
       status: 200,
       headers: {
         "content-type": "text/html; charset=UTF-8",
