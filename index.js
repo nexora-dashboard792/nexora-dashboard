@@ -5,7 +5,6 @@ export default {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Nexora</title>
 
 <style>
@@ -100,7 +99,7 @@ button {
   font-size: 14px;
 }
 
-/* TEST ENVIRONMENT NOTICE */
+/* TEST NOTICE */
 
 .demo-banner {
   background: #fef3c7;
@@ -285,7 +284,6 @@ button {
 /* MOBILE */
 
 @media (max-width: 700px) {
-
   .sidebar {
     position: relative;
     width: 100%;
@@ -342,13 +340,22 @@ button {
         placeholder="Password"
       >
 
-      <button class="auth-button" onclick="login()">
+      <button
+        class="auth-button"
+        type="button"
+        onclick="login()"
+      >
         Sign In
       </button>
 
       <div class="auth-switch">
         Don't have an account?
-        <button onclick="showSignup()">Create one</button>
+        <button
+          type="button"
+          onclick="showSignup()"
+        >
+          Create one
+        </button>
       </div>
 
     </div>
@@ -372,13 +379,22 @@ button {
         placeholder="Password"
       >
 
-      <button class="auth-button" onclick="signup()">
+      <button
+        class="auth-button"
+        type="button"
+        onclick="signup()"
+      >
         Create Account
       </button>
 
       <div class="auth-switch">
         Already have an account?
-        <button onclick="showLogin()">Sign in</button>
+        <button
+          type="button"
+          onclick="showLogin()"
+        >
+          Sign in
+        </button>
       </div>
 
     </div>
@@ -400,38 +416,59 @@ button {
       NEXORA
     </div>
 
-    <button class="nav active"
-      onclick="showPage('dashboard', this)">
+    <button
+      class="nav active"
+      type="button"
+      onclick="showPage('dashboard', this)"
+    >
       🏠 Dashboard
     </button>
 
-    <button class="nav"
-      onclick="showPage('wallet', this)">
+    <button
+      class="nav"
+      type="button"
+      onclick="showPage('wallet', this)"
+    >
       💰 Wallet
     </button>
 
-    <button class="nav"
-      onclick="showPage('transactions', this)">
+    <button
+      class="nav"
+      type="button"
+      onclick="showPage('transactions', this)"
+    >
       📋 Transactions
     </button>
 
-    <button class="nav"
-      onclick="showPage('profile', this)">
+    <button
+      class="nav"
+      type="button"
+      onclick="showPage('profile', this)"
+    >
       👤 Profile
     </button>
 
-    <button class="nav"
-      onclick="showPage('projects', this)">
+    <button
+      class="nav"
+      type="button"
+      onclick="showPage('projects', this)"
+    >
       📁 Projects
     </button>
 
-    <button class="nav"
-      onclick="showPage('settings', this)">
+    <button
+      class="nav"
+      type="button"
+      onclick="showPage('settings', this)"
+    >
       ⚙️ Settings
     </button>
 
-    <button class="nav logout"
-      onclick="logout()">
+    <button
+      class="nav logout"
+      type="button"
+      onclick="logout()"
+    >
       🚪 Logout
     </button>
 
@@ -469,7 +506,10 @@ button {
             Available Balance
           </div>
 
-          <div class="number" id="dashboardBalance">
+          <div
+            class="number"
+            id="dashboardBalance"
+          >
             $0.00
           </div>
 
@@ -481,7 +521,10 @@ button {
             Projects
           </div>
 
-          <div class="number" id="projectCount">
+          <div
+            class="number"
+            id="projectCount"
+          >
             0
           </div>
 
@@ -545,6 +588,8 @@ button {
       </div>
 
 
+      <!-- DEPOSIT -->
+
       <div class="panel">
 
         <h2>Deposit</h2>
@@ -565,6 +610,7 @@ button {
 
         <button
           class="button"
+          type="button"
           onclick="deposit()"
         >
           Deposit
@@ -574,6 +620,8 @@ button {
 
       </div>
 
+
+      <!-- WITHDRAWAL -->
 
       <div class="panel">
 
@@ -607,6 +655,7 @@ button {
 
         <button
           class="button"
+          type="button"
           onclick="withdraw()"
         >
           Request Withdrawal
@@ -616,6 +665,8 @@ button {
 
       </div>
 
+
+      <!-- PIN -->
 
       <div class="panel">
 
@@ -637,6 +688,7 @@ button {
 
         <button
           class="button secondary"
+          type="button"
           onclick="setWithdrawalPin()"
         >
           Set PIN
@@ -646,6 +698,8 @@ button {
 
       </div>
 
+
+      <!-- PENDING -->
 
       <div class="panel">
 
@@ -718,6 +772,7 @@ button {
 
         <button
           class="button"
+          type="button"
           onclick="saveProfile()"
         >
           Save Profile
@@ -755,6 +810,7 @@ button {
 
         <button
           class="button"
+          type="button"
           onclick="addProject()"
         >
           Add Project
@@ -792,6 +848,7 @@ button {
 
         <button
           class="button danger"
+          type="button"
           onclick="logout()"
         >
           Log Out
@@ -813,7 +870,16 @@ function getAccount() {
   const data =
     localStorage.getItem("nexoraAccount");
 
-  return data ? JSON.parse(data) : null;
+  if (!data) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(data);
+  } catch (error) {
+    console.error("Account data error:", error);
+    return null;
+  }
 
 }
 
@@ -891,6 +957,20 @@ function signup() {
   }
 
 
+  const existingAccount =
+    getAccount();
+
+
+  if (existingAccount) {
+
+    message.textContent =
+      "An account already exists on this browser. Sign in instead.";
+
+    return;
+
+  }
+
+
   const account = {
 
     name: name,
@@ -934,14 +1014,16 @@ function login() {
   const password =
     document.getElementById("loginPassword").value;
 
-
   const account =
     getAccount();
+
+  const message =
+    document.getElementById("authMessage");
 
 
   if (!account) {
 
-    document.getElementById("authMessage").textContent =
+    message.textContent =
       "No account found. Create an account first.";
 
     return;
@@ -954,7 +1036,7 @@ function login() {
     password !== account.password
   ) {
 
-    document.getElementById("authMessage").textContent =
+    message.textContent =
       "Incorrect email or password.";
 
     return;
@@ -1046,8 +1128,15 @@ function showPage(page, button) {
     });
 
 
-  document.getElementById(page)
-    .classList.add("active");
+  const selectedPage =
+    document.getElementById(page);
+
+
+  if (selectedPage) {
+
+    selectedPage.classList.add("active");
+
+  }
 
 
   document.querySelectorAll(".nav")
@@ -1058,7 +1147,9 @@ function showPage(page, button) {
     });
 
 
-  button.classList.add("active");
+  if (button) {
+    button.classList.add("active");
+  }
 
 
   updateBalance();
@@ -1089,33 +1180,71 @@ function updateBalance() {
     "$" + balance.toFixed(2);
 
 
-  document.getElementById("walletBalance").textContent =
-    formatted;
+  const walletBalance =
+    document.getElementById("walletBalance");
 
 
-  document.getElementById("dashboardBalance").textContent =
-    formatted;
+  const dashboardBalance =
+    document.getElementById("dashboardBalance");
+
+
+  if (walletBalance) {
+
+    walletBalance.textContent =
+      formatted;
+
+  }
+
+
+  if (dashboardBalance) {
+
+    dashboardBalance.textContent =
+      formatted;
+
+  }
 
 }
 
+
+/* DEPOSIT */
 
 function deposit() {
 
   const account =
     getAccount();
 
-
   const input =
     document.getElementById("depositAmount");
+
+  const message =
+    document.getElementById("depositMessage");
+
+
+  if (!account) {
+
+    message.textContent =
+      "Please sign in first.";
+
+    return;
+
+  }
+
+
+  if (!input || !message) {
+    return;
+  }
 
 
   const amount =
     Number(input.value);
 
 
-  if (!amount || amount <= 0) {
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
 
-    document.getElementById("depositMessage").textContent =
+    message.textContent =
       "Enter a valid amount.";
 
     return;
@@ -1123,53 +1252,120 @@ function deposit() {
   }
 
 
+  if (!Array.isArray(account.transactions)) {
+
+    account.transactions = [];
+
+  }
+
+
+  if (!Array.isArray(account.pendingWithdrawals)) {
+
+    account.pendingWithdrawals = [];
+
+  }
+
+
+  const currentBalance =
+    Number(account.balance);
+
+
+  if (!Number.isFinite(currentBalance)) {
+
+    account.balance = 0;
+
+  }
+
+
+  /*
+    Add simulated funds to the balance.
+  */
+
   account.balance =
     Number(account.balance || 0) + amount;
 
 
-  if (!account.transactions) {
-    account.transactions = [];
-  }
-
+  /*
+    Record the simulated deposit.
+  */
 
   account.transactions.unshift({
 
-    type: "Deposit",
+    id:
+      Date.now(),
 
-    amount: amount,
+    type:
+      "Deposit",
 
-    status: "Completed",
+    amount:
+      amount,
 
-    date: new Date().toLocaleString()
+    status:
+      "Completed",
+
+    date:
+      new Date().toLocaleString()
 
   });
 
 
+  /*
+    Save the updated account.
+  */
+
   saveAccount(account);
 
+
+  /*
+    Clear the input.
+  */
 
   input.value = "";
 
 
-  document.getElementById("depositMessage").textContent =
-    "Deposit added successfully ✅";
-
+  /*
+    Update the interface.
+  */
 
   updateBalance();
 
   renderTransactions();
 
+
+  /*
+    Show confirmation.
+  */
+
+  message.textContent =
+    "$" +
+    amount.toFixed(2) +
+    " added to your simulated balance successfully.";
+
 }
 
+
+/* WITHDRAWAL PIN */
 
 function setWithdrawalPin() {
 
   const account =
     getAccount();
 
-
   const input =
     document.getElementById("newPin");
+
+  const message =
+    document.getElementById("pinMessage");
+
+
+  if (!account) {
+
+    message.textContent =
+      "Please sign in first.";
+
+    return;
+
+  }
 
 
   const pin =
@@ -1178,7 +1374,7 @@ function setWithdrawalPin() {
 
   if (!/^[0-9]{4,6}$/.test(pin)) {
 
-    document.getElementById("pinMessage").textContent =
+    message.textContent =
       "PIN must contain 4–6 digits.";
 
     return;
@@ -1196,11 +1392,13 @@ function setWithdrawalPin() {
   input.value = "";
 
 
-  document.getElementById("pinMessage").textContent =
+  message.textContent =
     "Withdrawal PIN saved successfully ✅";
 
 }
 
+
+/* WITHDRAWAL */
 
 function withdraw() {
 
@@ -1222,7 +1420,20 @@ function withdraw() {
     document.getElementById("withdrawMessage");
 
 
-  if (!amount || amount <= 0) {
+  if (!account) {
+
+    message.textContent =
+      "Please sign in first.";
+
+    return;
+
+  }
+
+
+  if (
+    !Number.isFinite(amount) ||
+    amount <= 0
+  ) {
 
     message.textContent =
       "Enter a valid withdrawal amount.";
@@ -1252,7 +1463,10 @@ function withdraw() {
   }
 
 
-  if (amount > Number(account.balance || 0)) {
+  if (
+    amount >
+    Number(account.balance || 0)
+  ) {
 
     message.textContent =
       "Insufficient balance.";
@@ -1262,23 +1476,26 @@ function withdraw() {
   }
 
 
+  if (!Array.isArray(account.pendingWithdrawals)) {
+
+    account.pendingWithdrawals = [];
+
+  }
+
+
+  if (!Array.isArray(account.transactions)) {
+
+    account.transactions = [];
+
+  }
+
+
   /*
-    Simulated funds are reserved from the
-    available balance and the request becomes pending.
+    Reserve the simulated amount.
   */
 
   account.balance =
     Number(account.balance || 0) - amount;
-
-
-  if (!account.pendingWithdrawals) {
-    account.pendingWithdrawals = [];
-  }
-
-
-  if (!account.transactions) {
-    account.transactions = [];
-  }
 
 
   const withdrawal = {
@@ -1334,6 +1551,8 @@ function withdraw() {
 }
 
 
+/* PENDING WITHDRAWALS */
+
 function renderPendingWithdrawals() {
 
   const account =
@@ -1344,12 +1563,17 @@ function renderPendingWithdrawals() {
     document.getElementById("pendingList");
 
 
+  if (!list) {
+    return;
+  }
+
+
   list.innerHTML = "";
 
 
   if (
     !account ||
-    !account.pendingWithdrawals ||
+    !Array.isArray(account.pendingWithdrawals) ||
     account.pendingWithdrawals.length === 0
   ) {
 
@@ -1390,6 +1614,8 @@ function renderPendingWithdrawals() {
 }
 
 
+/* TRANSACTIONS */
+
 function renderTransactions() {
 
   const account =
@@ -1400,12 +1626,17 @@ function renderTransactions() {
     document.getElementById("transactionList");
 
 
+  if (!list) {
+    return;
+  }
+
+
   list.innerHTML = "";
 
 
   if (
     !account ||
-    !account.transactions ||
+    !Array.isArray(account.transactions) ||
     account.transactions.length === 0
   ) {
 
@@ -1469,6 +1700,8 @@ function renderTransactions() {
 }
 
 
+/* PROFILE */
+
 function saveProfile() {
 
   const account =
@@ -1481,9 +1714,23 @@ function saveProfile() {
       .trim();
 
 
+  const message =
+    document.getElementById("profileMessage");
+
+
+  if (!account) {
+
+    message.textContent =
+      "Please sign in first.";
+
+    return;
+
+  }
+
+
   if (!name) {
 
-    document.getElementById("profileMessage").textContent =
+    message.textContent =
       "Please enter your name.";
 
     return;
@@ -1506,11 +1753,13 @@ function saveProfile() {
     "Welcome back, " + name + ".";
 
 
-  document.getElementById("profileMessage").textContent =
+  message.textContent =
     "Profile saved successfully ✅";
 
 }
 
+
+/* PROJECTS */
 
 function addProject() {
 
@@ -1526,13 +1775,15 @@ function addProject() {
     input.value.trim();
 
 
-  if (!name) {
+  if (!account || !name) {
     return;
   }
 
 
-  if (!account.projects) {
+  if (!Array.isArray(account.projects)) {
+
     account.projects = [];
+
   }
 
 
@@ -1560,10 +1811,18 @@ function renderProjects() {
     document.getElementById("projectList");
 
 
+  if (!list) {
+    return;
+  }
+
+
   list.innerHTML = "";
 
 
-  if (!account || !account.projects) {
+  if (
+    !account ||
+    !Array.isArray(account.projects)
+  ) {
 
     document.getElementById("projectCount").textContent =
       "0";
@@ -1593,7 +1852,7 @@ function renderProjects() {
         escapeHtml(project) +
         "</strong>" +
         "<br>" +
-        '<button class="button danger" onclick="deleteProject(' +
+        '<button class="button danger" type="button" onclick="deleteProject(' +
         index +
         ')">Delete</button>';
 
@@ -1616,8 +1875,13 @@ function deleteProject(index) {
     getAccount();
 
 
-  if (!account || !account.projects) {
+  if (
+    !account ||
+    !Array.isArray(account.projects)
+  ) {
+
     return;
+
   }
 
 
@@ -1635,6 +1899,8 @@ function deleteProject(index) {
 }
 
 
+/* SECURITY HELPER */
+
 function escapeHtml(value) {
 
   const div =
@@ -1642,7 +1908,7 @@ function escapeHtml(value) {
 
 
   div.textContent =
-    value;
+    String(value);
 
 
   return div.innerHTML;
