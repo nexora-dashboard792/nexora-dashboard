@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#070b12">
+<meta name="description" content="NEXORA premium account demonstration interface">
 <title>NEXORA — Premium Account Demo</title>
-
 <style>
 *{box-sizing:border-box}
-
 :root{
   --bg:#070b12;
   --bg2:#0b111b;
@@ -23,9 +22,7 @@
   --yellow:#f2bd63;
   --red:#ff6b7d;
 }
-
 html{scroll-behavior:smooth}
-
 body{
   margin:0;
   color:var(--text);
@@ -35,7 +32,6 @@ body{
     linear-gradient(145deg,#070b12,#09111c 55%,#060a10);
   font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-
 body:before{
   content:"";
   position:fixed;
@@ -47,18 +43,15 @@ body:before{
     linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
   background-size:44px 44px;
 }
-
 button,input{font:inherit}
 button{cursor:pointer}
 .hidden{display:none!important}
-
-a{
-  color:inherit;
-  text-decoration:none;
+button:focus-visible,
+input:focus-visible{
+  outline:2px solid var(--cyan);
+  outline-offset:2px;
 }
-
 /* AUTH */
-
 #auth{
   min-height:100vh;
   display:flex;
@@ -66,7 +59,6 @@ a{
   justify-content:center;
   padding:25px;
 }
-
 .auth-card{
   width:100%;
   max-width:450px;
@@ -76,26 +68,22 @@ a{
   background:linear-gradient(145deg,#101b2a,#080e17);
   box-shadow:0 35px 100px rgba(0,0,0,.55);
 }
-
 .brand{
   font-size:27px;
   font-weight:950;
   letter-spacing:5px;
 }
-
-.brand span{color:var(--cyan)}
-
+.brand span,
+.logo span{color:var(--cyan)}
 .auth-card h1{
   margin:48px 0 8px;
   font-size:30px;
   letter-spacing:-.7px;
 }
-
 .auth-card p{
   color:var(--muted);
   line-height:1.6;
 }
-
 .input{
   width:100%;
   padding:14px;
@@ -106,12 +94,10 @@ a{
   border-radius:11px;
   outline:none;
 }
-
 .input:focus{
   border-color:var(--blue);
   box-shadow:0 0 0 3px rgba(108,140,255,.12);
 }
-
 .primary{
   width:100%;
   margin-top:12px;
@@ -122,25 +108,20 @@ a{
   font-weight:850;
   background:linear-gradient(135deg,#718cff,#4d72e9);
 }
-
 .switch{
   margin-top:20px;
   text-align:center;
   color:var(--muted);
   font-size:13px;
 }
-
 .switch button{
   border:0;
   background:none;
   color:var(--cyan);
   font-weight:800;
 }
-
 /* APP */
-
 #app{min-height:100vh}
-
 .header{
   position:sticky;
   top:0;
@@ -154,21 +135,16 @@ a{
   background:rgba(7,11,18,.84);
   backdrop-filter:blur(22px);
 }
-
 .logo{
   font-size:23px;
   font-weight:950;
   letter-spacing:4px;
 }
-
-.logo span{color:var(--cyan)}
-
 .header-nav{
   display:flex;
   align-items:center;
   gap:25px;
 }
-
 .header-nav button{
   border:0;
   background:none;
@@ -176,15 +152,12 @@ a{
   font-size:12px;
   font-weight:700;
 }
-
 .header-nav button:hover{color:white}
-
 .header-right{
   display:flex;
   align-items:center;
   gap:15px;
 }
-
 .demo-pill{
   padding:7px 10px;
   border:1px solid rgba(242,189,99,.15);
@@ -194,7 +167,6 @@ a{
   font-size:9px;
   font-weight:900;
 }
-
 .avatar{
   width:35px;
   height:35px;
@@ -205,16 +177,13 @@ a{
   font-size:12px;
   font-weight:950;
 }
-
 /* HERO */
-
 .hero{
   max-width:1250px;
   margin:auto;
   padding:70px 25px 45px;
   text-align:center;
 }
-
 .hero-kicker{
   display:inline-block;
   padding:7px 12px;
@@ -226,7 +195,6 @@ a{
   font-weight:900;
   letter-spacing:1.5px;
 }
-
 .hero h1{
   max-width:850px;
   margin:20px auto 12px;
@@ -234,13 +202,12 @@ a{
   line-height:.98;
   letter-spacing:-3px;
 }
-
 .gradient{
   background:linear-gradient(90deg,#fff,#8bdfff,#778eff);
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 }
-
 .hero p{
   max-width:620px;
   margin:0 auto;
@@ -248,14 +215,12 @@ a{
   line-height:1.7;
   font-size:14px;
 }
-
 .hero-actions{
   display:flex;
   justify-content:center;
   gap:10px;
   margin-top:27px;
 }
-
 .hero-button{
   padding:12px 20px;
   border-radius:10px;
@@ -265,20 +230,16 @@ a{
   font-weight:800;
   font-size:11px;
 }
-
 .hero-button.primary-button{
   border-color:#617fff;
   background:#617fff;
 }
-
-/* MARKET */
-
+/* MAIN */
 .main{
   max-width:1250px;
   margin:auto;
   padding:0 25px 70px;
 }
-
 .section-label{
   margin:30px 0 13px;
   color:#73849a;
@@ -286,13 +247,11 @@ a{
   font-weight:900;
   letter-spacing:1.7px;
 }
-
 .market{
   display:grid;
   grid-template-columns:1fr 2fr;
   gap:16px;
 }
-
 .market-card,
 .chart-card,
 .account-card,
@@ -304,23 +263,17 @@ a{
   border-radius:18px;
   background:linear-gradient(145deg,rgba(17,27,42,.9),rgba(10,16,25,.9));
 }
-
-.market-card{
-  padding:23px;
-}
-
+.market-card{padding:23px}
 .market-top{
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
-
 .coin{
   display:flex;
   align-items:center;
   gap:11px;
 }
-
 .coin-icon{
   width:39px;
   height:39px;
@@ -331,97 +284,80 @@ a{
   color:#8fa6ff;
   font-weight:950;
 }
-
 .coin-name{
   font-size:13px;
   font-weight:850;
 }
-
 .coin-symbol{
   margin-top:3px;
   color:var(--muted);
   font-size:9px;
 }
-
 .market-price{
   margin-top:28px;
   font-size:31px;
   font-weight:950;
 }
-
 .market-change{
   margin-top:6px;
   color:var(--green);
   font-size:11px;
   font-weight:850;
 }
-
 .market-note{
   margin-top:27px;
   color:#65758a;
   font-size:9px;
 }
-
 .chart-card{
   min-height:190px;
   padding:22px;
   overflow:hidden;
 }
-
 .chart-head{
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
-
 .chart-head strong{font-size:13px}
-
 .chart-tabs{
   display:flex;
   gap:5px;
 }
-
 .chart-tabs span{
   padding:5px 7px;
   border-radius:5px;
   color:#71839a;
   font-size:8px;
 }
-
 .chart-tabs span.active{
   color:white;
   background:#18263b;
 }
-
 .chart{
   height:120px;
   position:relative;
   margin-top:10px;
 }
-
 .chart svg{
   width:100%;
   height:100%;
 }
-
 .chart-note{
   color:#62738a;
   font-size:8px;
 }
-
 /* ACCOUNT */
-
 .account-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:15px;
 }
-
 .account-card{
   min-height:145px;
   padding:21px;
+  transition:.25s ease;
 }
-
 .card-label{
   color:#718298;
   font-size:9px;
@@ -429,91 +365,69 @@ a{
   letter-spacing:1px;
   text-transform:uppercase;
 }
-
 .card-value{
   margin-top:13px;
   font-size:25px;
   font-weight:950;
   letter-spacing:-1px;
 }
-
 .card-sub{
   margin-top:7px;
   color:#64758b;
   font-size:9px;
 }
-
 .positive{color:var(--green)}
 .pending{color:var(--yellow)}
-
 /* OVERVIEW */
-
 .overview{
   display:grid;
   grid-template-columns:1.55fr .75fr;
   gap:16px;
 }
-
 .balance-chart{
   padding:24px;
   min-height:270px;
 }
-
 .balance-chart-head{
   display:flex;
   align-items:start;
   justify-content:space-between;
 }
-
 .balance-chart h2{
   margin:0;
   font-size:16px;
 }
-
-.balance-chart small{
-  color:var(--muted);
-}
-
+.balance-chart small{color:var(--muted)}
 .big-chart{
   height:170px;
   margin-top:22px;
 }
-
 .big-chart svg{
   width:100%;
   height:100%;
 }
-
 .weeks{
   display:flex;
   justify-content:space-between;
   color:#5e7086;
   font-size:8px;
 }
-
 /* STATUS */
-
-.status-card{
-  padding:24px;
-}
-
+.status-card{padding:24px}
 .status-card h2{
   margin:0 0 20px;
   font-size:16px;
 }
-
 .status-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
 .status-active{
   color:var(--green);
   font-size:11px;
   font-weight:900;
 }
-
 .progress{
   height:7px;
   margin-top:20px;
@@ -521,39 +435,33 @@ a{
   border-radius:10px;
   background:#182333;
 }
-
 .progress div{
   width:80%;
   height:100%;
   background:linear-gradient(90deg,#51d8ff,#6c8cff);
   border-radius:10px;
 }
-
 .profile-percent{
   margin-top:8px;
   color:#76879c;
   font-size:9px;
 }
-
 /* PLANS */
-
 .plans{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:15px;
 }
-
 .plan{
   padding:23px;
   position:relative;
   overflow:hidden;
+  transition:.25s ease;
 }
-
 .plan.popular{
   border-color:rgba(108,140,255,.35);
   box-shadow:0 20px 55px rgba(52,83,180,.10);
 }
-
 .popular-label{
   position:absolute;
   top:14px;
@@ -565,27 +473,23 @@ a{
   font-size:7px;
   font-weight:900;
 }
-
 .plan-name{
   color:#78899e;
   font-size:9px;
   font-weight:900;
   letter-spacing:1px;
 }
-
 .plan-price{
   margin-top:12px;
   font-size:28px;
   font-weight:950;
 }
-
 .plan p{
   min-height:38px;
   color:#718198;
   font-size:10px;
   line-height:1.6;
 }
-
 .plan-button{
   width:100%;
   padding:10px;
@@ -596,9 +500,7 @@ a{
   font-size:9px;
   font-weight:850;
 }
-
 /* PENDING */
-
 .pending-box{
   margin-top:15px;
   padding:17px;
@@ -606,43 +508,36 @@ a{
   border-radius:12px;
   background:rgba(242,189,99,.035);
 }
-
 .pending-box strong{
   color:var(--yellow);
   font-size:10px;
 }
-
 .pending-box p{
   margin:7px 0 0;
   color:#77889d;
   font-size:9px;
   line-height:1.5;
 }
-
 /* WALLET */
-
 .wallet-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
 }
-
 .wallet-card{
   padding:24px;
+  transition:.25s ease;
 }
-
 .wallet-balance{
   margin-top:13px;
   font-size:38px;
   font-weight:950;
 }
-
 .wallet-actions{
   display:flex;
   gap:8px;
   margin-top:25px;
 }
-
 .wallet-action{
   flex:1;
   padding:11px;
@@ -653,23 +548,19 @@ a{
   font-size:10px;
   font-weight:850;
 }
-
 .wallet-action.main{
   background:#617fff;
   border-color:#617fff;
 }
-
 /* TRANSACTIONS */
-
 .transactions{
   padding:23px;
+  overflow-x:auto;
 }
-
 .table{
   width:100%;
   border-collapse:collapse;
 }
-
 .table th{
   padding:11px 8px;
   text-align:left;
@@ -678,36 +569,30 @@ a{
   text-transform:uppercase;
   letter-spacing:1px;
 }
-
 .table td{
   padding:15px 8px;
   border-top:1px solid var(--line);
   color:#d5dce5;
   font-size:10px;
 }
-
 .complete{
   color:var(--green);
   font-weight:850;
 }
-
 .pending-status{
   color:var(--yellow);
   font-weight:850;
 }
-
 /* SECURITY */
-
 .security{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:15px;
 }
-
 .security-card{
   padding:24px;
+  transition:.25s ease;
 }
-
 .security-icon{
   width:42px;
   height:42px;
@@ -718,18 +603,15 @@ a{
   color:var(--cyan);
   font-size:19px;
 }
-
 .security-card h2{
   margin:15px 0 7px;
   font-size:15px;
 }
-
 .security-card p{
   color:#718298;
   font-size:10px;
   line-height:1.7;
 }
-
 .security-button{
   padding:10px 14px;
   border:1px solid var(--line);
@@ -739,9 +621,7 @@ a{
   font-size:9px;
   font-weight:850;
 }
-
 /* FOOTER */
-
 .footer{
   max-width:1250px;
   margin:0 auto;
@@ -751,9 +631,7 @@ a{
   font-size:9px;
   line-height:1.7;
 }
-
 /* MODAL */
-
 .modal{
   position:fixed;
   inset:0;
@@ -765,9 +643,7 @@ a{
   background:rgba(0,0,0,.72);
   backdrop-filter:blur(8px);
 }
-
 .modal.show{display:flex}
-
 .modal-box{
   width:100%;
   max-width:440px;
@@ -777,17 +653,12 @@ a{
   background:#0e1826;
   box-shadow:0 30px 90px rgba(0,0,0,.6);
 }
-
-.modal-box h2{
-  margin:0 35px 8px 0;
-}
-
+.modal-box h2{margin:0 35px 8px 0}
 .modal-box p{
   color:var(--muted);
   font-size:12px;
   line-height:1.7;
 }
-
 .modal-input{
   width:100%;
   padding:13px;
@@ -797,7 +668,6 @@ a{
   border-radius:9px;
   outline:none;
 }
-
 .modal-button{
   width:100%;
   margin-top:10px;
@@ -808,7 +678,6 @@ a{
   background:#617fff;
   font-weight:850;
 }
-
 .close{
   float:right;
   border:0;
@@ -816,109 +685,130 @@ a{
   color:#8796a9;
   font-size:24px;
 }
-
+/* SIGNATURE ENHANCEMENTS */
+.live-clock{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  z-index:80;
+  padding:8px 11px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;
+  background:rgba(8,14,23,.78);
+  backdrop-filter:blur(14px);
+  color:#718198;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.7px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.nexora-toast{
+  position:fixed;
+  top:88px;
+  right:20px;
+  z-index:200;
+  max-width:290px;
+  padding:12px 15px;
+  border:1px solid rgba(81,216,255,.18);
+  border-radius:11px;
+  background:rgba(10,18,29,.94);
+  backdrop-filter:blur(16px);
+  color:#dfe8f5;
+  font-size:10px;
+  font-weight:750;
+  box-shadow:0 18px 50px rgba(0,0,0,.4);
+  animation:nexoraToastIn .3s ease;
+}
+.nexora-pulse{
+  animation:nexoraPulse 2s ease-in-out infinite;
+}
+@keyframes nexoraToastIn{
+  from{
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+@keyframes nexoraPulse{
+  0%,100%{opacity:1}
+  50%{opacity:.55}
+}
 /* MOBILE */
-
 @media(max-width:1000px){
   .header-nav{display:none}
-  .account-grid{grid-template-columns:repeat(2,1fr)}
+  .account-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
   .market,
   .overview,
   .wallet-grid,
-  .security{grid-template-columns:1fr}
+  .security{
+    grid-template-columns:1fr;
+  }
 }
-
 @media(max-width:700px){
-  .header{
-    padding:0 16px;
-  }
-
-  .hero{
-    padding-top:45px;
-  }
-
-  .hero h1{
-    letter-spacing:-2px;
-  }
-
+  .header{padding:0 16px}
+  .hero{padding-top:45px}
+  .hero h1{letter-spacing:-2px}
   .main{
     padding-left:14px;
     padding-right:14px;
   }
-
   .account-grid,
   .plans{
     grid-template-columns:1fr;
   }
-
   .hero-actions{
     flex-direction:column;
   }
-
-  .hero-button{
-    width:100%;
-  }
-
-  .wallet-actions{
-    flex-direction:column;
-  }
-
-  .table{
-    min-width:600px;
-  }
-
-  .transactions{
-    overflow-x:auto;
-  }
-
-  .demo-pill{
-    display:none;
+  .hero-button{width:100%}
+  .wallet-actions{flex-direction:column}
+  .demo-pill{display:none}
+  .live-clock{
+    bottom:10px;
+    right:10px;
   }
 }
 </style>
 </head>
-
 <body>
-
+<!-- AUTH -->
 <div id="auth">
-
   <div class="auth-card">
-
     <div class="brand">
       NEX<span>ORA</span>
     </div>
-
     <h1 id="authTitle">Create your account</h1>
-
     <p id="authSub">
       Set up your NEXORA demonstration account.
     </p>
-
     <form id="authForm">
-
       <input
         id="name"
         class="input"
         placeholder="Full name"
+        autocomplete="name"
         required
       >
-
       <input
         id="email"
         class="input"
         type="email"
         placeholder="Email address"
+        autocomplete="email"
         required
       >
-
       <input
         id="password"
         class="input"
         type="password"
         placeholder="Password"
+        autocomplete="new-password"
         required
       >
-
       <button
         class="primary"
         id="authButton"
@@ -926,141 +816,94 @@ a{
       >
         Create account
       </button>
-
     </form>
-
     <div class="switch">
       <span id="switchLabel">Already have an account?</span>
       <button id="switchMode" type="button">Login</button>
     </div>
-
   </div>
-
 </div>
-
-
+<!-- APP -->
 <div id="app" class="hidden">
-
   <header class="header">
-
     <div class="logo">
       NEX<span>ORA</span>
     </div>
-
     <nav class="header-nav">
       <button onclick="scrollToId('dashboard')">Dashboard</button>
       <button onclick="scrollToId('plans')">Plans</button>
       <button onclick="scrollToId('wallet')">Wallet</button>
       <button onclick="scrollToId('transactions')">Activity</button>
     </nav>
-
     <div class="header-right">
-
       <div class="demo-pill">
         DEMO ENVIRONMENT
       </div>
-
-      <div class="avatar" id="avatar">
-        N
-      </div>
-
+      <div class="avatar" id="avatar">N</div>
       <button
         onclick="logout()"
         style="border:0;background:none;color:#77869a;font-size:10px"
       >
         Sign out
       </button>
-
     </div>
-
   </header>
-
-
+  <!-- HERO -->
   <section id="dashboard" class="hero">
-
-    <div class="hero-kicker">
+    <div class="hero-kicker" id="heroKicker">
       PREMIUM ACCOUNT EXPERIENCE
     </div>
-
     <h1>
       Mine &amp; <span class="gradient">Invest</span>
     </h1>
-
     <p>
       Explore a premium crypto-account experience with a
       clean, modern dashboard designed for demonstration
       and product prototyping.
     </p>
-
     <div class="hero-actions">
-
       <button
         class="hero-button primary-button"
         onclick="scrollToId('plans')"
       >
         Explore Plans →
       </button>
-
       <button
         class="hero-button"
         onclick="scrollToId('wallet')"
       >
         Open Wallet
       </button>
-
     </div>
-
   </section>
-
-
   <main class="main">
-
+    <!-- MARKET -->
     <div class="section-label">
       MARKET PREVIEW
     </div>
-
     <section class="market">
-
       <div class="market-card">
-
         <div class="market-top">
-
           <div class="coin">
-
-            <div class="coin-icon">
-              Ξ
-            </div>
-
+            <div class="coin-icon">Ξ</div>
             <div>
               <div class="coin-name">Ethereum</div>
               <div class="coin-symbol">ETH / USDT</div>
             </div>
-
           </div>
-
           <span class="positive">24/7</span>
-
         </div>
-
         <div class="market-price">$—</div>
-
         <div class="market-change">
           +0.00%
         </div>
-
         <div class="market-note">
           Demo market data
         </div>
-
       </div>
-
-
       <div class="chart-card">
-
         <div class="chart-head">
-
           <strong>ETH / USDT</strong>
-
           <div class="chart-tabs">
             <span class="active">1m</span>
             <span>5m</span>
@@ -1068,547 +911,347 @@ a{
             <span>1H</span>
             <span>4H</span>
           </div>
-
         </div>
-
         <div class="chart">
-
           <svg viewBox="0 0 800 120" preserveAspectRatio="none">
-
             <defs>
               <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
                 <stop offset="0%" stop-color="#6c8cff" stop-opacity=".24"/>
                 <stop offset="100%" stop-color="#6c8cff" stop-opacity="0"/>
               </linearGradient>
             </defs>
-
             <path
-              d="M0 91
-                 C55 82 72 96 118 78
-                 S180 65 220 75
-                 S282 44 330 57
-                 S390 68 430 42
-                 S490 52 535 31
-                 S600 52 645 35
-                 S710 46 760 19
-                 S785 25 800 12
-                 L800 120 L0 120 Z"
+              d="M0 91 C55 82 72 96 118 78 S180 65 220 75 S282 44 330 57 S390 68 430 42 S490 52 535 31 S600 52 645 35 S710 46 760 19 S785 25 800 12 L800 120 L0 120 Z"
               fill="url(#area)"
             />
-
             <path
-              d="M0 91
-                 C55 82 72 96 118 78
-                 S180 65 220 75
-                 S282 44 330 57
-                 S390 68 430 42
-                 S490 52 535 31
-                 S600 52 645 35
-                 S710 46 760 19
-                 S785 25 800 12"
+              d="M0 91 C55 82 72 96 118 78 S180 65 220 75 S282 44 330 57 S390 68 430 42 S490 52 535 31 S600 52 645 35 S710 46 760 19 S785 25 800 12"
               fill="none"
               stroke="#6c8cff"
               stroke-width="2.5"
             />
-
           </svg>
-
         </div>
-
         <div class="chart-note">
           Illustrative chart — not live market data.
         </div>
-
       </div>
-
     </section>
-
-
+    <!-- ACCOUNT -->
     <div class="section-label">
       ACCOUNT
     </div>
-
     <div class="account-grid">
-
       <div class="account-card">
-
         <div class="card-label">Total Balance</div>
-
         <div class="card-value">
           $3,240.75
         </div>
-
         <div class="card-sub">
           Demo balance
         </div>
-
       </div>
-
-
       <div class="account-card">
-
         <div class="card-label">Total Earnings</div>
-
         <div class="card-value">
           $1,240.50
         </div>
-
         <div class="card-sub positive">
           +8.2% · Example data
         </div>
-
       </div>
-
-
       <div class="account-card">
-
         <div class="card-label">Active Plans</div>
-
-        <div class="card-value">
-          2
-        </div>
-
+        <div class="card-value">2</div>
         <div class="card-sub">
           Example data
         </div>
-
       </div>
-
-
       <div class="account-card">
-
         <div class="card-label">Referral Earnings</div>
-
         <div class="card-value">
           $320.25
         </div>
-
         <div class="card-sub positive">
           +4.1% · Example data
         </div>
-
       </div>
-
     </div>
-
-
+    <!-- OVERVIEW -->
     <div class="section-label">
       OVERVIEW
     </div>
-
     <section class="overview">
-
       <div class="chart-card balance-chart">
-
         <div class="balance-chart-head">
-
           <div>
             <h2>Balance overview</h2>
             <small>Illustrative demo history</small>
           </div>
-
           <span class="demo-pill">DEMO</span>
-
         </div>
-
         <div class="big-chart">
-
           <svg viewBox="0 0 900 170" preserveAspectRatio="none">
-
             <defs>
               <linearGradient id="balanceArea" x1="0" x2="0" y1="0" y2="1">
                 <stop offset="0%" stop-color="#51d8ff" stop-opacity=".20"/>
                 <stop offset="100%" stop-color="#51d8ff" stop-opacity="0"/>
               </linearGradient>
             </defs>
-
             <path
-              d="M0 145
-                 C70 138 95 119 155 128
-                 S230 96 285 107
-                 S360 83 415 91
-                 S485 59 535 72
-                 S605 44 655 54
-                 S735 27 790 38
-                 S855 17 900 23
-                 L900 170 L0 170 Z"
+              d="M0 145 C70 138 95 119 155 128 S230 96 285 107 S360 83 415 91 S485 59 535 72 S605 44 655 54 S735 27 790 38 S855 17 900 23 L900 170 L0 170 Z"
               fill="url(#balanceArea)"
             />
-
             <path
-              d="M0 145
-                 C70 138 95 119 155 128
-                 S230 96 285 107
-                 S360 83 415 91
-                 S485 59 535 72
-                 S605 44 655 54
-                 S735 27 790 38
-                 S855 17 900 23"
+              d="M0 145 C70 138 95 119 155 128 S230 96 285 107 S360 83 415 91 S485 59 535 72 S605 44 655 54 S735 27 790 38 S855 17 900 23"
               fill="none"
               stroke="#51d8ff"
               stroke-width="2.5"
             />
-
           </svg>
-
         </div>
-
         <div class="weeks">
           <span>Week 1</span>
           <span>Week 2</span>
           <span>Week 3</span>
           <span>Week 4</span>
         </div>
-
       </div>
-
-
       <div class="status-card market-card">
-
         <h2>Account status</h2>
-
         <div class="status-top">
-
           <span>Profile ready</span>
-
           <span class="status-active">
             Active
           </span>
-
         </div>
-
         <div class="progress">
           <div></div>
         </div>
-
         <div class="profile-percent">
           Profile setup · 80%
         </div>
-
         <div class="pending-box">
-
-          <strong>
-            Demo account
-          </strong>
-
+          <strong>Demo account</strong>
           <p>
             Your demonstration profile is ready for
             future backend integration.
           </p>
-
         </div>
-
       </div>
-
     </section>
-
-
+    <!-- PLANS -->
     <div id="plans" class="section-label">
       PLANS
     </div>
-
     <section class="plans">
-
       <div class="plan">
-
         <div class="plan-name">STARTER</div>
-
         <div class="plan-price">$100</div>
-
         <p>
           Basic access and account tools.
         </p>
-
         <button
           class="plan-button"
           onclick="demoPlan('Starter')"
         >
           View plan
         </button>
-
       </div>
-
-
       <div class="plan popular">
-
         <div class="popular-label">
           POPULAR
         </div>
-
         <div class="plan-name">STANDARD</div>
-
         <div class="plan-price">$500</div>
-
         <p>
           Expanded features and reporting.
         </p>
-
         <button
           class="plan-button"
           onclick="demoPlan('Standard')"
         >
           View plan
         </button>
-
       </div>
-
-
       <div class="plan">
-
         <div class="plan-name">ADVANCED</div>
-
         <div class="plan-price">$1,000</div>
-
         <p>
           Advanced account controls.
         </p>
-
         <button
           class="plan-button"
           onclick="demoPlan('Advanced')"
         >
           View plan
         </button>
-
       </div>
-
     </section>
-
-
     <div class="pending-box" style="margin-top:16px">
-
-      <strong>
-        DEMONSTRATION NOTICE
-      </strong>
-
+      <strong>DEMONSTRATION NOTICE</strong>
       <p>
         These plans are interface examples only. No real
         financial products, investment returns, payments,
         mining, or investment activity are provided.
       </p>
-
     </div>
-
-
+    <!-- WALLET -->
     <div id="wallet" class="section-label">
       WALLET
     </div>
-
     <section class="wallet-grid">
-
       <div class="wallet-card">
-
         <div class="card-label">
           Your Wallet
         </div>
-
         <div class="wallet-balance">
           $3,240.75
         </div>
-
         <div class="card-sub">
           Demo wallet balance
         </div>
-
         <div class="wallet-actions">
-
           <button
             class="wallet-action main"
             onclick="demoWallet('Deposit')"
           >
             Deposit
           </button>
-
           <button
             class="wallet-action"
             onclick="demoWallet('Withdraw')"
           >
             Withdraw
           </button>
-
         </div>
-
       </div>
-
-
       <div class="wallet-card">
-
         <div class="card-label">
           Pending activity
         </div>
-
         <div style="margin-top:15px;font-size:18px;font-weight:900">
           Withdrawal
         </div>
-
         <div class="pending" style="margin-top:8px">
           $150.00 · Pending
         </div>
-
         <div class="card-sub" style="margin-top:12px">
           Aug 17, 2026 · Demonstration transaction
         </div>
-
       </div>
-
     </section>
-
-
+    <!-- ACTIVITY -->
     <div id="transactions" class="section-label">
       ACTIVITY
     </div>
-
     <section class="transactions">
-
       <h3 style="margin:0 0 15px;font-size:16px">
         Transactions
       </h3>
-
       <div style="color:#718198;font-size:10px;margin-bottom:14px">
         Recent demo activity.
       </div>
-
       <table class="table">
-
         <thead>
-
           <tr>
             <th>Date</th>
             <th>Type</th>
             <th>Status</th>
             <th>Amount</th>
           </tr>
-
         </thead>
-
         <tbody>
-
           <tr>
             <td>Aug 18, 2026</td>
             <td>Deposit</td>
             <td class="complete">Completed</td>
             <td class="positive">+$200.00</td>
           </tr>
-
           <tr>
             <td>Aug 17, 2026</td>
             <td>Withdrawal</td>
             <td class="pending-status">Pending</td>
             <td class="pending">-$150.00</td>
           </tr>
-
           <tr>
             <td>Aug 16, 2026</td>
             <td>Account bonus</td>
             <td class="complete">Completed</td>
             <td class="positive">+$10.00</td>
           </tr>
-
         </tbody>
-
       </table>
-
     </section>
-
-
+    <!-- SECURITY -->
     <div class="section-label">
       SECURITY
     </div>
-
     <section class="security">
-
       <div class="security-card">
-
-        <div class="security-icon">
-          ◇
-        </div>
-
+        <div class="security-icon">◇</div>
         <h2>
           Two-factor authentication
         </h2>
-
         <p>
           A production version should use server-side
           authentication, hashed passwords, secure sessions,
           and optional 2FA.
         </p>
-
         <button
           class="security-button"
           onclick="demoSecurity()"
         >
           Set up 2FA
         </button>
-
       </div>
-
-
       <div class="security-card">
-
-        <div class="security-icon">
-          ✓
-        </div>
-
+        <div class="security-icon">✓</div>
         <h2>
           Demo protection
         </h2>
-
         <p>
           This browser-only prototype stores demonstration
           account information locally and does not provide
           production financial authentication.
         </p>
-
         <button
           class="security-button"
           onclick="demoSecurity()"
         >
           Security details
         </button>
-
       </div>
-
     </section>
-
   </main>
-
-
   <footer class="footer">
-
     NEXORA demonstration interface.
     No real financial products, returns, payments,
     deposits, withdrawals, mining, or investment activity
     are provided by this prototype.
-
   </footer>
-
 </div>
-
-
+<!-- MODAL -->
 <div
   id="modal"
   class="modal"
   onclick="modalBackground(event)"
 >
-
   <div class="modal-box">
-
     <button
       class="close"
       onclick="closeModal()"
+      aria-label="Close"
     >
       ×
     </button>
-
     <h2 id="modalTitle">
       Demo action
     </h2>
-
     <p id="modalText">
       This is a demonstration interface only.
       No real financial transaction will occur.
     </p>
-
     <input
       id="modalAmount"
       class="modal-input"
@@ -1617,184 +1260,205 @@ a{
       step="0.01"
       placeholder="Demo amount"
     >
-
     <button
       class="modal-button"
       onclick="demoAction()"
     >
       Continue in Demo
     </button>
-
   </div>
-
 </div>
-
-
 <script>
-const KEY="nexora_premium_demo_account";
-
-let loginMode=false;
-
+const KEY = "nexora_premium_demo_account";
+const ID_KEY = "nexora_unique_id";
+let loginMode = false;
 function $(id){
   return document.getElementById(id);
 }
-
+/* ACCOUNT */
 function getAccount(){
   try{
     return JSON.parse(
-      localStorage.getItem(KEY)||"null"
+      localStorage.getItem(KEY) || "null"
     );
   }catch(e){
     return null;
   }
 }
-
 function saveAccount(account){
   localStorage.setItem(
     KEY,
     JSON.stringify(account)
   );
 }
-
-function updateAuthMode(){
-
-  $("authTitle").textContent=
-    loginMode
-      ?"Welcome back"
-      :"Create your account";
-
-  $("authSub").textContent=
-    loginMode
-      ?"Login to your NEXORA demonstration account."
-      :"Set up your NEXORA demonstration account.";
-
-  $("authButton").textContent=
-    loginMode
-      ?"Login"
-      :"Create account";
-
-  $("switchLabel").textContent=
-    loginMode
-      ?"New here?"
-      :"Already have an account?";
-
-  $("switchMode").textContent=
-    loginMode
-      ?"Create account"
-      :"Login";
-
-  $("name").style.display=
-    loginMode
-      ?"none"
-      :"block";
-
-  $("name").required=!loginMode;
+/* UNIQUE NEXORA ID */
+function getNexoraID(){
+  let id =
+    localStorage.getItem(ID_KEY);
+  if(!id){
+    const a =
+      Math.random()
+        .toString(36)
+        .substring(2,6)
+        .toUpperCase();
+    const b =
+      Math.random()
+        .toString(36)
+        .substring(2,6)
+        .toUpperCase();
+    id =
+      "NX-" + a + "-" + b;
+    localStorage.setItem(
+      ID_KEY,
+      id
+    );
+  }
+  return id;
 }
-
-$("switchMode").onclick=function(){
-
-  loginMode=!loginMode;
-
+/* AUTH MODE */
+function updateAuthMode(){
+  $("authTitle").textContent =
+    loginMode
+      ? "Welcome back"
+      : "Create your account";
+  $("authSub").textContent =
+    loginMode
+      ? "Login to your NEXORA demonstration account."
+      : "Set up your NEXORA demonstration account.";
+  $("authButton").textContent =
+    loginMode
+      ? "Login"
+      : "Create account";
+  $("switchLabel").textContent =
+    loginMode
+      ? "New here?"
+      : "Already have an account?";
+  $("switchMode").textContent =
+    loginMode
+      ? "Create account"
+      : "Login";
+  $("name").style.display =
+    loginMode ? "none" : "block";
+  $("name").required = !loginMode;
+}
+$("switchMode").onclick = function(){
+  loginMode = !loginMode;
   updateAuthMode();
 };
-
-$("authForm").onsubmit=function(e){
-
+/* AUTH SUBMIT */
+$("authForm").onsubmit = function(e){
   e.preventDefault();
-
-  const email=
-    $("email").value.trim().toLowerCase();
-
-  const password=
+  const email =
+    $("email")
+      .value
+      .trim()
+      .toLowerCase();
+  const password =
     $("password").value;
-
   if(loginMode){
-
-    const old=getAccount();
-
+    const old =
+      getAccount();
     if(
       !old ||
-      old.email!==email ||
-      old.password!==password
+      old.email !== email ||
+      old.password !== password
     ){
-
-      alert(
-        "Demo login failed. Use the same details used to create the demo account."
+      showToast(
+        "Demo login failed. Check your demo credentials."
       );
-
       return;
     }
-
     showApp(old);
-
     return;
   }
-
-  const name=
-    $("name").value.trim();
-
-  if(!name||!email||!password){
-
-    alert("Please complete all fields.");
-
+  const name =
+    $("name")
+      .value
+      .trim();
+  if(!name || !email || !password){
+    showToast(
+      "Please complete all fields."
+    );
     return;
   }
-
-  if(password.length<6){
-
-    alert(
+  if(password.length < 6){
+    showToast(
       "Use at least 6 characters for the demo password."
     );
-
     return;
   }
-
-  const account={
+  const account = {
     name:name,
     email:email,
     password:password,
-    createdAt:new Date().toISOString()
+    createdAt:
+      new Date().toISOString()
   };
-
   saveAccount(account);
-
   showApp(account);
 };
-
+/* SHOW APP */
 function showApp(account){
-
-  $("auth").classList.add("hidden");
-
-  $("app").classList.remove("hidden");
-
-  $("avatar").textContent=
+  $("auth")
+    .classList
+    .add("hidden");
+  $("app")
+    .classList
+    .remove("hidden");
+  $("avatar").textContent =
     account.name
       .trim()
       .charAt(0)
-      .toUpperCase()||"N";
+      .toUpperCase() || "N";
+  personalize(account);
+  initializeEnhancements();
 }
-
+/* PERSONALIZATION */
+function personalize(account){
+  const firstName =
+    account.name
+      .trim()
+      .split(/\s+/)[0];
+  const heroTitle =
+    document.querySelector(".hero h1");
+  if(heroTitle){
+    heroTitle.innerHTML =
+      `Welcome back, <span class="gradient">${escapeHTML(firstName)}</span>`;
+  }
+  const kicker =
+    $("heroKicker");
+  if(kicker){
+    kicker.textContent =
+      "NEXORA ID • " +
+      getNexoraID();
+  }
+}
+/* SAFE TEXT */
+function escapeHTML(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+/* LOGOUT */
 function logout(){
-
   localStorage.removeItem(KEY);
-
-  $("app").classList.add("hidden");
-
-  $("auth").classList.remove("hidden");
-
+  $("app")
+    .classList
+    .add("hidden");
+  $("auth")
+    .classList
+    .remove("hidden");
   $("authForm").reset();
-
-  loginMode=false;
-
+  loginMode = false;
   updateAuthMode();
-
   window.scrollTo(0,0);
 }
-
+/* NAVIGATION */
 function scrollToId(id){
-
-  const element=$(id);
-
+  const element = $(id);
   if(element){
     element.scrollIntoView({
       behavior:"smooth",
@@ -1802,119 +1466,284 @@ function scrollToId(id){
     });
   }
 }
-
+/* MODAL */
 function openModal(title){
-
-  $("modalTitle").textContent=title;
-
-  $("modalAmount").value="";
-
-  $("modal").classList.add("show");
-
-  if(
-    title==="Security details"||
-    title==="Set up 2FA"||
-    title==="Security"
-  ){
-    $("modalAmount").style.display="none";
-  }else{
-    $("modalAmount").style.display="block";
-  }
+  $("modalTitle").textContent =
+    title;
+  $("modalAmount").value = "";
+  $("modal")
+    .classList
+    .add("show");
+  const needsAmount =
+    [
+      "Deposit",
+      "Withdraw",
+      "Withdrawal"
+    ].includes(title);
+  $("modalAmount").style.display =
+    needsAmount
+      ? "block"
+      : "none";
 }
-
 function closeModal(){
-
-  $("modal").classList.remove("show");
+  $("modal")
+    .classList
+    .remove("show");
 }
-
 function modalBackground(event){
-
-  if(event.target.id==="modal"){
+  if(event.target.id === "modal"){
     closeModal();
   }
 }
-
+/* DEMO ACTION */
 function demoAction(){
-
-  const title=
-    $("modalTitle").textContent;
-
-  const amount=
-    $("modalAmount").value;
-
-  if(
-    ["Deposit","Withdrawal","Transfer","Withdraw"]
-      .includes(title)&&
-    !amount
-  ){
-
-    alert(
+  const title =
+    $("modalTitle")
+      .textContent;
+  const amount =
+    $("modalAmount")
+      .value;
+  const requiresAmount =
+    [
+      "Deposit",
+      "Withdraw",
+      "Withdrawal"
+    ].includes(title);
+  if(requiresAmount && !amount){
+    showToast(
       "Enter a demonstration amount."
     );
-
     return;
   }
-
-  alert(
-    title+
-    " is available as a simulated interface action only."+
-    (amount
-      ?" Demo amount: $"+Number(amount).toFixed(2)
-      :"")
+  showToast(
+    title +
+    " is a simulated interface action only." +
+    (
+      amount
+        ? " Demo amount: $" +
+          Number(amount).toFixed(2)
+        : ""
+    )
   );
-
   closeModal();
 }
-
+/* WALLET */
 function demoWallet(action){
-
   openModal(action);
-
-  $("modalText").textContent=
-    action+
+  $("modalText").textContent =
+    action +
     " is a simulated wallet action. No real money is deposited, withdrawn, transferred, or processed.";
 }
-
+/* PLANS */
 function demoPlan(plan){
-
-  openModal(plan+" Plan");
-
-  $("modalAmount").style.display="none";
-
-  $("modalText").textContent=
-    plan+
+  openModal(plan + " Plan");
+  $("modalAmount")
+    .style
+    .display = "none";
+  $("modalText").textContent =
+    plan +
     " is an example plan displayed for interface prototyping. It is not a real investment or financial product.";
 }
-
+/* SECURITY */
 function demoSecurity(){
-
   openModal("Security");
-
-  $("modalAmount").style.display="none";
-
-  $("modalText").textContent=
+  $("modalAmount")
+    .style
+    .display = "none";
+  $("modalText").textContent =
     "This prototype demonstrates the placement of security controls. A production application would require server-side authentication, secure sessions, password hashing, and appropriate 2FA implementation.";
 }
-
+/* TOAST */
+function showToast(message){
+  const old =
+    document.querySelector(
+      ".nexora-toast"
+    );
+  if(old){
+    old.remove();
+  }
+  const box =
+    document.createElement("div");
+  box.className =
+    "nexora-toast";
+  box.textContent =
+    message;
+  document.body.appendChild(box);
+  setTimeout(() => {
+    box.style.opacity = "0";
+    box.style.transform =
+      "translateY(-8px)";
+    box.style.transition =
+      "all .25s ease";
+    setTimeout(
+      () => box.remove(),
+      250
+    );
+  },3000);
+}
+/* LIVE CLOCK */
+function createClock(){
+  if(
+    document.querySelector(".live-clock")
+  ){
+    return;
+  }
+  const clock =
+    document.createElement("div");
+  clock.className =
+    "live-clock";
+  document.body.appendChild(clock);
+  function update(){
+    const now =
+      new Date();
+    clock.textContent =
+      "NEXORA • " +
+      now.toLocaleTimeString(
+        [],
+        {
+          hour:"2-digit",
+          minute:"2-digit",
+          second:"2-digit"
+        }
+      );
+  }
+  update();
+  setInterval(
+    update,
+    1000
+  );
+}
+/* CARD EFFECTS */
+function activateCardEffects(){
+  const cards =
+    document.querySelectorAll(
+      ".account-card,.market-card,.chart-card,.wallet-card,.plan,.security-card"
+    );
+  cards.forEach(card => {
+    if(card.dataset.enhanced){
+      return;
+    }
+    card.dataset.enhanced = "true";
+    card.addEventListener(
+      "mouseenter",
+      () => {
+        card.style.transform =
+          "translateY(-3px)";
+        card.style.borderColor =
+          "rgba(108,140,255,.25)";
+        card.style.boxShadow =
+          "0 18px 45px rgba(0,0,0,.22)";
+      }
+    );
+    card.addEventListener(
+      "mouseleave",
+      () => {
+        card.style.transform = "";
+        card.style.borderColor = "";
+        card.style.boxShadow = "";
+      }
+    );
+  });
+}
+/* ANIMATE VALUES */
+function animateValue(element){
+  if(
+    element.dataset.animated
+  ){
+    return;
+  }
+  const original =
+    element.textContent.trim();
+  if(!original.startsWith("$")){
+    return;
+  }
+  const number =
+    parseFloat(
+      original
+        .replace(/[$,]/g,"")
+    );
+  if(!Number.isFinite(number)){
+    return;
+  }
+  element.dataset.animated =
+    "true";
+  const duration = 1100;
+  const startTime =
+    performance.now();
+  function frame(time){
+    const progress =
+      Math.min(
+        (time-startTime) /
+        duration,
+        1
+      );
+    const eased =
+      1 -
+      Math.pow(
+        1-progress,
+        3
+      );
+    const value =
+      number * eased;
+    element.textContent =
+      "$" +
+      value.toLocaleString(
+        "en-US",
+        {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        }
+      );
+    if(progress < 1){
+      requestAnimationFrame(
+        frame
+      );
+    }
+  }
+  requestAnimationFrame(frame);
+}
+/* STATUS PULSE */
+function activateStatus(){
+  const status =
+    document.querySelector(
+      ".status-active"
+    );
+  if(status){
+    status.classList.add(
+      "nexora-pulse"
+    );
+  }
+}
+/* ENHANCEMENTS */
+function initializeEnhancements(){
+  createClock();
+  activateCardEffects();
+  activateStatus();
+  document
+    .querySelectorAll(
+      ".card-value,.wallet-balance"
+    )
+    .forEach(
+      animateValue
+    );
+}
+/* ESCAPE KEY */
 document.addEventListener(
   "keydown",
   function(e){
-
-    if(e.key==="Escape"){
+    if(e.key === "Escape"){
       closeModal();
     }
-
   }
 );
-
-const existing=getAccount();
-
+/* START */
+const existing =
+  getAccount();
 if(existing){
   showApp(existing);
 }else{
   updateAuthMode();
 }
 </script>
-
 </body>
 </html>
