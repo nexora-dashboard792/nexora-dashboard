@@ -8,313 +8,277 @@ export default {
 <title>Nexora</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+  color:#111827;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fb;
-  color: #111827;
+button,input{font:inherit}
+button{cursor:pointer}
+
+#auth{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:#0f172a;
 }
 
-button,
-input {
-  font: inherit;
+.auth-card{
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  padding:32px;
+  border-radius:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
 }
 
-button {
-  cursor: pointer;
+.auth-logo{
+  text-align:center;
+  font-size:30px;
+  font-weight:800;
 }
 
-/* AUTH */
-
-#auth {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: #0f172a;
+.auth-subtitle{
+  text-align:center;
+  color:#64748b;
+  margin:8px 0 25px;
 }
 
-.auth-card {
-  width: 100%;
-  max-width: 420px;
-  background: white;
-  padding: 32px;
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+.auth-card input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #d1d5db;
+  border-radius:8px;
 }
 
-.auth-logo {
-  text-align: center;
-  font-size: 30px;
-  font-weight: 800;
+.auth-button{
+  width:100%;
+  margin-top:12px;
+  padding:13px;
+  border:0;
+  border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  font-weight:bold;
 }
 
-.auth-subtitle {
-  text-align: center;
-  color: #64748b;
-  margin: 8px 0 25px;
+.auth-switch{
+  text-align:center;
+  margin-top:20px;
+  color:#64748b;
 }
 
-.auth-card input {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+.auth-switch button{
+  border:0;
+  background:none;
+  color:#2563eb;
+  font-weight:bold;
 }
 
-.auth-button {
-  width: 100%;
-  margin-top: 12px;
-  padding: 13px;
-  border: 0;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-weight: bold;
+.auth-message{
+  min-height:20px;
+  margin-top:12px;
+  text-align:center;
+  font-size:14px;
 }
 
-.auth-switch {
-  text-align: center;
-  margin-top: 20px;
-  color: #64748b;
+.demo-banner{
+  background:#fef3c7;
+  color:#92400e;
+  padding:8px 15px;
+  text-align:center;
+  font-size:12px;
+  font-weight:600;
 }
 
-.auth-switch button {
-  border: 0;
-  background: none;
-  color: #2563eb;
-  font-weight: bold;
+#app{
+  display:none;
+  min-height:100vh;
 }
 
-.auth-message {
-  min-height: 20px;
-  margin-top: 12px;
-  text-align: center;
-  font-size: 14px;
+.sidebar{
+  width:240px;
+  background:#111827;
+  color:#fff;
+  padding:25px 18px;
+  position:fixed;
+  height:100vh;
 }
 
-/* TEST NOTICE */
-
-.demo-banner {
-  background: #fef3c7;
-  color: #92400e;
-  padding: 8px 15px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 600;
+.logo{
+  font-size:25px;
+  font-weight:800;
+  margin-bottom:30px;
 }
 
-/* APP */
-
-#app {
-  display: none;
-  min-height: 100vh;
-}
-
-.sidebar {
-  width: 240px;
-  background: #111827;
-  color: white;
-  padding: 25px 18px;
-  position: fixed;
-  height: 100vh;
-}
-
-.logo {
-  font-size: 25px;
-  font-weight: 800;
-  margin-bottom: 30px;
-}
-
-.nav {
-  width: 100%;
-  padding: 13px 15px;
-  margin-bottom: 8px;
-  border: 0;
-  border-radius: 9px;
-  background: transparent;
-  color: #cbd5e1;
-  text-align: left;
+.nav{
+  width:100%;
+  padding:13px 15px;
+  margin-bottom:8px;
+  border:0;
+  border-radius:9px;
+  background:transparent;
+  color:#cbd5e1;
+  text-align:left;
 }
 
 .nav:hover,
-.nav.active {
-  background: #2563eb;
-  color: white;
+.nav.active{
+  background:#2563eb;
+  color:#fff;
 }
 
-.logout {
-  margin-top: 20px;
-  background: #dc2626;
-  color: white;
+.logout{
+  margin-top:20px;
+  background:#dc2626;
+  color:#fff;
 }
 
-.main {
-  margin-left: 240px;
-  width: calc(100% - 240px);
-  padding: 0 35px 35px;
+.main{
+  margin-left:240px;
+  width:calc(100% - 240px);
+  padding:0 35px 35px;
 }
 
-.page {
-  display: none;
+.page{display:none}
+.page.active{display:block}
+
+.header{
+  padding-top:35px;
+  margin-bottom:25px;
 }
 
-.page.active {
-  display: block;
+.header h1{
+  margin:0;
+  font-size:32px;
 }
 
-.header {
-  padding-top: 35px;
-  margin-bottom: 25px;
+.header p{color:#64748b}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 32px;
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
-.header p {
-  color: #64748b;
+.card-title{
+  color:#64748b;
+  font-size:14px;
 }
 
-/* CARDS */
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.number{
+  font-size:30px;
+  font-weight:bold;
+  margin-top:10px;
 }
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.05);
+.panel{
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  margin-top:25px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
-.card-title {
-  color: #64748b;
-  font-size: 14px;
+.panel input{
+  width:100%;
+  max-width:500px;
+  padding:13px;
+  margin:7px 0;
+  border:1px solid #d1d5db;
+  border-radius:8px;
 }
 
-.number {
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 10px;
+.button{
+  border:0;
+  background:#2563eb;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:8px;
+  font-weight:bold;
+  margin-top:8px;
 }
 
-/* PANELS */
+.button.danger{background:#dc2626}
+.button.secondary{background:#475569}
 
-.panel {
-  background: white;
-  padding: 25px;
-  border-radius: 15px;
-  margin-top: 25px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.05);
+.balance{
+  font-size:42px;
+  font-weight:800;
+  margin-top:10px;
 }
 
-.panel input {
-  width: 100%;
-  max-width: 500px;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
+.pending{
+  background:#fef3c7;
+  color:#92400e;
+  padding:12px;
+  border-radius:8px;
+  margin-top:10px;
 }
 
-.button {
-  border: 0;
-  background: #2563eb;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 8px;
+.transaction{
+  padding:15px 0;
+  border-bottom:1px solid #e5e7eb;
 }
 
-.button.danger {
-  background: #dc2626;
+.transaction:last-child{border-bottom:0}
+.deposit{color:#15803d}
+.withdrawal{color:#dc2626}
+.pending-text{color:#d97706}
+
+.message-success{
+  color:#15803d;
+  font-weight:600;
 }
 
-.button.secondary {
-  background: #475569;
+.message-error{
+  color:#dc2626;
+  font-weight:600;
 }
 
-.balance {
-  font-size: 42px;
-  font-weight: 800;
-  margin-top: 10px;
-}
+@media(max-width:700px){
 
-.pending {
-  background: #fef3c7;
-  color: #92400e;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-.transaction {
-  padding: 15px 0;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.transaction:last-child {
-  border-bottom: 0;
-}
-
-.deposit {
-  color: #15803d;
-}
-
-.withdrawal {
-  color: #dc2626;
-}
-
-.pending-text {
-  color: #d97706;
-}
-
-/* MOBILE */
-
-@media (max-width: 700px) {
-  .sidebar {
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding: 18px;
+  .sidebar{
+    position:relative;
+    width:100%;
+    height:auto;
+    padding:18px;
   }
 
-  .logo {
-    margin-bottom: 15px;
+  .logo{margin-bottom:15px}
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:0 20px 25px;
   }
 
-  .main {
-    margin-left: 0;
-    width: 100%;
-    padding: 0 20px 25px;
+  .cards{
+    grid-template-columns:1fr;
   }
 
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .balance {
-    font-size: 34px;
+  .balance{
+    font-size:34px;
   }
 }
 </style>
 </head>
 
 <body>
-
-<!-- AUTH -->
 
 <div id="auth">
 
@@ -406,20 +370,16 @@ button {
 </div>
 
 
-<!-- APP -->
-
 <div id="app">
 
   <aside class="sidebar">
 
-    <div class="logo">
-      NEXORA
-    </div>
+    <div class="logo">NEXORA</div>
 
     <button
       class="nav active"
       type="button"
-      onclick="showPage('dashboard', this)"
+      onclick="showPage('dashboard',this)"
     >
       🏠 Dashboard
     </button>
@@ -427,7 +387,7 @@ button {
     <button
       class="nav"
       type="button"
-      onclick="showPage('wallet', this)"
+      onclick="showPage('wallet',this)"
     >
       💰 Wallet
     </button>
@@ -435,7 +395,7 @@ button {
     <button
       class="nav"
       type="button"
-      onclick="showPage('transactions', this)"
+      onclick="showPage('transactions',this)"
     >
       📋 Transactions
     </button>
@@ -443,7 +403,7 @@ button {
     <button
       class="nav"
       type="button"
-      onclick="showPage('profile', this)"
+      onclick="showPage('profile',this)"
     >
       👤 Profile
     </button>
@@ -451,7 +411,7 @@ button {
     <button
       class="nav"
       type="button"
-      onclick="showPage('projects', this)"
+      onclick="showPage('projects',this)"
     >
       📁 Projects
     </button>
@@ -459,7 +419,7 @@ button {
     <button
       class="nav"
       type="button"
-      onclick="showPage('settings', this)"
+      onclick="showPage('settings',this)"
     >
       ⚙️ Settings
     </button>
@@ -481,8 +441,6 @@ button {
       Test environment — transactions use simulated funds.
     </div>
 
-
-    <!-- DASHBOARD -->
 
     <section id="dashboard" class="page active">
 
@@ -557,8 +515,6 @@ button {
     </section>
 
 
-    <!-- WALLET -->
-
     <section id="wallet" class="page">
 
       <div class="header">
@@ -588,8 +544,6 @@ button {
       </div>
 
 
-      <!-- DEPOSIT -->
-
       <div class="panel">
 
         <h2>Deposit</h2>
@@ -601,8 +555,9 @@ button {
         <input
           id="depositAmount"
           type="number"
-          min="1"
+          min="0.01"
           step="0.01"
+          inputmode="decimal"
           placeholder="Amount"
         >
 
@@ -621,23 +576,22 @@ button {
       </div>
 
 
-      <!-- WITHDRAWAL -->
-
       <div class="panel">
 
         <h2>Withdrawal</h2>
 
         <p>
           Withdrawals use simulated funds and require
-          your withdrawal PIN. Requests are placed into
-          pending status.
+          your withdrawal PIN. Requests are placed
+          into pending status.
         </p>
 
         <input
           id="withdrawAmount"
           type="number"
-          min="1"
+          min="0.01"
           step="0.01"
+          inputmode="decimal"
           placeholder="Amount"
         >
 
@@ -665,8 +619,6 @@ button {
 
       </div>
 
-
-      <!-- PIN -->
 
       <div class="panel">
 
@@ -699,8 +651,6 @@ button {
       </div>
 
 
-      <!-- PENDING -->
-
       <div class="panel">
 
         <h2>Pending Withdrawals</h2>
@@ -713,8 +663,6 @@ button {
 
     </section>
 
-
-    <!-- TRANSACTIONS -->
 
     <section id="transactions" class="page">
 
@@ -738,8 +686,6 @@ button {
 
     </section>
 
-
-    <!-- PROFILE -->
 
     <section id="profile" class="page">
 
@@ -785,8 +731,6 @@ button {
     </section>
 
 
-    <!-- PROJECTS -->
-
     <section id="projects" class="page">
 
       <div class="header">
@@ -823,8 +767,6 @@ button {
     </section>
 
 
-    <!-- SETTINGS -->
-
     <section id="settings" class="page">
 
       <div class="header">
@@ -842,8 +784,8 @@ button {
         <h2>Account</h2>
 
         <p>
-          This account is currently operating in a
-          test environment using simulated funds.
+          This account is operating in a test
+          environment using simulated funds.
         </p>
 
         <button
@@ -877,10 +819,9 @@ function getAccount() {
   try {
     return JSON.parse(data);
   } catch (error) {
-    console.error("Account data error:", error);
+    console.error(error);
     return null;
   }
-
 }
 
 
@@ -957,14 +898,10 @@ function signup() {
   }
 
 
-  const existingAccount =
-    getAccount();
-
-
-  if (existingAccount) {
+  if (getAccount()) {
 
     message.textContent =
-      "An account already exists on this browser. Sign in instead.";
+      "An account already exists on this browser. Please sign in.";
 
     return;
 
@@ -973,21 +910,21 @@ function signup() {
 
   const account = {
 
-    name: name,
+    name:name,
 
-    email: email,
+    email:email,
 
-    password: password,
+    password:password,
 
-    balance: 0,
+    balance:0,
 
-    withdrawalPin: "",
+    withdrawalPin:"",
 
-    projects: [],
+    projects:[],
 
-    transactions: [],
+    transactions:[],
 
-    pendingWithdrawals: []
+    pendingWithdrawals:[]
 
   };
 
@@ -1090,11 +1027,8 @@ function openDashboard() {
 
 
   updateBalance();
-
   renderProjects();
-
   renderTransactions();
-
   renderPendingWithdrawals();
 
 }
@@ -1128,14 +1062,12 @@ function showPage(page, button) {
     });
 
 
-  const selectedPage =
+  const selected =
     document.getElementById(page);
 
 
-  if (selectedPage) {
-
-    selectedPage.classList.add("active");
-
+  if (selected) {
+    selected.classList.add("active");
   }
 
 
@@ -1153,9 +1085,7 @@ function showPage(page, button) {
 
 
   updateBalance();
-
   renderTransactions();
-
   renderPendingWithdrawals();
 
 }
@@ -1180,27 +1110,20 @@ function updateBalance() {
     "$" + balance.toFixed(2);
 
 
-  const walletBalance =
+  const wallet =
     document.getElementById("walletBalance");
 
-
-  const dashboardBalance =
+  const dashboard =
     document.getElementById("dashboardBalance");
 
 
-  if (walletBalance) {
-
-    walletBalance.textContent =
-      formatted;
-
+  if (wallet) {
+    wallet.textContent = formatted;
   }
 
 
-  if (dashboardBalance) {
-
-    dashboardBalance.textContent =
-      formatted;
-
+  if (dashboard) {
+    dashboard.textContent = formatted;
   }
 
 }
@@ -1225,13 +1148,11 @@ function deposit() {
     message.textContent =
       "Please sign in first.";
 
+    message.className =
+      "message-error";
+
     return;
 
-  }
-
-
-  if (!input || !message) {
-    return;
   }
 
 
@@ -1247,99 +1168,65 @@ function deposit() {
     message.textContent =
       "Enter a valid amount.";
 
+    message.className =
+      "message-error";
+
     return;
 
   }
 
 
   if (!Array.isArray(account.transactions)) {
-
     account.transactions = [];
-
   }
 
 
   if (!Array.isArray(account.pendingWithdrawals)) {
-
     account.pendingWithdrawals = [];
-
   }
 
 
-  const currentBalance =
-    Number(account.balance);
-
-
-  if (!Number.isFinite(currentBalance)) {
-
+  if (!Number.isFinite(Number(account.balance))) {
     account.balance = 0;
-
   }
 
-
-  /*
-    Add simulated funds to the balance.
-  */
 
   account.balance =
-    Number(account.balance || 0) + amount;
+    Number(account.balance) + amount;
 
-
-  /*
-    Record the simulated deposit.
-  */
 
   account.transactions.unshift({
 
-    id:
-      Date.now(),
+    id:Date.now(),
 
-    type:
-      "Deposit",
+    type:"Deposit",
 
-    amount:
-      amount,
+    amount:amount,
 
-    status:
-      "Completed",
+    status:"Completed",
 
-    date:
-      new Date().toLocaleString()
+    date:new Date().toLocaleString()
 
   });
 
 
-  /*
-    Save the updated account.
-  */
-
   saveAccount(account);
 
-
-  /*
-    Clear the input.
-  */
 
   input.value = "";
 
 
-  /*
-    Update the interface.
-  */
-
   updateBalance();
-
   renderTransactions();
 
-
-  /*
-    Show confirmation.
-  */
 
   message.textContent =
     "$" +
     amount.toFixed(2) +
     " added to your simulated balance successfully.";
+
+  message.className =
+    "message-success";
 
 }
 
@@ -1393,28 +1280,25 @@ function setWithdrawalPin() {
 
 
   message.textContent =
-    "Withdrawal PIN saved successfully ✅";
+    "Withdrawal PIN saved successfully.";
 
 }
 
 
-/* WITHDRAWAL */
+/* WITHDRAW */
 
 function withdraw() {
 
   const account =
     getAccount();
 
-
   const amount =
     Number(
       document.getElementById("withdrawAmount").value
     );
 
-
   const pin =
     document.getElementById("withdrawPin").value.trim();
-
 
   const message =
     document.getElementById("withdrawMessage");
@@ -1477,43 +1361,30 @@ function withdraw() {
 
 
   if (!Array.isArray(account.pendingWithdrawals)) {
-
     account.pendingWithdrawals = [];
-
   }
 
 
   if (!Array.isArray(account.transactions)) {
-
     account.transactions = [];
-
   }
 
 
-  /*
-    Reserve the simulated amount.
-  */
-
   account.balance =
-    Number(account.balance || 0) - amount;
+    Number(account.balance) - amount;
 
 
   const withdrawal = {
 
-    id:
-      Date.now(),
+    id:Date.now(),
 
-    type:
-      "Withdrawal",
+    type:"Withdrawal",
 
-    amount:
-      amount,
+    amount:amount,
 
-    status:
-      "Pending",
+    status:"Pending",
 
-    date:
-      new Date().toLocaleString()
+    date:new Date().toLocaleString()
 
   };
 
@@ -1539,25 +1410,25 @@ function withdraw() {
 
 
   message.textContent =
-    "Withdrawal submitted and is now pending ⏳";
+    "Withdrawal submitted and is now pending.";
+
+  message.className =
+    "message-success";
 
 
   updateBalance();
-
   renderTransactions();
-
   renderPendingWithdrawals();
 
 }
 
 
-/* PENDING WITHDRAWALS */
+/* PENDING */
 
 function renderPendingWithdrawals() {
 
   const account =
     getAccount();
-
 
   const list =
     document.getElementById("pendingList");
@@ -1591,10 +1462,8 @@ function renderPendingWithdrawals() {
       const div =
         document.createElement("div");
 
-
       div.className =
         "pending";
-
 
       div.innerHTML =
         "<strong>Withdrawal: $" +
@@ -1604,7 +1473,6 @@ function renderPendingWithdrawals() {
         "<small>" +
         escapeHtml(item.date) +
         "</small>";
-
 
       list.appendChild(div);
 
@@ -1620,7 +1488,6 @@ function renderTransactions() {
 
   const account =
     getAccount();
-
 
   const list =
     document.getElementById("transactionList");
@@ -1654,7 +1521,6 @@ function renderTransactions() {
       const div =
         document.createElement("div");
 
-
       div.className =
         "transaction";
 
@@ -1676,17 +1542,14 @@ function renderTransactions() {
         typeClass +
         "'>" +
         escapeHtml(item.type) +
-        "</strong>" +
-        "<br>" +
+        "</strong><br>" +
         "$" +
         Number(item.amount).toFixed(2) +
-        " — " +
-        "<span class='" +
+        " — <span class='" +
         statusClass +
         "'>" +
         escapeHtml(item.status) +
-        "</span>" +
-        "<br>" +
+        "</span><br>" +
         "<small>" +
         escapeHtml(item.date) +
         "</small>";
@@ -1707,12 +1570,10 @@ function saveProfile() {
   const account =
     getAccount();
 
-
   const name =
     document.getElementById("profileName")
       .value
       .trim();
-
 
   const message =
     document.getElementById("profileMessage");
@@ -1754,7 +1615,7 @@ function saveProfile() {
 
 
   message.textContent =
-    "Profile saved successfully ✅";
+    "Profile saved successfully.";
 
 }
 
@@ -1766,10 +1627,8 @@ function addProject() {
   const account =
     getAccount();
 
-
   const input =
     document.getElementById("projectInput");
-
 
   const name =
     input.value.trim();
@@ -1781,20 +1640,15 @@ function addProject() {
 
 
   if (!Array.isArray(account.projects)) {
-
     account.projects = [];
-
   }
 
 
   account.projects.push(name);
 
-
   saveAccount(account);
 
-
   input.value = "";
-
 
   renderProjects();
 
@@ -1805,7 +1659,6 @@ function renderProjects() {
 
   const account =
     getAccount();
-
 
   const list =
     document.getElementById("projectList");
@@ -1833,15 +1686,13 @@ function renderProjects() {
 
 
   account.projects.forEach(
-    function(project, index) {
+    function(project,index) {
 
       const item =
         document.createElement("div");
 
-
       item.style.padding =
         "15px 0";
-
 
       item.style.borderBottom =
         "1px solid #e5e7eb";
@@ -1850,8 +1701,7 @@ function renderProjects() {
       item.innerHTML =
         "<strong>" +
         escapeHtml(project) +
-        "</strong>" +
-        "<br>" +
+        "</strong><br>" +
         '<button class="button danger" type="button" onclick="deleteProject(' +
         index +
         ')">Delete</button>';
@@ -1879,37 +1729,28 @@ function deleteProject(index) {
     !account ||
     !Array.isArray(account.projects)
   ) {
-
     return;
-
   }
 
 
-  account.projects.splice(
-    index,
-    1
-  );
-
+  account.projects.splice(index,1);
 
   saveAccount(account);
-
 
   renderProjects();
 
 }
 
 
-/* SECURITY HELPER */
+/* HTML ESCAPE */
 
 function escapeHtml(value) {
 
   const div =
     document.createElement("div");
 
-
   div.textContent =
     String(value);
-
 
   return div.innerHTML;
 
@@ -1932,8 +1773,10 @@ if (
 </html>`;
 
     return new Response(html, {
+      status: 200,
       headers: {
-        "content-type": "text/html; charset=UTF-8"
+        "content-type": "text/html; charset=UTF-8",
+        "cache-control": "no-store"
       }
     });
   }
