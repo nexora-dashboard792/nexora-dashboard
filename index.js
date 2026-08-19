@@ -5,7 +5,8 @@ export default {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora</title>
+
+<title>Nexora Demo</title>
 
 <style>
 * {
@@ -22,6 +23,10 @@ body {
 button,
 input {
   font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 /* AUTH */
@@ -48,13 +53,12 @@ input {
   text-align: center;
   font-size: 30px;
   font-weight: 800;
-  margin-bottom: 8px;
 }
 
 .auth-subtitle {
   text-align: center;
   color: #64748b;
-  margin-bottom: 25px;
+  margin: 8px 0 25px;
 }
 
 .auth-card input {
@@ -74,11 +78,6 @@ input {
   background: #2563eb;
   color: white;
   font-weight: bold;
-  cursor: pointer;
-}
-
-.auth-button:hover {
-  background: #1d4ed8;
 }
 
 .auth-switch {
@@ -92,7 +91,6 @@ input {
   background: none;
   color: #2563eb;
   font-weight: bold;
-  cursor: pointer;
 }
 
 .auth-message {
@@ -100,6 +98,17 @@ input {
   margin-top: 12px;
   text-align: center;
   font-size: 14px;
+}
+
+/* DEMO BANNER */
+
+.demo-banner {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 /* APP */
@@ -121,8 +130,7 @@ input {
 .logo {
   font-size: 25px;
   font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
 .nav {
@@ -134,8 +142,6 @@ input {
   background: transparent;
   color: #cbd5e1;
   text-align: left;
-  font-size: 15px;
-  cursor: pointer;
 }
 
 .nav:hover,
@@ -145,7 +151,7 @@ input {
 }
 
 .logout {
-  margin-top: 25px;
+  margin-top: 20px;
   background: #dc2626;
   color: white;
 }
@@ -153,7 +159,7 @@ input {
 .main {
   margin-left: 240px;
   width: calc(100% - 240px);
-  padding: 35px;
+  padding: 0 35px 35px;
 }
 
 .page {
@@ -165,7 +171,8 @@ input {
 }
 
 .header {
-  margin-bottom: 30px;
+  padding-top: 35px;
+  margin-bottom: 25px;
 }
 
 .header h1 {
@@ -198,7 +205,7 @@ input {
 }
 
 .number {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: bold;
   margin-top: 10px;
 }
@@ -213,27 +220,66 @@ input {
   box-shadow: 0 5px 20px rgba(0,0,0,.05);
 }
 
+.panel input {
+  width: 100%;
+  max-width: 500px;
+  padding: 13px;
+  margin: 7px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
 .button {
   border: 0;
   background: #2563eb;
   color: white;
   padding: 12px 18px;
   border-radius: 8px;
-  cursor: pointer;
   font-weight: bold;
+  margin-top: 8px;
 }
 
-.button:hover {
-  background: #1d4ed8;
+.button.danger {
+  background: #dc2626;
 }
 
-.panel input {
-  width: 100%;
-  max-width: 500px;
-  padding: 13px;
-  margin: 8px 0;
-  border: 1px solid #d1d5db;
+.button.secondary {
+  background: #475569;
+}
+
+.balance {
+  font-size: 42px;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.pending {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 12px;
   border-radius: 8px;
+  margin-top: 10px;
+}
+
+.transaction {
+  padding: 15px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.transaction:last-child {
+  border-bottom: 0;
+}
+
+.deposit {
+  color: #15803d;
+}
+
+.withdrawal {
+  color: #dc2626;
+}
+
+.pending-text {
+  color: #d97706;
 }
 
 /* MOBILE */
@@ -254,15 +300,15 @@ input {
   .main {
     margin-left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 0 20px 25px;
   }
 
   .cards {
     grid-template-columns: 1fr;
   }
 
-  .auth-card {
-    padding: 25px;
+  .balance {
+    font-size: 34px;
   }
 }
 </style>
@@ -270,7 +316,7 @@ input {
 
 <body>
 
-<!-- LOGIN / CREATE ACCOUNT -->
+<!-- AUTH -->
 
 <div id="auth">
 
@@ -278,8 +324,8 @@ input {
 
     <div class="auth-logo">NEXORA</div>
 
-    <div class="auth-subtitle" id="authSubtitle">
-      Sign in to your dashboard
+    <div class="auth-subtitle">
+      Demo Account
     </div>
 
     <div id="loginForm">
@@ -288,14 +334,12 @@ input {
         id="loginEmail"
         type="email"
         placeholder="Email"
-        autocomplete="email"
       >
 
       <input
         id="loginPassword"
         type="password"
         placeholder="Password"
-        autocomplete="current-password"
       >
 
       <button class="auth-button" onclick="login()">
@@ -309,28 +353,23 @@ input {
 
     </div>
 
-
-    <div id="signupForm" style="display:none;">
+    <div id="signupForm" style="display:none">
 
       <input
         id="signupName"
-        type="text"
         placeholder="Full name"
-        autocomplete="name"
       >
 
       <input
         id="signupEmail"
         type="email"
         placeholder="Email"
-        autocomplete="email"
       >
 
       <input
         id="signupPassword"
         type="password"
         placeholder="Password"
-        autocomplete="new-password"
       >
 
       <button class="auth-button" onclick="signup()">
@@ -344,7 +383,7 @@ input {
 
     </div>
 
-    <div class="auth-message" id="authMessage"></div>
+    <div id="authMessage" class="auth-message"></div>
 
   </div>
 
@@ -361,38 +400,38 @@ input {
       NEXORA
     </div>
 
-    <button
-      class="nav active"
-      onclick="showPage('dashboard', this)"
-    >
+    <button class="nav active"
+      onclick="showPage('dashboard', this)">
       🏠 Dashboard
     </button>
 
-    <button
-      class="nav"
-      onclick="showPage('profile', this)"
-    >
+    <button class="nav"
+      onclick="showPage('wallet', this)">
+      💰 Wallet
+    </button>
+
+    <button class="nav"
+      onclick="showPage('transactions', this)">
+      📋 Transactions
+    </button>
+
+    <button class="nav"
+      onclick="showPage('profile', this)">
       👤 Profile
     </button>
 
-    <button
-      class="nav"
-      onclick="showPage('projects', this)"
-    >
+    <button class="nav"
+      onclick="showPage('projects', this)">
       📁 Projects
     </button>
 
-    <button
-      class="nav"
-      onclick="showPage('settings', this)"
-    >
+    <button class="nav"
+      onclick="showPage('settings', this)">
       ⚙️ Settings
     </button>
 
-    <button
-      class="nav logout"
-      onclick="logout()"
-    >
+    <button class="nav logout"
+      onclick="logout()">
       🚪 Logout
     </button>
 
@@ -400,6 +439,11 @@ input {
 
 
   <main class="main">
+
+    <div class="demo-banner">
+      DEMO MODE — No real money is processed.
+    </div>
+
 
     <!-- DASHBOARD -->
 
@@ -412,13 +456,24 @@ input {
         </h1>
 
         <p>
-          Your dashboard overview.
+          Your account overview.
         </p>
 
       </div>
 
-
       <div class="cards">
+
+        <div class="card">
+
+          <div class="card-title">
+            Available Balance
+          </div>
+
+          <div class="number" id="dashboardBalance">
+            $0.00
+          </div>
+
+        </div>
 
         <div class="card">
 
@@ -426,33 +481,16 @@ input {
             Projects
           </div>
 
-          <div
-            class="number"
-            id="projectCount"
-          >
+          <div class="number" id="projectCount">
             0
           </div>
 
         </div>
 
-
         <div class="card">
 
           <div class="card-title">
-            Tasks
-          </div>
-
-          <div class="number">
-            0
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="card-title">
-            Status
+            Account
           </div>
 
           <div class="number">
@@ -463,16 +501,183 @@ input {
 
       </div>
 
+      <div class="panel">
+
+        <h2>Nexora is online 🚀</h2>
+
+        <p id="dashboardMessage">
+          Welcome to your dashboard.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- WALLET -->
+
+    <section id="wallet" class="page">
+
+      <div class="header">
+
+        <h1>Wallet</h1>
+
+        <p>
+          Demo wallet management.
+        </p>
+
+      </div>
+
 
       <div class="panel">
 
-        <h2>
-          Nexora is online 🚀
-        </h2>
+        <div class="card-title">
+          Available Balance
+        </div>
 
-        <p id="dashboardMessage">
-          Welcome to your Nexora dashboard.
+        <div
+          class="balance"
+          id="walletBalance"
+        >
+          $0.00
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h2>Demo Deposit</h2>
+
+        <p>
+          Add simulated funds to your demo balance.
         </p>
+
+        <input
+          id="depositAmount"
+          type="number"
+          min="1"
+          step="0.01"
+          placeholder="Amount"
+        >
+
+        <br>
+
+        <button
+          class="button"
+          onclick="deposit()"
+        >
+          Deposit Demo Funds
+        </button>
+
+        <p id="depositMessage"></p>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h2>Withdrawal</h2>
+
+        <p>
+          Demo withdrawals require your withdrawal PIN
+          and are placed into pending status.
+        </p>
+
+        <input
+          id="withdrawAmount"
+          type="number"
+          min="1"
+          step="0.01"
+          placeholder="Amount"
+        >
+
+        <br>
+
+        <input
+          id="withdrawPin"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="Withdrawal PIN"
+        >
+
+        <br>
+
+        <button
+          class="button"
+          onclick="withdraw()"
+        >
+          Request Withdrawal
+        </button>
+
+        <p id="withdrawMessage"></p>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h2>Withdrawal PIN</h2>
+
+        <p>
+          Set a demo PIN for withdrawal requests.
+        </p>
+
+        <input
+          id="newPin"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="4–6 digit PIN"
+        >
+
+        <br>
+
+        <button
+          class="button secondary"
+          onclick="setWithdrawalPin()"
+        >
+          Set PIN
+        </button>
+
+        <p id="pinMessage"></p>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h2>Pending Withdrawals</h2>
+
+        <div id="pendingList">
+          No pending withdrawals.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRANSACTIONS -->
+
+    <section id="transactions" class="page">
+
+      <div class="header">
+
+        <h1>Transactions</h1>
+
+        <p>
+          Your demo transaction history.
+        </p>
+
+      </div>
+
+      <div class="panel">
+
+        <div id="transactionList">
+          No transactions yet.
+        </div>
 
       </div>
 
@@ -485,22 +690,15 @@ input {
 
       <div class="header">
 
-        <h1>
-          Profile
-        </h1>
+        <h1>Profile</h1>
 
         <p>
-          Manage your Nexora profile.
+          Manage your profile.
         </p>
 
       </div>
 
-
       <div class="panel">
-
-        <h2>
-          Your Profile
-        </h2>
 
         <input
           id="profileName"
@@ -511,8 +709,8 @@ input {
 
         <input
           id="profileEmail"
-          placeholder="Email"
           disabled
+          placeholder="Email"
         >
 
         <br>
@@ -537,16 +735,13 @@ input {
 
       <div class="header">
 
-        <h1>
-          Projects
-        </h1>
+        <h1>Projects</h1>
 
         <p>
-          Create and manage your projects.
+          Create and manage projects.
         </p>
 
       </div>
-
 
       <div class="panel">
 
@@ -577,29 +772,24 @@ input {
 
       <div class="header">
 
-        <h1>
-          Settings
-        </h1>
+        <h1>Settings</h1>
 
         <p>
-          Customize your Nexora experience.
+          Account settings.
         </p>
 
       </div>
 
-
       <div class="panel">
 
-        <h2>
-          Account
-        </h2>
+        <h2>Account</h2>
 
         <p>
-          You are signed in to Nexora.
+          This is a demo account.
         </p>
 
         <button
-          class="button"
+          class="button danger"
           onclick="logout()"
         >
           Log Out
@@ -616,47 +806,50 @@ input {
 
 <script>
 
-/*
-  DEMO ACCOUNT SYSTEM
-
-  This stores the account locally in the browser.
-  It is NOT production authentication.
-*/
-
-
 function getAccount() {
 
-  const data = localStorage.getItem("nexoraAccount");
+  const data =
+    localStorage.getItem("nexoraAccount");
 
   return data ? JSON.parse(data) : null;
 
 }
 
 
+function saveAccount(account) {
+
+  localStorage.setItem(
+    "nexoraAccount",
+    JSON.stringify(account)
+  );
+
+}
+
+
 function showSignup() {
 
-  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("loginForm").style.display =
+    "none";
 
-  document.getElementById("signupForm").style.display = "block";
+  document.getElementById("signupForm").style.display =
+    "block";
 
-  document.getElementById("authSubtitle").textContent =
-    "Create your Nexora account";
-
-  document.getElementById("authMessage").textContent = "";
+  document.getElementById("authMessage").textContent =
+    "";
 
 }
 
 
 function showLogin() {
 
-  document.getElementById("loginForm").style.display = "block";
+  document.getElementById("loginForm").style.display =
+    "block";
 
-  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("signupForm").style.display =
+    "none";
 
-  document.getElementById("authSubtitle").textContent =
-    "Sign in to your dashboard";
-
-  document.getElementById("authMessage").textContent = "";
+  document.getElementById("authMessage").textContent =
+    "";
 
 }
 
@@ -689,7 +882,7 @@ function signup() {
   if (password.length < 6) {
 
     message.textContent =
-      "Password must be at least 6 characters.";
+      "Password must contain at least 6 characters.";
 
     return;
 
@@ -704,15 +897,20 @@ function signup() {
 
     password: password,
 
-    projects: []
+    balance: 0,
+
+    withdrawalPin: "",
+
+    projects: [],
+
+    transactions: [],
+
+    pendingWithdrawals: []
 
   };
 
 
-  localStorage.setItem(
-    "nexoraAccount",
-    JSON.stringify(account)
-  );
+  saveAccount(account);
 
 
   localStorage.setItem(
@@ -735,7 +933,8 @@ function login() {
     document.getElementById("loginPassword").value;
 
 
-  const account = getAccount();
+  const account =
+    getAccount();
 
 
   if (!account) {
@@ -774,7 +973,8 @@ function login() {
 
 function openDashboard() {
 
-  const account = getAccount();
+  const account =
+    getAccount();
 
 
   if (!account) {
@@ -805,7 +1005,13 @@ function openDashboard() {
     account.email;
 
 
+  updateBalance();
+
   renderProjects();
+
+  renderTransactions();
+
+  renderPendingWithdrawals();
 
 }
 
@@ -822,7 +1028,6 @@ function logout() {
 
   document.getElementById("auth").style.display =
     "flex";
-
 
   showLogin();
 
@@ -853,20 +1058,425 @@ function showPage(page, button) {
 
   button.classList.add("active");
 
+
+  updateBalance();
+
+  renderTransactions();
+
+  renderPendingWithdrawals();
+
 }
 
 
-function saveProfile() {
+function updateBalance() {
 
-  const account = getAccount();
+  const account =
+    getAccount();
+
 
   if (!account) {
     return;
   }
 
 
+  const balance =
+    Number(account.balance || 0);
+
+
+  const formatted =
+    "$" + balance.toFixed(2);
+
+
+  document.getElementById("walletBalance").textContent =
+    formatted;
+
+
+  document.getElementById("dashboardBalance").textContent =
+    formatted;
+
+}
+
+
+function deposit() {
+
+  const account =
+    getAccount();
+
+
+  const input =
+    document.getElementById("depositAmount");
+
+
+  const amount =
+    Number(input.value);
+
+
+  if (!amount || amount <= 0) {
+
+    document.getElementById("depositMessage").textContent =
+      "Enter a valid amount.";
+
+    return;
+
+  }
+
+
+  account.balance =
+    Number(account.balance || 0) + amount;
+
+
+  if (!account.transactions) {
+    account.transactions = [];
+  }
+
+
+  account.transactions.unshift({
+
+    type: "Deposit",
+
+    amount: amount,
+
+    status: "Completed",
+
+    date: new Date().toLocaleString()
+
+  });
+
+
+  saveAccount(account);
+
+
+  input.value = "";
+
+
+  document.getElementById("depositMessage").textContent =
+    "Demo deposit added successfully ✅";
+
+
+  updateBalance();
+
+  renderTransactions();
+
+}
+
+
+function setWithdrawalPin() {
+
+  const account =
+    getAccount();
+
+
+  const input =
+    document.getElementById("newPin");
+
+
+  const pin =
+    input.value.trim();
+
+
+  if (!/^[0-9]{4,6}$/.test(pin)) {
+
+    document.getElementById("pinMessage").textContent =
+      "PIN must contain 4–6 digits.";
+
+    return;
+
+  }
+
+
+  account.withdrawalPin =
+    pin;
+
+
+  saveAccount(account);
+
+
+  input.value = "";
+
+
+  document.getElementById("pinMessage").textContent =
+    "Withdrawal PIN saved for this demo account ✅";
+
+}
+
+
+function withdraw() {
+
+  const account =
+    getAccount();
+
+
+  const amount =
+    Number(
+      document.getElementById("withdrawAmount").value
+    );
+
+
+  const pin =
+    document.getElementById("withdrawPin").value.trim();
+
+
+  const message =
+    document.getElementById("withdrawMessage");
+
+
+  if (!amount || amount <= 0) {
+
+    message.textContent =
+      "Enter a valid withdrawal amount.";
+
+    return;
+
+  }
+
+
+  if (!account.withdrawalPin) {
+
+    message.textContent =
+      "Set a withdrawal PIN first.";
+
+    return;
+
+  }
+
+
+  if (pin !== account.withdrawalPin) {
+
+    message.textContent =
+      "Incorrect withdrawal PIN.";
+
+    return;
+
+  }
+
+
+  if (amount > Number(account.balance || 0)) {
+
+    message.textContent =
+      "Insufficient demo balance.";
+
+    return;
+
+  }
+
+
+  /*
+    The amount is reserved from the available
+    demo balance and the withdrawal becomes pending.
+  */
+
+  account.balance =
+    Number(account.balance || 0) - amount;
+
+
+  if (!account.pendingWithdrawals) {
+    account.pendingWithdrawals = [];
+  }
+
+
+  if (!account.transactions) {
+    account.transactions = [];
+  }
+
+
+  const withdrawal = {
+
+    id:
+      Date.now(),
+
+    type:
+      "Withdrawal",
+
+    amount:
+      amount,
+
+    status:
+      "Pending",
+
+    date:
+      new Date().toLocaleString()
+
+  };
+
+
+  account.pendingWithdrawals.unshift(
+    withdrawal
+  );
+
+
+  account.transactions.unshift(
+    withdrawal
+  );
+
+
+  saveAccount(account);
+
+
+  document.getElementById("withdrawAmount").value =
+    "";
+
+  document.getElementById("withdrawPin").value =
+    "";
+
+
+  message.textContent =
+    "Withdrawal submitted and is now pending ⏳";
+
+
+  updateBalance();
+
+  renderTransactions();
+
+  renderPendingWithdrawals();
+
+}
+
+
+function renderPendingWithdrawals() {
+
+  const account =
+    getAccount();
+
+
+  const list =
+    document.getElementById("pendingList");
+
+
+  list.innerHTML = "";
+
+
+  if (
+    !account ||
+    !account.pendingWithdrawals ||
+    account.pendingWithdrawals.length === 0
+  ) {
+
+    list.textContent =
+      "No pending withdrawals.";
+
+    return;
+
+  }
+
+
+  account.pendingWithdrawals.forEach(
+    function(item) {
+
+      const div =
+        document.createElement("div");
+
+
+      div.className =
+        "pending";
+
+
+      div.innerHTML =
+        "<strong>Withdrawal: $" +
+        Number(item.amount).toFixed(2) +
+        "</strong><br>" +
+        "Status: Pending<br>" +
+        "<small>" +
+        escapeHtml(item.date) +
+        "</small>";
+
+
+      list.appendChild(div);
+
+    }
+  );
+
+}
+
+
+function renderTransactions() {
+
+  const account =
+    getAccount();
+
+
+  const list =
+    document.getElementById("transactionList");
+
+
+  list.innerHTML = "";
+
+
+  if (
+    !account ||
+    !account.transactions ||
+    account.transactions.length === 0
+  ) {
+
+    list.textContent =
+      "No transactions yet.";
+
+    return;
+
+  }
+
+
+  account.transactions.forEach(
+    function(item) {
+
+      const div =
+        document.createElement("div");
+
+
+      div.className =
+        "transaction";
+
+
+      const typeClass =
+        item.type === "Deposit"
+          ? "deposit"
+          : "withdrawal";
+
+
+      const statusClass =
+        item.status === "Pending"
+          ? "pending-text"
+          : "";
+
+
+      div.innerHTML =
+        "<strong class='" +
+        typeClass +
+        "'>" +
+        escapeHtml(item.type) +
+        "</strong>" +
+        "<br>" +
+        "$" +
+        Number(item.amount).toFixed(2) +
+        " — " +
+        "<span class='" +
+        statusClass +
+        "'>" +
+        escapeHtml(item.status) +
+        "</span>" +
+        "<br>" +
+        "<small>" +
+        escapeHtml(item.date) +
+        "</small>";
+
+
+      list.appendChild(div);
+
+    }
+  );
+
+}
+
+
+function saveProfile() {
+
+  const account =
+    getAccount();
+
+
   const name =
-    document.getElementById("profileName").value.trim();
+    document.getElementById("profileName")
+      .value
+      .trim();
 
 
   if (!name) {
@@ -879,13 +1489,11 @@ function saveProfile() {
   }
 
 
-  account.name = name;
+  account.name =
+    name;
 
 
-  localStorage.setItem(
-    "nexoraAccount",
-    JSON.stringify(account)
-  );
+  saveAccount(account);
 
 
   document.getElementById("welcomeTitle").textContent =
@@ -904,11 +1512,8 @@ function saveProfile() {
 
 function addProject() {
 
-  const account = getAccount();
-
-  if (!account) {
-    return;
-  }
+  const account =
+    getAccount();
 
 
   const input =
@@ -932,10 +1537,7 @@ function addProject() {
   account.projects.push(name);
 
 
-  localStorage.setItem(
-    "nexoraAccount",
-    JSON.stringify(account)
-  );
+  saveAccount(account);
 
 
   input.value = "";
@@ -948,7 +1550,9 @@ function addProject() {
 
 function renderProjects() {
 
-  const account = getAccount();
+  const account =
+    getAccount();
+
 
   const list =
     document.getElementById("projectList");
@@ -977,6 +1581,7 @@ function renderProjects() {
       item.style.padding =
         "15px 0";
 
+
       item.style.borderBottom =
         "1px solid #e5e7eb";
 
@@ -986,7 +1591,7 @@ function renderProjects() {
         escapeHtml(project) +
         "</strong>" +
         "<br>" +
-        '<button class="button" style="margin-top:8px" onclick="deleteProject(' +
+        '<button class="button danger" onclick="deleteProject(' +
         index +
         ')">Delete</button>';
 
@@ -1005,20 +1610,22 @@ function renderProjects() {
 
 function deleteProject(index) {
 
-  const account = getAccount();
+  const account =
+    getAccount();
+
 
   if (!account || !account.projects) {
     return;
   }
 
 
-  account.projects.splice(index, 1);
-
-
-  localStorage.setItem(
-    "nexoraAccount",
-    JSON.stringify(account)
+  account.projects.splice(
+    index,
+    1
   );
+
+
+  saveAccount(account);
 
 
   renderProjects();
@@ -1031,7 +1638,10 @@ function escapeHtml(value) {
   const div =
     document.createElement("div");
 
-  div.textContent = value;
+
+  div.textContent =
+    value;
+
 
   return div.innerHTML;
 
