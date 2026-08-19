@@ -1,59 +1,23 @@
 export default {
   async fetch(request) {
-    const html = `<!DOCTYPE html>
+    const html = `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b1220">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nexora</title>
 
 <style>
-:root{
-  --bg:#f4f7fb;
-  --surface:#ffffff;
-  --surface-soft:#f8fafc;
-  --border:#e5e7eb;
-  --text:#111827;
-  --muted:#64748b;
-  --primary:#2563eb;
-  --primary-dark:#1d4ed8;
-  --success:#15803d;
-  --success-bg:#ecfdf3;
-  --danger:#dc2626;
-  --danger-bg:#fef2f2;
-  --warning:#b45309;
-  --warning-bg:#fffbeb;
-  --nav:#0b1220;
-  --nav-muted:#94a3b8;
-  --shadow:0 12px 35px rgba(15,23,42,.07);
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  background:var(--bg);
-  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
 }
 
-button,
-input{
+button,input{
   font:inherit;
 }
 
@@ -61,303 +25,153 @@ button{
   cursor:pointer;
 }
 
+.hidden{
+  display:none!important;
+}
+
 input{
   width:100%;
   padding:13px 14px;
-  border:1px solid var(--border);
+  margin:7px 0;
+  border:1px solid #d7dee9;
   border-radius:10px;
-  background:#fff;
-  color:var(--text);
   outline:none;
-  transition:.2s;
 }
 
 input:focus{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(37,99,235,.10);
+  border-color:#356ae6;
+  box-shadow:0 0 0 3px rgba(53,106,230,.1);
 }
 
-button:focus-visible,
-input:focus-visible{
-  outline:3px solid rgba(37,99,235,.18);
-  outline-offset:2px;
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:12px 17px;
+  background:#2463eb;
+  color:#fff;
+  font-weight:700;
+}
+
+.btn.secondary{
+  background:#e9eef8;
+  color:#24324a;
+}
+
+.btn.danger{
+  background:#d9363e;
+}
+
+.link{
+  border:0;
+  background:none;
+  color:#2463eb;
+  font-weight:700;
+}
+
+.muted{
+  color:#718096;
+}
+
+.msg{
+  min-height:20px;
+  margin-top:12px;
+  font-size:14px;
+}
+
+.ok{
+  color:#16834b;
+  font-weight:600;
+}
+
+.err{
+  color:#d9363e;
+  font-weight:600;
 }
 
 /* AUTH */
 
 #auth{
   min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:grid;
+  place-items:center;
   padding:24px;
-  background:
-    radial-gradient(circle at top left,#1d4ed8 0,transparent 32%),
-    linear-gradient(135deg,#07101f,#101b32 55%,#0b1220);
+  background:#0b1220;
 }
 
-.auth-shell{
-  width:100%;
-  max-width:1080px;
-  display:grid;
-  grid-template-columns:1fr 430px;
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,.32);
+.auth{
+  width:min(430px,100%);
+  background:#fff;
+  border-radius:22px;
+  padding:34px;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
 }
 
-.auth-intro{
-  padding:55px;
-  color:white;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(37,99,235,.94),
-      rgba(15,23,42,.97)
-    );
-  min-height:600px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.auth-brand{
-  font-size:32px;
-  font-weight:850;
-  letter-spacing:-1px;
-  margin-bottom:70px;
-}
-
-.auth-intro h1{
-  font-size:48px;
-  line-height:1.05;
-  margin:0 0 20px;
-  letter-spacing:-2px;
-}
-
-.auth-intro p{
-  max-width:500px;
-  color:#dbeafe;
-  line-height:1.7;
-  font-size:16px;
-}
-
-.auth-points{
-  margin-top:35px;
-  display:grid;
-  gap:13px;
-}
-
-.auth-point{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:#e2e8f0;
-  font-size:14px;
-}
-
-.auth-point span{
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.12);
-}
-
-.auth-card{
-  background:white;
-  padding:38px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.auth-logo{
-  font-size:29px;
-  font-weight:850;
-  letter-spacing:-1px;
+.brand{
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:.5px;
   text-align:center;
-}
-
-.auth-subtitle{
-  text-align:center;
-  color:var(--muted);
-  margin:8px 0 28px;
-  font-size:14px;
-}
-
-.auth-button{
-  width:100%;
-  margin-top:12px;
-  padding:13px;
-  border:0;
-  border-radius:10px;
-  background:var(--primary);
-  color:white;
-  font-weight:700;
-  transition:.2s;
-}
-
-.auth-button:hover{
-  background:var(--primary-dark);
-  transform:translateY(-1px);
-}
-
-.auth-switch{
-  text-align:center;
-  margin-top:20px;
-  color:var(--muted);
-  font-size:14px;
-}
-
-.auth-switch button{
-  border:0;
-  background:none;
-  color:var(--primary);
-  font-weight:700;
-}
-
-.auth-message{
-  min-height:20px;
-  margin-top:14px;
-  text-align:center;
-  font-size:14px;
-}
-
-.message-success{
-  color:var(--success);
-}
-
-.message-error{
-  color:var(--danger);
 }
 
 /* APP */
 
 #app{
-  display:none;
   min-height:100vh;
 }
 
-.sidebar{
-  width:250px;
-  background:var(--nav);
-  color:white;
-  padding:25px 18px;
+.side{
   position:fixed;
-  left:0;
-  top:0;
-  height:100vh;
-  z-index:20;
+  inset:0 auto 0 0;
+  width:245px;
+  background:#101a2c;
+  color:#d9e2f2;
+  padding:25px 17px;
+  z-index:3;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:24px;
-  font-weight:850;
-  letter-spacing:-.5px;
-  padding:5px 10px 28px;
-}
-
-.brand-mark{
-  width:34px;
-  height:34px;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#60a5fa,#2563eb);
-  font-size:17px;
-  box-shadow:0 8px 20px rgba(37,99,235,.28);
-}
-
-.nav-label{
-  padding:0 10px 10px;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  color:#64748b;
+.logo{
+  color:#fff;
+  font-size:25px;
   font-weight:800;
+  margin:0 10px 30px;
 }
 
 .nav{
   width:100%;
-  padding:12px 13px;
-  margin-bottom:6px;
   border:0;
-  border-radius:10px;
   background:transparent;
-  color:var(--nav-muted);
+  color:#aebbd0;
   text-align:left;
-  display:flex;
-  align-items:center;
-  gap:11px;
-  transition:.2s;
+  padding:13px 14px;
+  border-radius:10px;
+  margin:3px 0;
 }
 
-.nav:hover{
-  background:rgba(255,255,255,.06);
-  color:white;
-}
-
+.nav:hover,
 .nav.active{
-  background:#2563eb;
-  color:white;
-  box-shadow:0 8px 20px rgba(37,99,235,.20);
+  background:#2463eb;
+  color:#fff;
 }
 
 .logout{
-  margin-top:20px;
-  color:#fca5a5;
-}
-
-.logout:hover{
-  background:rgba(220,38,38,.14);
-  color:#fecaca;
+  margin-top:25px;
+  background:#bd2933;
+  color:#fff;
 }
 
 .main{
-  margin-left:250px;
-  width:calc(100% - 250px);
-  padding:0 38px 45px;
+  margin-left:245px;
+  padding:0 34px 40px;
 }
 
-.test-banner{
-  background:rgba(255,251,235,.95);
-  color:#92400e;
-  padding:8px 15px;
+.notice{
+  margin:0 -34px;
+  padding:8px;
   text-align:center;
-  font-size:11px;
+  background:#fff4cf;
+  color:#85600a;
+  font-size:12px;
   font-weight:700;
-  margin:0 -38px;
-  border-bottom:1px solid #fde68a;
-}
-
-.header{
-  padding-top:34px;
-  margin-bottom:25px;
-}
-
-.header-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:20px;
-}
-
-.header h1{
-  margin:0;
-  font-size:31px;
-  letter-spacing:-1px;
-}
-
-.header p{
-  color:var(--muted);
-  margin:8px 0 0;
 }
 
 .page{
@@ -368,55 +182,71 @@ input:focus-visible{
   display:block;
 }
 
-/* CARDS */
+.top{
+  padding:31px 0 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+}
 
-.cards{
+.top h1{
+  margin:0;
+  font-size:32px;
+}
+
+.grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+}
+
+.card,
+.panel{
+  background:#fff;
+  border:1px solid #e8edf5;
+  border-radius:16px;
+  box-shadow:0 7px 25px rgba(23,32,51,.04);
 }
 
 .card{
-  background:var(--surface);
-  padding:23px;
-  border:1px solid rgba(226,232,240,.8);
-  border-radius:16px;
-  box-shadow:var(--shadow);
+  padding:20px;
 }
-
-.card-title{
-  color:var(--muted);
-  font-size:13px;
-  font-weight:650;
-}
-
-.number{
-  font-size:29px;
-  font-weight:800;
-  margin-top:10px;
-  letter-spacing:-.5px;
-}
-
-.card-icon{
-  width:39px;
-  height:39px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:11px;
-  background:#eff6ff;
-  margin-bottom:16px;
-}
-
-/* PANELS */
 
 .panel{
-  background:var(--surface);
-  padding:25px;
-  border:1px solid rgba(226,232,240,.8);
-  border-radius:16px;
+  padding:23px;
   margin-top:20px;
-  box-shadow:var(--shadow);
+}
+
+.label{
+  font-size:13px;
+  color:#738096;
+}
+
+.value{
+  font-size:27px;
+  font-weight:800;
+  margin-top:9px;
+}
+
+.value.orange{
+  color:#c47a00;
+}
+
+.balance{
+  font-size:43px;
+  font-weight:850;
+  margin:5px 0;
+}
+
+.row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.row input{
+  max-width:280px;
 }
 
 .panel h2{
@@ -424,519 +254,270 @@ input:focus-visible{
   font-size:19px;
 }
 
-.panel p{
-  color:var(--muted);
-  line-height:1.6;
+table{
+  width:100%;
+  border-collapse:collapse;
 }
 
-.panel-description{
-  margin-top:0;
+th,
+td{
+  text-align:left;
+  padding:14px 8px;
+  border-bottom:1px solid #edf1f6;
   font-size:14px;
 }
 
-.balance-panel{
-  background:
-    radial-gradient(circle at 90% 10%,rgba(96,165,250,.20),transparent 35%),
-    linear-gradient(135deg,#0b1220,#172554);
-  color:white;
-}
-
-.balance-panel .card-title{
-  color:#bfdbfe;
-}
-
-.balance{
-  font-size:44px;
-  font-weight:850;
-  margin-top:8px;
-  letter-spacing:-1.5px;
-}
-
-.balance-note{
-  color:#cbd5e1;
+th{
+  color:#718096;
   font-size:12px;
-  margin-top:8px;
+  text-transform:uppercase;
 }
 
-.button-row{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.primary,
-.danger,
-.secondary{
-  border:0;
-  padding:12px 18px;
-  border-radius:10px;
-  font-weight:700;
-  transition:.2s;
-}
-
-.primary{
-  background:var(--primary);
-  color:white;
-}
-
-.primary:hover{
-  background:var(--primary-dark);
-}
-
-.secondary{
-  background:#e2e8f0;
-  color:#334155;
-}
-
-.danger{
-  background:var(--danger);
-  color:white;
-}
-
-.primary:hover,
-.secondary:hover,
-.danger:hover{
-  transform:translateY(-1px);
-}
-
-.message{
-  min-height:20px;
-  margin-bottom:0;
-  font-size:14px;
-  font-weight:650;
-}
-
-/* TRANSACTIONS */
-
-.transaction-head{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  padding:11px 0;
-  border-bottom:1px solid var(--border);
-  color:var(--muted);
-  font-size:12px;
-  font-weight:750;
-}
-
-.transaction{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  padding:16px 0;
-  border-bottom:1px solid #eef2f7;
-  align-items:center;
-  font-size:14px;
-}
-
-.transaction:last-child{
-  border-bottom:0;
-}
-
-.deposit-text{
-  color:var(--success);
-  font-weight:750;
-}
-
-.withdrawal-text{
-  color:var(--danger);
-  font-weight:750;
-}
-
-.pending-text{
-  color:var(--warning);
-  font-weight:700;
-}
-
-.status-pill{
-  display:inline-flex;
-  align-items:center;
-  width:max-content;
+.badge{
+  display:inline-block;
   padding:5px 9px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:750;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+  background:#e7f7ee;
+  color:#16834b;
 }
 
-.status-completed{
-  background:var(--success-bg);
-  color:var(--success);
+.badge.pending{
+  background:#fff4cf;
+  color:#a56b00;
 }
 
-.status-pending{
-  background:var(--warning-bg);
-  color:var(--warning);
+.listitem{
+  padding:15px 0;
+  border-bottom:1px solid #edf1f6;
 }
 
-/* PENDING */
-
-.pending{
-  background:var(--warning-bg);
-  border:1px solid #fde68a;
-  color:#92400e;
-  padding:14px;
-  border-radius:11px;
-  margin-top:10px;
-  font-size:14px;
-}
-
-/* EMPTY */
-
-.empty{
-  padding:30px 10px;
-  text-align:center;
-  color:var(--muted);
-}
-
-.empty-icon{
-  font-size:28px;
-  margin-bottom:8px;
-}
-
-/* PROJECT */
-
-.project-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  padding:16px 0;
-  border-bottom:1px solid #eef2f7;
-}
-
-.project-item:last-child{
+.listitem:last-child{
   border-bottom:0;
 }
 
-.project-name{
-  font-weight:700;
-}
+@media(max-width:850px){
 
-/* TOAST */
-
-.toast{
-  position:fixed;
-  right:25px;
-  bottom:25px;
-  background:#111827;
-  color:white;
-  padding:13px 17px;
-  border-radius:11px;
-  box-shadow:0 15px 40px rgba(0,0,0,.18);
-  opacity:0;
-  pointer-events:none;
-  transform:translateY(12px);
-  transition:.25s;
-  z-index:100;
-  font-size:14px;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* MOBILE */
-
-@media(max-width:900px){
-
-  .auth-shell{
-    grid-template-columns:1fr;
-    max-width:470px;
-  }
-
-  .auth-intro{
-    display:none;
-  }
-
-  .cards{
-    grid-template-columns:1fr;
-  }
-
-}
-
-@media(max-width:700px){
-
-  .sidebar{
+  .side{
     position:relative;
     width:100%;
     height:auto;
-    padding:14px;
-  }
-
-  .brand{
-    padding:5px 7px 15px;
-  }
-
-  .nav-label{
-    display:none;
-  }
-
-  .nav{
-    width:auto;
-    display:inline-flex;
-    margin:3px;
-    padding:10px 11px;
-  }
-
-  .logout{
-    margin-top:5px;
   }
 
   .main{
-    margin-left:0;
-    width:100%;
-    padding:0 18px 30px;
+    margin:0;
+    padding:0 20px 30px;
   }
 
-  .test-banner{
-    margin:0 -18px;
+  .notice{
+    margin:0 -20px;
   }
 
-  .header{
-    padding-top:25px;
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:520px){
+
+  .grid{
+    grid-template-columns:1fr;
   }
 
-  .header-row{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .transaction-head{
-    display:none;
-  }
-
-  .transaction{
+  .top{
     display:block;
-    padding:17px 0;
   }
 
-  .transaction > div{
-    margin-bottom:6px;
+  .top h1{
+    font-size:27px;
   }
 
   .balance{
     font-size:36px;
   }
 
-}
-
-@media(max-width:420px){
-
-  .auth-card{
-    padding:28px 22px;
+  table{
+    font-size:12px;
   }
 
-  .panel{
-    padding:20px;
+  th,
+  td{
+    padding:10px 5px;
   }
-
-  .number{
-    font-size:27px;
-  }
-
 }
 </style>
 </head>
 
 <body>
 
-<!-- AUTH -->
-
 <div id="auth">
 
-  <div class="auth-shell">
+  <div class="auth">
 
-    <div class="auth-intro">
-
-      <div class="auth-brand">
-        NEXORA
-      </div>
-
-      <h1>
-        Your financial workspace.
-      </h1>
-
-      <p>
-        A clean workspace for managing balances,
-        transactions, projects and account activity.
-      </p>
-
-      <div class="auth-points">
-
-        <div class="auth-point">
-          <span>✓</span>
-          Simple account management
-        </div>
-
-        <div class="auth-point">
-          <span>✓</span>
-          Organized wallet activity
-        </div>
-
-        <div class="auth-point">
-          <span>✓</span>
-          Clear transaction tracking
-        </div>
-
-      </div>
-
+    <div class="brand">
+      NEXORA
     </div>
 
+    <p
+      class="muted"
+      style="text-align:center"
+    >
+      Digital finance workspace
+    </p>
 
-    <div class="auth-card">
+    <div id="loginBox">
 
-      <div class="auth-logo">
-        NEXORA
-      </div>
-
-      <div class="auth-subtitle">
-        Account access
-      </div>
-
-
-      <div id="loginForm">
-
-        <input
-          id="loginEmail"
-          type="email"
-          placeholder="Email"
-          autocomplete="email"
-        >
-
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="Password"
-          autocomplete="current-password"
-        >
-
-        <button
-          class="auth-button"
-          onclick="login()"
-        >
-          Sign In
-        </button>
-
-        <div class="auth-switch">
-          Don't have an account?
-          <button onclick="showSignup()">
-            Create one
-          </button>
-        </div>
-
-      </div>
-
-
-      <div
-        id="signupForm"
-        style="display:none"
+      <input
+        id="le"
+        type="email"
+        placeholder="Email"
       >
 
-        <input
-          id="signupName"
-          placeholder="Full name"
-          autocomplete="name"
-        >
+      <input
+        id="lp"
+        type="password"
+        placeholder="Password"
+      >
 
-        <input
-          id="signupEmail"
-          type="email"
-          placeholder="Email"
-          autocomplete="email"
-        >
+      <button
+        class="btn"
+        style="width:100%;margin-top:8px"
+        onclick="login()"
+      >
+        Sign In
+      </button>
 
-        <input
-          id="signupPassword"
-          type="password"
-          placeholder="Password"
-          autocomplete="new-password"
-        >
+      <p
+        style="text-align:center"
+        class="muted"
+      >
+        New to Nexora?
 
         <button
-          class="auth-button"
-          onclick="signup()"
+          class="link"
+          onclick="toggleAuth()"
         >
-          Create Account
+          Create account
         </button>
-
-        <div class="auth-switch">
-          Already have an account?
-          <button onclick="showLogin()">
-            Sign in
-          </button>
-        </div>
-
-      </div>
-
-
-      <div
-        id="authMessage"
-        class="auth-message"
-      ></div>
+      </p>
 
     </div>
+
+
+    <div
+      id="signupBox"
+      class="hidden"
+    >
+
+      <input
+        id="sn"
+        placeholder="Full name"
+      >
+
+      <input
+        id="se"
+        type="email"
+        placeholder="Email"
+      >
+
+      <input
+        id="sp"
+        type="password"
+        placeholder="Password (6+ characters)"
+      >
+
+      <button
+        class="btn"
+        style="width:100%;margin-top:8px"
+        onclick="signup()"
+      >
+        Create Account
+      </button>
+
+      <p
+        style="text-align:center"
+        class="muted"
+      >
+        Already registered?
+
+        <button
+          class="link"
+          onclick="toggleAuth()"
+        >
+          Sign in
+        </button>
+      </p>
+
+    </div>
+
+
+    <div
+      id="authMsg"
+      class="msg"
+    ></div>
 
   </div>
 
 </div>
 
 
-<!-- APP -->
+<div
+  id="app"
+  class="hidden"
+>
 
-<div id="app">
+  <aside class="side">
 
-  <aside class="sidebar">
-
-    <div class="brand">
-      <div class="brand-mark">N</div>
+    <div class="logo">
       NEXORA
-    </div>
-
-    <div class="nav-label">
-      Workspace
     </div>
 
     <button
       class="nav active"
-      onclick="showPage('dashboard',this)"
+      onclick="page('home',this)"
     >
-      🏠 Dashboard
+      🏠 Overview
     </button>
 
     <button
       class="nav"
-      onclick="showPage('wallet',this)"
+      onclick="page('wallet',this)"
     >
       💳 Wallet
     </button>
 
     <button
       class="nav"
-      onclick="showPage('transactions',this)"
+      onclick="page('invest',this)"
+    >
+      📈 Portfolio
+    </button>
+
+    <button
+      class="nav"
+      onclick="page('transactions',this)"
     >
       📋 Transactions
     </button>
 
     <button
       class="nav"
-      onclick="showPage('projects',this)"
+      onclick="page('projects',this)"
     >
       📁 Projects
     </button>
 
     <button
       class="nav"
-      onclick="showPage('profile',this)"
+      onclick="page('profile',this)"
     >
       👤 Profile
     </button>
 
-    <div class="nav-label" style="margin-top:18px;">
-      Account
-    </div>
-
     <button
       class="nav"
-      onclick="showPage('settings',this)"
+      onclick="page('settings',this)"
     >
       ⚙️ Settings
     </button>
@@ -953,52 +534,47 @@ input:focus-visible{
 
   <main class="main">
 
-    <div class="test-banner">
-      Test environment · Wallet activity uses simulated funds
+    <div class="notice">
+      Test environment — wallet activity uses simulated funds.
+      No real money is processed.
     </div>
 
 
-    <!-- DASHBOARD -->
+    <!-- OVERVIEW -->
 
     <section
-      id="dashboard"
+      id="home"
       class="page active"
     >
 
-      <div class="header">
+      <div class="top">
 
-        <div class="header-row">
+        <div>
 
-          <div>
-            <h1 id="welcomeTitle">
-              Welcome to Nexora
-            </h1>
+          <h1 id="welcome">
+            Welcome
+          </h1>
 
-            <p>
-              Here's an overview of your account.
-            </p>
-          </div>
+          <p class="muted">
+            Here is your account overview.
+          </p>
 
         </div>
 
       </div>
 
 
-      <div class="cards">
+      <div class="grid">
 
         <div class="card">
 
-          <div class="card-icon">
-            💳
-          </div>
-
-          <div class="card-title">
-            Available Balance
+          <div class="label">
+            Total Balance
           </div>
 
           <div
-            class="number"
-            id="dashboardBalance"
+            id="b1"
+            class="value"
           >
             $0.00
           </div>
@@ -1008,19 +584,15 @@ input:focus-visible{
 
         <div class="card">
 
-          <div class="card-icon">
-            📁
-          </div>
-
-          <div class="card-title">
-            Projects
+          <div class="label">
+            Available
           </div>
 
           <div
-            class="number"
-            id="projectCount"
+            id="b2"
+            class="value"
           >
-            0
+            $0.00
           </div>
 
         </div>
@@ -1028,38 +600,33 @@ input:focus-visible{
 
         <div class="card">
 
-          <div class="card-icon">
-            ✓
+          <div class="label">
+            Pending
           </div>
 
-          <div class="card-title">
-            Account Status
-          </div>
-
-          <div class="number">
-            Active
+          <div
+            id="pendingValue"
+            class="value orange"
+          >
+            $0.00
           </div>
 
         </div>
 
-      </div>
 
+        <div class="card">
 
-      <div class="panel balance-panel">
+          <div class="label">
+            Projects
+          </div>
 
-        <div class="card-title">
-          Current balance
-        </div>
+          <div
+            id="pc"
+            class="value"
+          >
+            0
+          </div>
 
-        <div
-          class="balance"
-          id="dashboardLargeBalance"
-        >
-          $0.00
-        </div>
-
-        <div class="balance-note">
-          Simulated balance · Test environment
         </div>
 
       </div>
@@ -1068,11 +635,14 @@ input:focus-visible{
       <div class="panel">
 
         <h2>
-          Welcome back
+          Account snapshot
         </h2>
 
-        <p id="dashboardMessage">
-          Your Nexora workspace is ready.
+        <p
+          id="snapshot"
+          class="muted"
+        >
+          Your simulated account is ready.
         </p>
 
       </div>
@@ -1087,40 +657,38 @@ input:focus-visible{
       class="page"
     >
 
-      <div class="header">
+      <div class="top">
 
-        <h1>
-          Wallet
-        </h1>
+        <div>
 
-        <p>
-          Manage your simulated wallet activity.
-        </p>
+          <h1>
+            Wallet
+          </h1>
+
+          <p class="muted">
+            Manage your simulated account balance.
+          </p>
+
+        </div>
 
       </div>
 
 
-      <div class="panel balance-panel">
+      <div class="panel">
 
-        <div class="card-title">
+        <div class="label">
           Available balance
         </div>
 
         <div
+          id="wb"
           class="balance"
-          id="walletBalance"
         >
           $0.00
         </div>
 
-        <div class="balance-note">
-          Test environment · No real-money processing
-        </div>
-
       </div>
 
-
-      <!-- DEPOSIT -->
 
       <div class="panel">
 
@@ -1128,38 +696,36 @@ input:focus-visible{
           Deposit
         </h2>
 
-        <p class="panel-description">
+        <p class="muted">
           Add simulated funds to your test balance.
         </p>
 
-        <input
-          id="depositAmount"
-          type="number"
-          min="0.01"
-          step="0.01"
-          placeholder="Enter amount"
-        >
+        <div class="row">
 
-        <div class="button-row">
+          <input
+            id="da"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Amount"
+          >
 
           <button
-            class="primary"
+            class="btn"
             onclick="deposit()"
           >
-            Add Funds
+            Deposit
           </button>
 
         </div>
 
-        <p
-          id="depositMessage"
-          class="message"
-        ></p>
+        <div
+          id="dm"
+          class="msg"
+        ></div>
 
       </div>
 
-
-      <!-- WITHDRAWAL -->
 
       <div class="panel">
 
@@ -1167,31 +733,31 @@ input:focus-visible{
           Withdrawal
         </h2>
 
-        <p class="panel-description">
-          Withdrawal requests are simulated and remain
-          pending in this test environment.
+        <p class="muted">
+          Requests are simulated and remain pending
+          in this test environment.
         </p>
 
-        <input
-          id="withdrawAmount"
-          type="number"
-          min="0.01"
-          step="0.01"
-          placeholder="Enter amount"
-        >
+        <div class="row">
 
-        <input
-          id="withdrawPin"
-          type="password"
-          inputmode="numeric"
-          maxlength="6"
-          placeholder="Withdrawal PIN"
-        >
+          <input
+            id="wa"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Amount"
+          >
 
-        <div class="button-row">
+          <input
+            id="wp"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="Withdrawal PIN"
+          >
 
           <button
-            class="primary"
+            class="btn"
             onclick="withdraw()"
           >
             Request Withdrawal
@@ -1199,15 +765,13 @@ input:focus-visible{
 
         </div>
 
-        <p
-          id="withdrawMessage"
-          class="message"
-        ></p>
+        <div
+          id="wm"
+          class="msg"
+        ></div>
 
       </div>
 
-
-      <!-- PIN -->
 
       <div class="panel">
 
@@ -1215,38 +779,36 @@ input:focus-visible{
           Withdrawal PIN
         </h2>
 
-        <p class="panel-description">
+        <p class="muted">
           Set a 4–6 digit PIN for simulated withdrawal requests.
         </p>
 
-        <input
-          id="newPin"
-          type="password"
-          inputmode="numeric"
-          maxlength="6"
-          placeholder="4–6 digit PIN"
-        >
+        <div class="row">
 
-        <div class="button-row">
+          <input
+            id="np"
+            type="password"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="4–6 digit PIN"
+          >
 
           <button
-            class="secondary"
-            onclick="setWithdrawalPin()"
+            class="btn secondary"
+            onclick="setPin()"
           >
             Save PIN
           </button>
 
         </div>
 
-        <p
-          id="pinMessage"
-          class="message"
-        ></p>
+        <div
+          id="pm"
+          class="msg"
+        ></div>
 
       </div>
 
-
-      <!-- PENDING -->
 
       <div class="panel">
 
@@ -1254,12 +816,111 @@ input:focus-visible{
           Pending withdrawals
         </h2>
 
-        <div id="pendingList">
-          <div class="empty">
-            <div class="empty-icon">⏳</div>
-            No pending withdrawals.
-          </div>
+        <div
+          id="pendingList"
+          class="muted"
+        >
+          No pending withdrawals.
         </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PORTFOLIO -->
+
+    <section
+      id="invest"
+      class="page"
+    >
+
+      <div class="top">
+
+        <div>
+
+          <h1>
+            Portfolio
+          </h1>
+
+          <p class="muted">
+            A professional view of your simulated financial workspace.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid">
+
+        <div class="card">
+
+          <div class="label">
+            Portfolio Value
+          </div>
+
+          <div
+            id="pv"
+            class="value"
+          >
+            $0.00
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="label">
+            Cash Allocation
+          </div>
+
+          <div class="value">
+            100%
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="label">
+            Account Status
+          </div>
+
+          <div class="value">
+            Active
+          </div>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="label">
+            Environment
+          </div>
+
+          <div class="value">
+            Test
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h2>
+          Portfolio status
+        </h2>
+
+        <p class="muted">
+          Portfolio figures are illustrative and are not connected
+          to brokerage, investment, payment, or banking networks.
+        </p>
 
       </div>
 
@@ -1273,46 +934,27 @@ input:focus-visible{
       class="page"
     >
 
-      <div class="header">
+      <div class="top">
 
-        <h1>
-          Transactions
-        </h1>
+        <div>
 
-        <p>
-          Review your account activity.
-        </p>
+          <h1>
+            Transactions
+          </h1>
+
+          <p class="muted">
+            Account activity and simulated requests.
+          </p>
+
+        </div>
 
       </div>
 
 
       <div class="panel">
 
-        <div class="transaction-head">
-
-          <div>
-            Type
-          </div>
-
-          <div>
-            Amount
-          </div>
-
-          <div>
-            Status
-          </div>
-
-          <div>
-            Date
-          </div>
-
-        </div>
-
-        <div id="transactionList">
-          <div class="empty">
-            <div class="empty-icon">📋</div>
-            No transactions yet.
-          </div>
+        <div id="tx">
+          No transactions yet.
         </div>
 
       </div>
@@ -1327,38 +969,34 @@ input:focus-visible{
       class="page"
     >
 
-      <div class="header">
+      <div class="top">
 
-        <h1>
-          Projects
-        </h1>
+        <div>
 
-        <p>
-          Create and manage your projects.
-        </p>
+          <h1>
+            Projects
+          </h1>
+
+          <p class="muted">
+            Organize your Nexora workspace.
+          </p>
+
+        </div>
 
       </div>
 
 
       <div class="panel">
 
-        <h2>
-          New project
-        </h2>
+        <div class="row">
 
-        <p class="panel-description">
-          Add a project to your workspace.
-        </p>
-
-        <input
-          id="projectInput"
-          placeholder="Project name"
-        >
-
-        <div class="button-row">
+          <input
+            id="project"
+            placeholder="Project name"
+          >
 
           <button
-            class="primary"
+            class="btn"
             onclick="addProject()"
           >
             Add Project
@@ -1366,21 +1004,7 @@ input:focus-visible{
 
         </div>
 
-      </div>
-
-
-      <div class="panel">
-
-        <h2>
-          Your projects
-        </h2>
-
-        <div id="projectList">
-          <div class="empty">
-            <div class="empty-icon">📁</div>
-            No projects yet.
-          </div>
-        </div>
+        <div id="projectsList"></div>
 
       </div>
 
@@ -1394,51 +1018,47 @@ input:focus-visible{
       class="page"
     >
 
-      <div class="header">
+      <div class="top">
 
-        <h1>
-          Profile
-        </h1>
+        <div>
 
-        <p>
-          Manage your personal account information.
-        </p>
+          <h1>
+            Profile
+          </h1>
+
+          <p class="muted">
+            Manage your account details.
+          </p>
+
+        </div>
 
       </div>
 
 
       <div class="panel">
 
-        <h2>
-          Personal information
-        </h2>
-
         <input
-          id="profileName"
-          placeholder="Your name"
+          id="pn"
+          placeholder="Full name"
         >
 
         <input
-          id="profileEmail"
+          id="pe"
           disabled
           placeholder="Email"
         >
 
-        <div class="button-row">
+        <button
+          class="btn"
+          onclick="saveProfile()"
+        >
+          Save Profile
+        </button>
 
-          <button
-            class="primary"
-            onclick="saveProfile()"
-          >
-            Save Changes
-          </button>
-
-        </div>
-
-        <p
-          id="profileMessage"
-          class="message"
-        ></p>
+        <div
+          id="profMsg"
+          class="msg"
+        ></div>
 
       </div>
 
@@ -1452,15 +1072,19 @@ input:focus-visible{
       class="page"
     >
 
-      <div class="header">
+      <div class="top">
 
-        <h1>
-          Settings
-        </h1>
+        <div>
 
-        <p>
-          Manage your account settings.
-        </p>
+          <h1>
+            Settings
+          </h1>
+
+          <p class="muted">
+            Account and security preferences.
+          </p>
+
+        </div>
 
       </div>
 
@@ -1468,35 +1092,20 @@ input:focus-visible{
       <div class="panel">
 
         <h2>
-          Account
+          Security
         </h2>
 
-        <p>
-          This Nexora environment uses simulated funds
-          for testing and demonstration purposes.
+        <p class="muted">
+          This test account stores its data locally in your browser.
+          Do not use real passwords or sensitive financial information.
         </p>
 
         <button
-          class="danger"
+          class="btn danger"
           onclick="logout()"
         >
           Sign Out
         </button>
-
-      </div>
-
-
-      <div class="panel">
-
-        <h2>
-          Environment
-        </h2>
-
-        <p>
-          <strong>Test environment</strong><br>
-          Wallet activity and transactions are simulated
-          and are not connected to a payment processor.
-        </p>
 
       </div>
 
@@ -1507,87 +1116,69 @@ input:focus-visible{
 </div>
 
 
-<div
-  id="toast"
-  class="toast"
-></div>
-
-
 <script>
 
-function getAccount(){
+const storageKey =
+  "nexoraAccount";
 
-  const raw =
-    localStorage.getItem("nexoraAccount");
 
-  if(!raw){
-    return null;
-  }
+function acct(){
 
   try{
-    return JSON.parse(raw);
+
+    return JSON.parse(
+      localStorage.getItem(storageKey) || "null"
+    );
+
   }catch(error){
+
     return null;
+
   }
 
 }
 
 
-function saveAccount(account){
+function save(account){
 
   localStorage.setItem(
-    "nexoraAccount",
+    storageKey,
     JSON.stringify(account)
   );
 
 }
 
 
-function toast(message){
+function showMessage(id,text,success){
 
   const element =
-    document.getElementById("toast");
+    document.getElementById(id);
 
   element.textContent =
-    message;
+    text;
 
-  element.classList.add("show");
-
-  clearTimeout(window.nexoraToastTimer);
-
-  window.nexoraToastTimer =
-    setTimeout(function(){
-
-      element.classList.remove("show");
-
-    },3000);
+  element.className =
+    "msg " +
+    (success ? "ok" : "err");
 
 }
 
 
-function showSignup(){
+function toggleAuth(){
 
-  document.getElementById("loginForm").style.display =
-    "none";
+  document
+    .getElementById("loginBox")
+    .classList
+    .toggle("hidden");
 
-  document.getElementById("signupForm").style.display =
-    "block";
+  document
+    .getElementById("signupBox")
+    .classList
+    .toggle("hidden");
 
-  document.getElementById("authMessage").textContent =
-    "";
-
-}
-
-
-function showLogin(){
-
-  document.getElementById("loginForm").style.display =
-    "block";
-
-  document.getElementById("signupForm").style.display =
-    "none";
-
-  document.getElementById("authMessage").textContent =
+  document
+    .getElementById("authMsg")
+    .textContent =
     "";
 
 }
@@ -1596,25 +1187,34 @@ function showLogin(){
 function signup(){
 
   const name =
-    document.getElementById("signupName").value.trim();
+    document
+      .getElementById("sn")
+      .value
+      .trim();
 
   const email =
-    document.getElementById("signupEmail").value.trim();
+    document
+      .getElementById("se")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("signupPassword").value;
+    document
+      .getElementById("sp")
+      .value;
 
-  const message =
-    document.getElementById("authMessage");
 
+  if(
+    !name ||
+    !email ||
+    !password
+  ){
 
-  if(!name || !email || !password){
-
-    message.textContent =
-      "Please complete all fields.";
-
-    message.className =
-      "auth-message message-error";
+    showMessage(
+      "authMsg",
+      "Please complete all fields.",
+      false
+    );
 
     return;
 
@@ -1623,27 +1223,11 @@ function signup(){
 
   if(password.length < 6){
 
-    message.textContent =
-      "Password must contain at least 6 characters.";
-
-    message.className =
-      "auth-message message-error";
-
-    return;
-
-  }
-
-
-  const existing =
-    getAccount();
-
-  if(existing){
-
-    message.textContent =
-      "An account already exists in this browser. Sign in instead.";
-
-    message.className =
-      "auth-message message-error";
+    showMessage(
+      "authMsg",
+      "Password must contain at least 6 characters.",
+      false
+    );
 
     return;
 
@@ -1660,23 +1244,23 @@ function signup(){
 
     balance:0,
 
-    withdrawalPin:"",
+    pin:"",
 
     projects:[],
 
     transactions:[],
 
-    pendingWithdrawals:[]
+    pending:[]
 
   };
 
 
-  saveAccount(account);
+  save(account);
 
 
   localStorage.setItem(
     "nexoraLoggedIn",
-    "true"
+    "1"
   );
 
 
@@ -1687,30 +1271,33 @@ function signup(){
 
 function login(){
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
-
-  const password =
-    document.getElementById("loginPassword").value;
-
   const account =
-    getAccount();
-
-  const message =
-    document.getElementById("authMessage");
+    acct();
 
 
   if(!account){
 
-    message.textContent =
-      "No account found. Create an account first.";
-
-    message.className =
-      "auth-message message-error";
+    showMessage(
+      "authMsg",
+      "No account found. Create an account first.",
+      false
+    );
 
     return;
 
   }
+
+
+  const email =
+    document
+      .getElementById("le")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("lp")
+      .value;
 
 
   if(
@@ -1718,11 +1305,11 @@ function login(){
     password !== account.password
   ){
 
-    message.textContent =
-      "Incorrect email or password.";
-
-    message.className =
-      "auth-message message-error";
+    showMessage(
+      "authMsg",
+      "Incorrect email or password.",
+      false
+    );
 
     return;
 
@@ -1731,7 +1318,7 @@ function login(){
 
   localStorage.setItem(
     "nexoraLoggedIn",
-    "true"
+    "1"
   );
 
 
@@ -1743,43 +1330,47 @@ function login(){
 function openDashboard(){
 
   const account =
-    getAccount();
+    acct();
+
 
   if(!account){
     return;
   }
 
 
-  document.getElementById("auth").style.display =
-    "none";
-
-  document.getElementById("app").style.display =
-    "block";
-
-
-  document.getElementById("welcomeTitle").textContent =
-    "Welcome, " + account.name + " 👋";
+  document
+    .getElementById("auth")
+    .classList
+    .add("hidden");
 
 
-  document.getElementById("dashboardMessage").textContent =
-    "Welcome back, " + account.name + ".";
+  document
+    .getElementById("app")
+    .classList
+    .remove("hidden");
 
 
-  document.getElementById("profileName").value =
+  document
+    .getElementById("welcome")
+    .textContent =
+    "Welcome, " +
+    account.name +
+    " 👋";
+
+
+  document
+    .getElementById("pn")
+    .value =
     account.name;
 
 
-  document.getElementById("profileEmail").value =
+  document
+    .getElementById("pe")
+    .value =
     account.email;
 
 
-  updateBalance();
-
-  renderProjects();
-
-  renderTransactions();
-
-  renderPendingWithdrawals();
+  render();
 
 }
 
@@ -1791,115 +1382,187 @@ function logout(){
   );
 
 
-  document.getElementById("app").style.display =
-    "none";
+  document
+    .getElementById("app")
+    .classList
+    .add("hidden");
 
-  document.getElementById("auth").style.display =
-    "flex";
 
-
-  showLogin();
+  document
+    .getElementById("auth")
+    .classList
+    .remove("hidden");
 
 }
 
 
-function showPage(page,button){
+function page(id,button){
 
-  document.querySelectorAll(".page")
+  document
+    .querySelectorAll(".page")
     .forEach(function(section){
 
-      section.classList.remove("active");
+      section.classList.remove(
+        "active"
+      );
 
     });
 
 
-  document.getElementById(page)
-    .classList.add("active");
+  document
+    .getElementById(id)
+    .classList
+    .add("active");
 
 
-  document.querySelectorAll(".nav")
+  document
+    .querySelectorAll(".nav")
     .forEach(function(nav){
 
-      nav.classList.remove("active");
+      nav.classList.remove(
+        "active"
+      );
 
     });
 
 
-  if(button){
-    button.classList.add("active");
-  }
+  button.classList.add(
+    "active"
+  );
 
 
-  updateBalance();
-
-  renderTransactions();
-
-  renderPendingWithdrawals();
+  render();
 
 }
 
 
-function updateBalance(){
+function money(value){
+
+  return "$" +
+    Number(value || 0)
+      .toFixed(2);
+
+}
+
+
+function render(){
 
   const account =
-    getAccount();
+    acct();
+
 
   if(!account){
     return;
   }
 
 
-  const balance =
-    Number(account.balance || 0);
+  if(!Array.isArray(account.projects)){
+    account.projects = [];
+  }
 
 
-  const formatted =
-    "$" + balance.toFixed(2);
+  if(!Array.isArray(account.transactions)){
+    account.transactions = [];
+  }
 
 
-  document.getElementById("walletBalance").textContent =
-    formatted;
+  if(!Array.isArray(account.pending)){
+    account.pending = [];
+  }
 
 
-  document.getElementById("dashboardBalance").textContent =
-    formatted;
+  const pendingTotal =
+    account.pending.reduce(
+      function(total,item){
+
+        return total +
+          Number(item.amount || 0);
+
+      },
+      0
+    );
 
 
-  document.getElementById("dashboardLargeBalance").textContent =
-    formatted;
+  document
+    .getElementById("b1")
+    .textContent =
+    money(account.balance);
+
+
+  document
+    .getElementById("b2")
+    .textContent =
+    money(account.balance);
+
+
+  document
+    .getElementById("wb")
+    .textContent =
+    money(account.balance);
+
+
+  document
+    .getElementById("pv")
+    .textContent =
+    money(account.balance);
+
+
+  document
+    .getElementById("pendingValue")
+    .textContent =
+    money(pendingTotal);
+
+
+  document
+    .getElementById("pc")
+    .textContent =
+    account.projects.length;
+
+
+  document
+    .getElementById("snapshot")
+    .textContent =
+    account.transactions.length
+      ? "Your account has " +
+        account.transactions.length +
+        " recorded transaction(s)."
+      : "Your simulated account is ready.";
+
+
+  renderTransactions();
+
+  renderPending();
+
+  renderProjects();
 
 }
 
-
-/* DEPOSIT */
 
 function deposit(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const input =
-    document.getElementById("depositAmount");
-
-  const message =
-    document.getElementById("depositMessage");
-
-
-  if(!account){
-
-    message.textContent =
-      "Please sign in first.";
-
-    message.className =
-      "message message-error";
-
-    return;
-
-  }
+    document.getElementById("da");
 
 
   const amount =
     Number(input.value);
+
+
+  if(!account){
+
+    showMessage(
+      "dm",
+      "Please sign in first.",
+      false
+    );
+
+    return;
+
+  }
 
 
   if(
@@ -1907,15 +1570,20 @@ function deposit(){
     amount <= 0
   ){
 
-    message.textContent =
-      "Enter a valid amount.";
-
-    message.className =
-      "message message-error";
+    showMessage(
+      "dm",
+      "Enter a valid amount.",
+      false
+    );
 
     return;
 
   }
+
+
+  account.balance =
+    Number(account.balance || 0) +
+    amount;
 
 
   if(!Array.isArray(account.transactions)){
@@ -1925,13 +1593,7 @@ function deposit(){
   }
 
 
-  account.balance =
-    Number(account.balance || 0) + amount;
-
-
   account.transactions.unshift({
-
-    id:Date.now(),
 
     type:"Deposit",
 
@@ -1939,121 +1601,100 @@ function deposit(){
 
     status:"Completed",
 
-    date:new Date().toLocaleString()
+    date:new Date()
+      .toLocaleString()
 
   });
 
 
-  saveAccount(account);
+  save(account);
 
 
   input.value =
     "";
 
 
-  message.textContent =
-    "$" +
-    amount.toFixed(2) +
-    " added to your simulated balance.";
+  showMessage(
+    "dm",
+    money(amount) +
+    " was added to your simulated balance.",
+    true
+  );
 
-  message.className =
-    "message message-success";
 
-
-  updateBalance();
-
-  renderTransactions();
-
-  toast("Deposit recorded");
+  render();
 
 }
 
 
-/* WITHDRAWAL PIN */
-
-function setWithdrawalPin(){
+function setPin(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const input =
-    document.getElementById("newPin");
-
-  const message =
-    document.getElementById("pinMessage");
-
-
-  if(!account){
-
-    return;
-
-  }
+    document.getElementById("np");
 
 
   const pin =
     input.value.trim();
 
 
-  if(!/^[0-9]{4,6}$/.test(pin)){
+  if(
+    !/^[0-9]{4,6}$/.test(pin)
+  ){
 
-    message.textContent =
-      "PIN must contain 4–6 digits.";
-
-    message.className =
-      "message message-error";
+    showMessage(
+      "pm",
+      "PIN must contain 4–6 digits.",
+      false
+    );
 
     return;
 
   }
 
 
-  account.withdrawalPin =
+  account.pin =
     pin;
 
 
-  saveAccount(account);
+  save(account);
 
 
   input.value =
     "";
 
 
-  message.textContent =
-    "Withdrawal PIN saved.";
-
-  message.className =
-    "message message-success";
-
-
-  toast("Withdrawal PIN saved");
+  showMessage(
+    "pm",
+    "Withdrawal PIN saved.",
+    true
+  );
 
 }
 
 
-/* WITHDRAWAL */
-
 function withdraw(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const amount =
     Number(
-      document.getElementById("withdrawAmount").value
+      document
+        .getElementById("wa")
+        .value
     );
 
+
   const pin =
-    document.getElementById("withdrawPin").value.trim();
-
-  const message =
-    document.getElementById("withdrawMessage");
-
-
-  if(!account){
-
-    return;
-
-  }
+    document
+      .getElementById("wp")
+      .value
+      .trim();
 
 
   if(
@@ -2061,37 +1702,37 @@ function withdraw(){
     amount <= 0
   ){
 
-    message.textContent =
-      "Enter a valid withdrawal amount.";
-
-    message.className =
-      "message message-error";
-
-    return;
-
-  }
-
-
-  if(!account.withdrawalPin){
-
-    message.textContent =
-      "Set a withdrawal PIN first.";
-
-    message.className =
-      "message message-error";
+    showMessage(
+      "wm",
+      "Enter a valid amount.",
+      false
+    );
 
     return;
 
   }
 
 
-  if(pin !== account.withdrawalPin){
+  if(!account.pin){
 
-    message.textContent =
-      "Incorrect withdrawal PIN.";
+    showMessage(
+      "wm",
+      "Set a withdrawal PIN first.",
+      false
+    );
 
-    message.className =
-      "message message-error";
+    return;
+
+  }
+
+
+  if(pin !== account.pin){
+
+    showMessage(
+      "wm",
+      "Incorrect withdrawal PIN.",
+      false
+    );
 
     return;
 
@@ -2103,20 +1744,20 @@ function withdraw(){
     Number(account.balance || 0)
   ){
 
-    message.textContent =
-      "Insufficient balance.";
-
-    message.className =
-      "message message-error";
+    showMessage(
+      "wm",
+      "Insufficient balance.",
+      false
+    );
 
     return;
 
   }
 
 
-  if(!Array.isArray(account.pendingWithdrawals)){
+  if(!Array.isArray(account.pending)){
 
-    account.pendingWithdrawals = [];
+    account.pending = [];
 
   }
 
@@ -2129,7 +1770,8 @@ function withdraw(){
 
 
   account.balance =
-    Number(account.balance || 0) - amount;
+    Number(account.balance || 0) -
+    amount;
 
 
   const withdrawal = {
@@ -2142,12 +1784,13 @@ function withdraw(){
 
     status:"Pending",
 
-    date:new Date().toLocaleString()
+    date:new Date()
+      .toLocaleString()
 
   };
 
 
-  account.pendingWithdrawals.unshift(
+  account.pending.unshift(
     withdrawal
   );
 
@@ -2157,43 +1800,42 @@ function withdraw(){
   );
 
 
-  saveAccount(account);
+  save(account);
 
 
-  document.getElementById("withdrawAmount").value =
+  document
+    .getElementById("wa")
+    .value =
     "";
 
-  document.getElementById("withdrawPin").value =
+
+  document
+    .getElementById("wp")
+    .value =
     "";
 
 
-  message.textContent =
-    "Withdrawal request submitted and marked pending.";
+  showMessage(
+    "wm",
+    "Withdrawal request submitted and marked pending.",
+    true
+  );
 
-  message.className =
-    "message message-success";
 
-
-  updateBalance();
-
-  renderTransactions();
-
-  renderPendingWithdrawals();
-
-  toast("Withdrawal request submitted");
+  render();
 
 }
 
 
-/* PENDING */
-
-function renderPendingWithdrawals(){
+function renderPending(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const list =
-    document.getElementById("pendingList");
+    document
+      .getElementById("pendingList");
 
 
   list.innerHTML =
@@ -2202,40 +1844,41 @@ function renderPendingWithdrawals(){
 
   if(
     !account ||
-    !Array.isArray(account.pendingWithdrawals) ||
-    account.pendingWithdrawals.length === 0
+    !account.pending ||
+    account.pending.length === 0
   ){
 
-    list.innerHTML =
-      '<div class="empty">' +
-      '<div class="empty-icon">⏳</div>' +
-      'No pending withdrawals.' +
-      '</div>';
+    list.textContent =
+      "No pending withdrawals.";
 
     return;
 
   }
 
 
-  account.pendingWithdrawals.forEach(
+  account.pending.forEach(
     function(item){
 
       const div =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
       div.className =
-        "pending";
+        "listitem";
 
 
       div.textContent =
-        "Withdrawal: $" +
-        Number(item.amount).toFixed(2) +
-        " · Pending · " +
+        "Withdrawal: " +
+        money(item.amount) +
+        " — Pending — " +
         item.date;
 
 
-      list.appendChild(div);
+      list.appendChild(
+        div
+      );
 
     }
   );
@@ -2243,15 +1886,14 @@ function renderPendingWithdrawals(){
 }
 
 
-/* TRANSACTIONS */
-
 function renderTransactions(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const list =
-    document.getElementById("transactionList");
+    document.getElementById("tx");
 
 
   list.innerHTML =
@@ -2260,73 +1902,105 @@ function renderTransactions(){
 
   if(
     !account ||
-    !Array.isArray(account.transactions) ||
+    !account.transactions ||
     account.transactions.length === 0
   ){
 
-    list.innerHTML =
-      '<div class="empty">' +
-      '<div class="empty-icon">📋</div>' +
-      'No transactions yet.' +
-      '</div>';
+    list.textContent =
+      "No transactions yet.";
 
     return;
 
   }
 
 
+  const table =
+    document.createElement(
+      "table"
+    );
+
+
+  table.innerHTML =
+    "<thead>" +
+    "<tr>" +
+    "<th>Type</th>" +
+    "<th>Amount</th>" +
+    "<th>Status</th>" +
+    "<th>Date</th>" +
+    "</tr>" +
+    "</thead>";
+
+
+  const tbody =
+    document.createElement(
+      "tbody"
+    );
+
+
   account.transactions.forEach(
     function(item){
 
       const row =
-        document.createElement("div");
-
-      row.className =
-        "transaction";
+        document.createElement(
+          "tr"
+        );
 
 
       const type =
-        document.createElement("div");
+        document.createElement(
+          "td"
+        );
+
 
       type.textContent =
         item.type;
 
-      type.className =
-        item.type === "Deposit"
-          ? "deposit-text"
-          : "withdrawal-text";
-
 
       const amount =
-        document.createElement("div");
+        document.createElement(
+          "td"
+        );
+
 
       amount.textContent =
-        "$" +
-        Number(item.amount).toFixed(2);
+        money(item.amount);
 
 
       const status =
-        document.createElement("div");
-
-      const pill =
-        document.createElement("span");
-
-      pill.className =
-        "status-pill " +
-        (
-          item.status === "Pending"
-            ? "status-pending"
-            : "status-completed"
+        document.createElement(
+          "td"
         );
 
-      pill.textContent =
+
+      const badge =
+        document.createElement(
+          "span"
+        );
+
+
+      badge.className =
+        "badge " +
+        (
+          item.status === "Pending"
+            ? "pending"
+            : ""
+        );
+
+
+      badge.textContent =
         item.status;
 
-      status.appendChild(pill);
+
+      status.appendChild(
+        badge
+      );
 
 
       const date =
-        document.createElement("div");
+        document.createElement(
+          "td"
+        );
+
 
       date.textContent =
         item.date;
@@ -2341,90 +2015,41 @@ function renderTransactions(){
       row.appendChild(date);
 
 
-      list.appendChild(row);
+      tbody.appendChild(row);
 
     }
+  );
+
+
+  table.appendChild(
+    tbody
+  );
+
+
+  list.appendChild(
+    table
   );
 
 }
 
 
-/* PROFILE */
-
-function saveProfile(){
-
-  const account =
-    getAccount();
-
-  const name =
-    document.getElementById("profileName")
-      .value
-      .trim();
-
-  const message =
-    document.getElementById("profileMessage");
-
-
-  if(!account){
-    return;
-  }
-
-
-  if(!name){
-
-    message.textContent =
-      "Please enter your name.";
-
-    message.className =
-      "message message-error";
-
-    return;
-
-  }
-
-
-  account.name =
-    name;
-
-
-  saveAccount(account);
-
-
-  document.getElementById("welcomeTitle").textContent =
-    "Welcome, " + name + " 👋";
-
-
-  document.getElementById("dashboardMessage").textContent =
-    "Welcome back, " + name + ".";
-
-
-  message.textContent =
-    "Profile saved successfully.";
-
-  message.className =
-    "message message-success";
-
-
-  toast("Profile updated");
-
-}
-
-
-/* PROJECTS */
-
 function addProject(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const input =
-    document.getElementById("projectInput");
+    document.getElementById(
+      "project"
+    );
+
 
   const name =
     input.value.trim();
 
 
-  if(!account || !name){
+  if(!name){
     return;
   }
 
@@ -2436,21 +2061,19 @@ function addProject(){
   }
 
 
-  account.projects.push(name);
+  account.projects.push(
+    name
+  );
 
 
-  saveAccount(account);
+  save(account);
 
 
   input.value =
     "";
 
 
-  renderProjects();
-
-  updateProjectCount();
-
-  toast("Project added");
+  render();
 
 }
 
@@ -2458,10 +2081,13 @@ function addProject(){
 function renderProjects(){
 
   const account =
-    getAccount();
+    acct();
+
 
   const list =
-    document.getElementById("projectList");
+    document.getElementById(
+      "projectsList"
+    );
 
 
   list.innerHTML =
@@ -2470,17 +2096,8 @@ function renderProjects(){
 
   if(
     !account ||
-    !Array.isArray(account.projects) ||
-    account.projects.length === 0
+    !account.projects
   ){
-
-    list.innerHTML =
-      '<div class="empty">' +
-      '<div class="empty-icon">📁</div>' +
-      'No projects yet.' +
-      '</div>';
-
-    updateProjectCount();
 
     return;
 
@@ -2491,33 +2108,38 @@ function renderProjects(){
     function(project,index){
 
       const item =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       item.className =
-        "project-item";
+        "listitem";
 
 
-      const name =
-        document.createElement("div");
-
-      name.className =
-        "project-name";
-
-      name.textContent =
-        project;
+      item.textContent =
+        project + " ";
 
 
-      const deleteButton =
-        document.createElement("button");
+      const button =
+        document.createElement(
+          "button"
+        );
 
-      deleteButton.className =
-        "danger";
 
-      deleteButton.textContent =
+      button.className =
+        "btn danger";
+
+
+      button.style.float =
+        "right";
+
+
+      button.textContent =
         "Delete";
 
 
-      deleteButton.onclick =
+      button.onclick =
         function(){
 
           account.projects.splice(
@@ -2525,56 +2147,83 @@ function renderProjects(){
             1
           );
 
-          saveAccount(account);
 
-          renderProjects();
+          save(account);
 
-          updateProjectCount();
-
-          toast("Project removed");
+          render();
 
         };
 
 
-      item.appendChild(name);
+      item.appendChild(
+        button
+      );
 
-      item.appendChild(deleteButton);
 
-      list.appendChild(item);
+      list.appendChild(
+        item
+      );
 
     }
   );
 
-
-  updateProjectCount();
-
 }
 
 
-function updateProjectCount(){
+function saveProfile(){
 
   const account =
-    getAccount();
+    acct();
 
 
-  const count =
-    account &&
-    Array.isArray(account.projects)
-      ? account.projects.length
-      : 0;
+  const name =
+    document
+      .getElementById("pn")
+      .value
+      .trim();
 
 
-  document.getElementById("projectCount")
+  if(!name){
+
+    showMessage(
+      "profMsg",
+      "Please enter your name.",
+      false
+    );
+
+    return;
+
+  }
+
+
+  account.name =
+    name;
+
+
+  save(account);
+
+
+  document
+    .getElementById("welcome")
     .textContent =
-    count;
+    "Welcome, " +
+    name +
+    " 👋";
+
+
+  showMessage(
+    "profMsg",
+    "Profile saved successfully.",
+    true
+  );
 
 }
 
 
-/* AUTO LOGIN */
-
 if(
-  localStorage.getItem("nexoraLoggedIn") === "true"
+  localStorage.getItem(
+    "nexoraLoggedIn"
+  ) === "1"
 ){
 
   openDashboard();
@@ -2586,11 +2235,11 @@ if(
 </body>
 </html>`;
 
-    return new Response(html,{
-      status:200,
-      headers:{
-        "content-type":"text/html; charset=UTF-8",
-        "cache-control":"no-store"
+    return new Response(html, {
+      status: 200,
+      headers: {
+        "content-type": "text/html;charset=UTF-8",
+        "cache-control": "no-store"
       }
     });
   }
