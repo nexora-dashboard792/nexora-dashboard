@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>NEXORA — Demo Account</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="auth" class="auth">
+  <div class="auth-card">
+    <div class="brand">NEXORA</div>
+    <div class="auth-badge">DEMO PLATFORM</div>
+
+    <h1 id="authTitle">Create your account</h1>
+    <p id="authSub">Set up your NEXORA demo account.</p>
+
+    <form id="authForm">
+      <input id="name" placeholder="Full name" required>
+      <input id="email" type="email" placeholder="Email address" required>
+      <input id="password" type="password" placeholder="Password" minlength="6" required>
+
+      <button class="primary full" id="authBtn">
+        Create account
+      </button>
+    </form>
+
+    <button class="switch" id="switchMode">
+      Already have an account? Login
+    </button>
+
+    <div class="demo-note">
+      Demo environment — no real money is processed.
+    </div>
+  </div>
+</div>
+
+
+<div id="app" class="hidden">
+
+  <aside class="sidebar">
+
+    <div class="brand">NEXORA</div>
+
+    <div class="demo-label">DEMO ACCOUNT</div>
+
+    <button class="nav active" onclick="showPanel('dashboard',this)">
+      ◈ Dashboard
+    </button>
+
+    <button class="nav" onclick="showPanel('wallet',this)">
+      ◇ Wallet
+    </button>
+
+    <button class="nav" onclick="showPanel('transactions',this)">
+      ≡ Transactions
+    </button>
+
+    <button class="nav" onclick="showPanel('profile',this)">
+      ◎ Profile
+    </button>
+
+    <button class="nav" onclick="showPanel('settings',this)">
+      ⚙ Settings
+    </button>
+
+    <button class="nav logout" onclick="logout()">
+      Sign out
+    </button>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header class="topbar">
+      <div>
+        <span class="eyebrow">ACCOUNT OVERVIEW</span>
+        <h2>Welcome, <span id="welcomeName"></span></h2>
+      </div>
+
+      <div class="user-pill">
+        <span class="status-dot"></span>
+        <span id="userName"></span>
+      </div>
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="panel-page active">
+
+      <div class="hero-card">
+
+        <div>
+          <span class="eyebrow light">
+            SIMULATED AVAILABLE BALANCE
+          </span>
+
+          <div class="hero-balance" id="dashboardBalance">
+            $0.00
+          </div>
+
+          <div class="hero-status">
+            ● Demo account active
+          </div>
+        </div>
+
+        <div class="hero-symbol">
+          N
+        </div>
+
+      </div>
+
+
+      <div class="stats">
+
+        <div class="stat-card">
+          <span>Balance</span>
+          <strong id="dashBalance">$0.00</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Transactions</span>
+          <strong id="transactionCount">0</strong>
+        </div>
+
+        <div class="stat-card">
+          <span>Account</span>
+          <strong class="green">Active</strong>
+        </div>
+
+      </div>
+
+
+      <div class="content-card">
+        <span class="eyebrow">OVERVIEW</span>
+        <h3>Your NEXORA account</h3>
+        <p>
+          This dashboard is a browser-based demonstration.
+          Wallet balances and transactions shown here are simulated.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- WALLET -->
+
+    <section id="wallet" class="panel-page">
+
+      <div class="page-heading">
+        <span class="eyebrow">ACCOUNT WALLET</span>
+        <h1>Wallet</h1>
+        <p>Manage your simulated demo balance.</p>
+      </div>
+
+
+      <div class="wallet-balance">
+        <span>AVAILABLE BALANCE</span>
+        <strong id="walletBalance">$0.00</strong>
+      </div>
+
+
+      <div class="two-column">
+
+        <div class="content-card">
+
+          <span class="eyebrow">DEMO DEPOSIT</span>
+
+          <h3>Add simulated funds</h3>
+
+          <p>
+            Deposits here update your demo balance only.
+          </p>
+
+          <input
+            id="depositAmount"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Enter amount"
+          >
+
+          <button class="primary" onclick="deposit()">
+            Deposit
+          </button>
+
+          <div id="depositMessage"></div>
+
+        </div>
+
+
+        <div class="content-card">
+
+          <span class="eyebrow">DEMO WITHDRAWAL</span>
+
+          <h3>Request withdrawal</h3>
+
+          <p>
+            Withdrawal requests remain simulated and pending.
+          </p>
+
+          <input
+            id="withdrawAmount"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Enter amount"
+          >
+
+          <input
+            id="withdrawPin"
+            type="password"
+            maxlength="6"
+            inputmode="numeric"
+            placeholder="Withdrawal PIN"
+          >
+
+          <button class="primary" onclick="withdraw()">
+            Request withdrawal
+          </button>
+
+          <div id="withdrawMessage"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="content-card">
+
+        <span class="eyebrow">SECURITY</span>
+
+        <h3>Withdrawal PIN</h3>
+
+        <p>
+          Set a 4–6 digit PIN for simulated withdrawals.
+        </p>
+
+        <input
+          id="newPin"
+          type="password"
+          maxlength="6"
+          inputmode="numeric"
+          placeholder="4–6 digit PIN"
+        >
+
+        <button class="secondary" onclick="setWithdrawalPin()">
+          Save PIN
+        </button>
+
+        <div id="pinMessage"></div>
+
+      </div>
+
+
+      <div class="content-card">
+
+        <span class="eyebrow">PENDING</span>
+
+        <h3>Pending withdrawals</h3>
+
+        <div id="pendingList">
+          No pending withdrawals.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRANSACTIONS -->
+
+    <section id="transactions" class="panel-page">
+
+      <div class="page-heading">
+        <span class="eyebrow">ACCOUNT ACTIVITY</span>
+        <h1>Transactions</h1>
+        <p>Your simulated account activity.</p>
+      </div>
+
+      <div class="content-card">
+        <div id="transactionList">
+          No transactions yet.
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section id="profile" class="panel-page">
+
+      <div class="page-heading">
+        <span class="eyebrow">PERSONAL DETAILS</span>
+        <h1>Profile</h1>
+      </div>
+
+      <div class="content-card">
+
+        <input id="settingsName" placeholder="Full name">
+
+        <input id="settingsEmail" type="email" placeholder="Email">
+
+        <button class="primary" onclick="saveSettings()">
+          Save changes
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- SETTINGS -->
+
+    <section id="settings" class="panel-page">
+
+      <div class="page-heading">
+        <span class="eyebrow">PREFERENCES</span>
+        <h1>Settings</h1>
+      </div>
+
+      <div class="content-card">
+
+        <h3>Demo account</h3>
+
+        <p>
+          NEXORA is currently operating as a browser-only demonstration.
+          No real financial transactions are processed.
+        </p>
+
+        <button class="danger" onclick="logout()">
+          Sign out
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>
