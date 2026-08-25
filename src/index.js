@@ -1,1931 +1,272 @@
-export default {
-  async fetch(request) {
-    const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#070b12">
-<title>NEXORA — Premium Account Demo</title>
-
-<style>
-*{box-sizing:border-box}
-
-:root{
-  --bg:#070b12;
-  --bg2:#0b111b;
-  --card:#0e1622;
-  --card2:#111c2b;
-  --line:rgba(255,255,255,.075);
-  --text:#f5f7fb;
-  --muted:#8492a6;
-  --blue:#6c8cff;
-  --cyan:#51d8ff;
-  --green:#42d59b;
-  --yellow:#f2bd63;
-  --red:#ff6b7d;
-}
-
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  color:var(--text);
-  background:
-    radial-gradient(circle at 8% 0%,rgba(81,216,255,.09),transparent 26%),
-    radial-gradient(circle at 92% 8%,rgba(108,140,255,.12),transparent 30%),
-    linear-gradient(145deg,#070b12,#09111c 55%,#060a10);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.12;
-  background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-  background-size:44px 44px;
-}
-
-button,input{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-/* AUTH */
-
-#auth{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
-}
-
-.auth-card{
-  width:100%;
-  max-width:450px;
-  padding:38px;
-  border:1px solid var(--line);
-  border-radius:26px;
-  background:linear-gradient(145deg,#101b2a,#080e17);
-  box-shadow:0 35px 100px rgba(0,0,0,.55);
-}
-
-.brand{
-  font-size:27px;
-  font-weight:950;
-  letter-spacing:5px;
-}
-
-.brand span{color:var(--cyan)}
-
-.auth-card h1{
-  margin:48px 0 8px;
-  font-size:30px;
-  letter-spacing:-.7px;
-}
-
-.auth-card p{
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.input{
-  width:100%;
-  padding:14px;
-  margin:7px 0;
-  color:white;
-  background:#07101b;
-  border:1px solid var(--line);
-  border-radius:11px;
-  outline:none;
-}
-
-.input:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(108,140,255,.12);
-}
-
-.primary{
-  width:100%;
-  margin-top:12px;
-  padding:14px;
-  border:0;
-  border-radius:11px;
-  color:white;
-  font-weight:850;
-  background:linear-gradient(135deg,#718cff,#4d72e9);
-}
-
-.switch{
-  margin-top:20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.switch button{
-  border:0;
-  background:none;
-  color:var(--cyan);
-  font-weight:800;
-}
-
-/* APP */
-
-#app{min-height:100vh}
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:30;
-  height:74px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 5vw;
-  border-bottom:1px solid var(--line);
-  background:rgba(7,11,18,.84);
-  backdrop-filter:blur(22px);
-}
-
-.logo{
-  font-size:23px;
-  font-weight:950;
-  letter-spacing:4px;
-}
-
-.logo span{color:var(--cyan)}
-
-.header-nav{
-  display:flex;
-  align-items:center;
-  gap:25px;
-}
-
-.header-nav button{
-  border:0;
-  background:none;
-  color:#8795a8;
-  font-size:12px;
-  font-weight:700;
-}
-
-.header-nav button:hover{color:white}
-
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:15px;
-}
-
-.demo-pill{
-  padding:7px 10px;
-  border:1px solid rgba(242,189,99,.15);
-  border-radius:20px;
-  color:var(--yellow);
-  background:rgba(242,189,99,.05);
-  font-size:9px;
-  font-weight:900;
-}
-
-.avatar{
-  width:35px;
-  height:35px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:linear-gradient(135deg,#6c8cff,#51d8ff);
-  font-size:12px;
-  font-weight:950;
-}
-
-/* HERO */
-
-.hero{
-  max-width:1250px;
-  margin:auto;
-  padding:70px 25px 45px;
-  text-align:center;
-}
-
-.hero-kicker{
-  display:inline-block;
-  padding:7px 12px;
-  border:1px solid rgba(81,216,255,.13);
-  border-radius:20px;
-  color:var(--cyan);
-  background:rgba(81,216,255,.045);
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1.5px;
-}
-
-.hero h1{
-  max-width:850px;
-  margin:20px auto 12px;
-  font-size:clamp(40px,6vw,72px);
-  line-height:.98;
-  letter-spacing:-3px;
-}
-
-.gradient{
-  background:linear-gradient(90deg,#fff,#8bdfff,#778eff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:620px;
-  margin:0 auto;
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
-}
-
-.hero-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:27px;
-}
-
-.hero-button{
-  padding:12px 20px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:#111b29;
-  color:white;
-  font-weight:800;
-  font-size:11px;
-}
-
-.hero-button.primary-button{
-  border-color:#617fff;
-  background:#617fff;
-}
-
-/* MARKET */
-
-.main{
-  max-width:1250px;
-  margin:auto;
-  padding:0 25px 70px;
-}
-
-.section-label{
-  margin:30px 0 13px;
-  color:#73849a;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1.7px;
-}
-
-.market{
-  display:grid;
-  grid-template-columns:1fr 2fr;
-  gap:16px;
-}
-
-.market-card,
-.chart-card,
-.account-card,
-.plan,
-.wallet-card,
-.security-card,
-.transactions{
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:linear-gradient(145deg,rgba(17,27,42,.9),rgba(10,16,25,.9));
-}
-
-.market-card{
-  padding:23px;
-}
-
-.market-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.coin{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-
-.coin-icon{
-  width:39px;
-  height:39px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:rgba(108,140,255,.1);
-  color:#8fa6ff;
-  font-weight:950;
-}
-
-.coin-name{
-  font-size:13px;
-  font-weight:850;
-}
-
-.coin-symbol{
-  margin-top:3px;
-  color:var(--muted);
-  font-size:9px;
-}
-
-.market-price{
-  margin-top:28px;
-  font-size:31px;
-  font-weight:950;
-}
-
-.market-change{
-  margin-top:6px;
-  color:var(--green);
-  font-size:11px;
-  font-weight:850;
-}
-
-.market-note{
-  margin-top:27px;
-  color:#65758a;
-  font-size:9px;
-}
-
-.chart-card{
-  min-height:190px;
-  padding:22px;
-  overflow:hidden;
-}
-
-.chart-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.chart-head strong{font-size:13px}
-
-.chart-tabs{
-  display:flex;
-  gap:5px;
-}
-
-.chart-tabs span{
-  padding:5px 7px;
-  border-radius:5px;
-  color:#71839a;
-  font-size:8px;
-}
-
-.chart-tabs span.active{
-  color:white;
-  background:#18263b;
-}
-
-.chart{
-  height:120px;
-  position:relative;
-  margin-top:10px;
-}
-
-.chart svg{
-  width:100%;
-  height:100%;
-}
-
-.chart-note{
-  color:#62738a;
-  font-size:8px;
-}
-
-/* ACCOUNT */
-
-.account-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-
-.account-card{
-  min-height:145px;
-  padding:21px;
-}
-
-.card-label{
-  color:#718298;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-
-.card-value{
-  margin-top:13px;
-  font-size:25px;
-  font-weight:950;
-  letter-spacing:-1px;
-}
-
-.card-sub{
-  margin-top:7px;
-  color:#64758b;
-  font-size:9px;
-}
-
-.positive{color:var(--green)}
-.pending{color:var(--yellow)}
-
-/* OVERVIEW */
-
-.overview{
-  display:grid;
-  grid-template-columns:1.55fr .75fr;
-  gap:16px;
-}
-
-.balance-chart{
-  padding:24px;
-  min-height:270px;
-}
-
-.balance-chart-head{
-  display:flex;
-  align-items:start;
-  justify-content:space-between;
-}
-
-.balance-chart h2{
-  margin:0;
-  font-size:16px;
-}
-
-.balance-chart small{
-  color:var(--muted);
-}
-
-.big-chart{
-  height:170px;
-  margin-top:22px;
-}
-
-.big-chart svg{
-  width:100%;
-  height:100%;
-}
-
-.weeks{
-  display:flex;
-  justify-content:space-between;
-  color:#5e7086;
-  font-size:8px;
-}
-
-/* STATUS */
-
-.status-card{
-  padding:24px;
-}
-
-.status-card h2{
-  margin:0 0 20px;
-  font-size:16px;
-}
-
-.status-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.status-active{
-  color:var(--green);
-  font-size:11px;
-  font-weight:900;
-}
-
-.progress{
-  height:7px;
-  margin-top:20px;
-  overflow:hidden;
-  border-radius:10px;
-  background:#182333;
-}
-
-.progress div{
-  width:80%;
-  height:100%;
-  background:linear-gradient(90deg,#51d8ff,#6c8cff);
-  border-radius:10px;
-}
-
-.profile-percent{
-  margin-top:8px;
-  color:#76879c;
-  font-size:9px;
-}
-
-/* PLANS */
-
-.plans{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-}
-
-.plan{
-  padding:23px;
-  position:relative;
-  overflow:hidden;
-}
-
-.plan.popular{
-  border-color:rgba(108,140,255,.35);
-  box-shadow:0 20px 55px rgba(52,83,180,.10);
-}
-
-.popular-label{
-  position:absolute;
-  top:14px;
-  right:14px;
-  padding:5px 7px;
-  border-radius:5px;
-  background:#617fff;
-  color:white;
-  font-size:7px;
-  font-weight:900;
-}
-
-.plan-name{
-  color:#78899e;
-  font-size:9px;
-  font-weight:900;
-  letter-spacing:1px;
-}
-
-.plan-price{
-  margin-top:12px;
-  font-size:28px;
-  font-weight:950;
-}
-
-.plan p{
-  min-height:38px;
-  color:#718198;
-  font-size:10px;
-  line-height:1.6;
-}
-
-.plan-button{
-  width:100%;
-  padding:10px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  color:white;
-  background:#121e2d;
-  font-size:9px;
-  font-weight:850;
-}
-
-/* PENDING */
-
-.pending-box{
-  margin-top:15px;
-  padding:17px;
-  border:1px solid rgba(242,189,99,.14);
-  border-radius:12px;
-  background:rgba(242,189,99,.035);
-}
-
-.pending-box strong{
-  color:var(--yellow);
-  font-size:10px;
-}
-
-.pending-box p{
-  margin:7px 0 0;
-  color:#77889d;
-  font-size:9px;
-  line-height:1.5;
-}
-
-/* WALLET */
-
-.wallet-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.wallet-card{
-  padding:24px;
-}
-
-.wallet-balance{
-  margin-top:13px;
-  font-size:38px;
-  font-weight:950;
-}
-
-.wallet-actions{
-  display:flex;
-  gap:8px;
-  margin-top:25px;
-}
-
-.wallet-action{
-  flex:1;
-  padding:11px;
-  border-radius:9px;
-  border:1px solid var(--line);
-  color:white;
-  background:#121d2b;
-  font-size:10px;
-  font-weight:850;
-}
-
-.wallet-action.main{
-  background:#617fff;
-  border-color:#617fff;
-}
-
-/* TRANSACTIONS */
-
-.transactions{
-  padding:23px;
-}
-
-.table{
-  width:100%;
-  border-collapse:collapse;
-}
-
-.table th{
-  padding:11px 8px;
-  text-align:left;
-  color:#5f7086;
-  font-size:8px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.table td{
-  padding:15px 8px;
-  border-top:1px solid var(--line);
-  color:#d5dce5;
-  font-size:10px;
-}
-
-.complete{
-  color:var(--green);
-  font-weight:850;
-}
-
-.pending-status{
-  color:var(--yellow);
-  font-weight:850;
-}
-
-/* SECURITY */
-
-.security{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-
-.security-card{
-  padding:24px;
-}
-
-.security-icon{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  background:rgba(81,216,255,.08);
-  color:var(--cyan);
-  font-size:19px;
-}
-
-.security-card h2{
-  margin:15px 0 7px;
-  font-size:15px;
-}
-
-.security-card p{
-  color:#718298;
-  font-size:10px;
-  line-height:1.7;
-}
-
-.security-button{
-  padding:10px 14px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  color:white;
-  background:#121d2b;
-  font-size:9px;
-  font-weight:850;
-}
-
-/* FOOTER */
-
-.footer{
-  max-width:1250px;
-  margin:0 auto;
-  padding:30px 25px 60px;
-  color:#526277;
-  text-align:center;
-  font-size:9px;
-  line-height:1.7;
-}
-
-/* MODAL */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.72);
-  backdrop-filter:blur(8px);
-}
-
-.modal.show{display:flex}
-
-.modal-box{
-  width:100%;
-  max-width:440px;
-  padding:28px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:#0e1826;
-  box-shadow:0 30px 90px rgba(0,0,0,.6);
-}
-
-.modal-box h2{
-  margin:0 35px 8px 0;
-}
-
-.modal-box p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.7;
-}
-
-.modal-input{
-  width:100%;
-  padding:13px;
-  color:white;
-  background:#07101b;
-  border:1px solid var(--line);
-  border-radius:9px;
-  outline:none;
-}
-
-.modal-button{
-  width:100%;
-  margin-top:10px;
-  padding:12px;
-  border:0;
-  border-radius:9px;
-  color:white;
-  background:#617fff;
-  font-weight:850;
-}
-
-.close{
-  float:right;
-  border:0;
-  background:none;
-  color:#8796a9;
-  font-size:24px;
-}
-
-/* MOBILE */
-
-@media(max-width:1000px){
-  .header-nav{display:none}
-  .account-grid{grid-template-columns:repeat(2,1fr)}
-  .market,
-  .overview,
-  .wallet-grid,
-  .security{grid-template-columns:1fr}
-}
-
-@media(max-width:700px){
-  .header{
-    padding:0 16px;
-  }
-
-  .hero{
-    padding-top:45px;
-  }
-
-  .hero h1{
-    letter-spacing:-2px;
-  }
-
-  .main{
-    padding-left:14px;
-    padding-right:14px;
-  }
-
-  .account-grid,
-  .plans{
-    grid-template-columns:1fr;
-  }
-
-  .hero-actions{
-    flex-direction:column;
-  }
-
-  .hero-button{
-    width:100%;
-  }
-
-  .wallet-actions{
-    flex-direction:column;
-  }
-
-  .table{
-    min-width:600px;
-  }
-
-  .transactions{
-    overflow-x:auto;
-  }
-
-  .demo-pill{
-    display:none;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<div id="auth">
-
-  <div class="auth-card">
-
-    <div class="brand">
-      NEX<span>ORA</span>
-    </div>
-
-    <h1 id="authTitle">Create your account</h1>
-
-    <p id="authSub">
-      Set up your NEXORA demonstration account.
-    </p>
-
-    <form id="authForm">
-
-      <input
-        id="name"
-        class="input"
-        placeholder="Full name"
-        required
-      >
-
-      <input
-        id="email"
-        class="input"
-        type="email"
-        placeholder="Email address"
-        required
-      >
-
-      <input
-        id="password"
-        class="input"
-        type="password"
-        placeholder="Password"
-        required
-      >
-
-      <button
-        class="primary"
-        id="authButton"
-        type="submit"
-      >
-        Create account
-      </button>
-
-    </form>
-
-    <div class="switch">
-      <span id="switchLabel">Already have an account?</span>
-      <button id="switchMode" type="button">Login</button>
-    </div>
-
-  </div>
-
-</div>
-
-
-<div id="app" class="hidden">
-
-  <header class="header">
-
-    <div class="logo">
-      NEX<span>ORA</span>
-    </div>
-
-    <nav class="header-nav">
-      <button onclick="scrollToId('dashboard')">Dashboard</button>
-      <button onclick="scrollToId('plans')">Plans</button>
-      <button onclick="scrollToId('wallet')">Wallet</button>
-      <button onclick="scrollToId('transactions')">Activity</button>
-    </nav>
-
-    <div class="header-right">
-
-      <div class="demo-pill">
-        DEMO ENVIRONMENT
-      </div>
-
-      <div class="avatar" id="avatar">
-        N
-      </div>
-
-      <button
-        onclick="logout()"
-        style="border:0;background:none;color:#77869a;font-size:10px"
-      >
-        Sign out
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <section id="dashboard" class="hero">
-
-    <div class="hero-kicker">
-      PREMIUM ACCOUNT EXPERIENCE
-    </div>
-
-    <h1>
-      Mine &amp; <span class="gradient">Invest</span>
-    </h1>
-
-    <p>
-      Explore a premium crypto-account experience with a
-      clean, modern dashboard designed for demonstration
-      and product prototyping.
-    </p>
-
-    <div class="hero-actions">
-
-      <button
-        class="hero-button primary-button"
-        onclick="scrollToId('plans')"
-      >
-        Explore Plans →
-      </button>
-
-      <button
-        class="hero-button"
-        onclick="scrollToId('wallet')"
-      >
-        Open Wallet
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <main class="main">
-
-    <div class="section-label">
-      MARKET PREVIEW
-    </div>
-
-    <section class="market">
-
-      <div class="market-card">
-
-        <div class="market-top">
-
-          <div class="coin">
-
-            <div class="coin-icon">
-              Ξ
-            </div>
-
-            <div>
-              <div class="coin-name">Ethereum</div>
-              <div class="coin-symbol">ETH / USDT</div>
-            </div>
-
-          </div>
-
-          <span class="positive">24/7</span>
-
-        </div>
-
-        <div class="market-price">$—</div>
-
-        <div class="market-change">
-          +0.00%
-        </div>
-
-        <div class="market-note">
-          Demo market data
-        </div>
-
-      </div>
-
-
-      <div class="chart-card">
-
-        <div class="chart-head">
-
-          <strong>ETH / USDT</strong>
-
-          <div class="chart-tabs">
-            <span class="active">1m</span>
-            <span>5m</span>
-            <span>15m</span>
-            <span>1H</span>
-            <span>4H</span>
-          </div>
-
-        </div>
-
-        <div class="chart">
-
-          <svg viewBox="0 0 800 120" preserveAspectRatio="none">
-
-            <defs>
-              <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#6c8cff" stop-opacity=".24"/>
-                <stop offset="100%" stop-color="#6c8cff" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-
-            <path
-              d="M0 91
-                 C55 82 72 96 118 78
-                 S180 65 220 75
-                 S282 44 330 57
-                 S390 68 430 42
-                 S490 52 535 31
-                 S600 52 645 35
-                 S710 46 760 19
-                 S785 25 800 12
-                 L800 120 L0 120 Z"
-              fill="url(#area)"
-            />
-
-            <path
-              d="M0 91
-                 C55 82 72 96 118 78
-                 S180 65 220 75
-                 S282 44 330 57
-                 S390 68 430 42
-                 S490 52 535 31
-                 S600 52 645 35
-                 S710 46 760 19
-                 S785 25 800 12"
-              fill="none"
-              stroke="#6c8cff"
-              stroke-width="2.5"
-            />
-
-          </svg>
-
-        </div>
-
-        <div class="chart-note">
-          Illustrative chart — not live market data.
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <div class="section-label">
-      ACCOUNT
-    </div>
-
-    <div class="account-grid">
-
-      <div class="account-card">
-
-        <div class="card-label">Total Balance</div>
-
-        <div class="card-value">
-          $3,240.75
-        </div>
-
-        <div class="card-sub">
-          Demo balance
-        </div>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="card-label">Total Earnings</div>
-
-        <div class="card-value">
-          $1,240.50
-        </div>
-
-        <div class="card-sub positive">
-          +8.2% · Example data
-        </div>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="card-label">Active Plans</div>
-
-        <div class="card-value">
-          2
-        </div>
-
-        <div class="card-sub">
-          Example data
-        </div>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="card-label">Referral Earnings</div>
-
-        <div class="card-value">
-          $320.25
-        </div>
-
-        <div class="card-sub positive">
-          +4.1% · Example data
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="section-label">
-      OVERVIEW
-    </div>
-
-    <section class="overview">
-
-      <div class="chart-card balance-chart">
-
-        <div class="balance-chart-head">
-
-          <div>
-            <h2>Balance overview</h2>
-            <small>Illustrative demo history</small>
-          </div>
-
-          <span class="demo-pill">DEMO</span>
-
-        </div>
-
-        <div class="big-chart">
-
-          <svg viewBox="0 0 900 170" preserveAspectRatio="none">
-
-            <defs>
-              <linearGradient id="balanceArea" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stop-color="#51d8ff" stop-opacity=".20"/>
-                <stop offset="100%" stop-color="#51d8ff" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-
-            <path
-              d="M0 145
-                 C70 138 95 119 155 128
-                 S230 96 285 107
-                 S360 83 415 91
-                 S485 59 535 72
-                 S605 44 655 54
-                 S735 27 790 38
-                 S855 17 900 23
-                 L900 170 L0 170 Z"
-              fill="url(#balanceArea)"
-            />
-
-            <path
-              d="M0 145
-                 C70 138 95 119 155 128
-                 S230 96 285 107
-                 S360 83 415 91
-                 S485 59 535 72
-                 S605 44 655 54
-                 S735 27 790 38
-                 S855 17 900 23"
-              fill="none"
-              stroke="#51d8ff"
-              stroke-width="2.5"
-            />
-
-          </svg>
-
-        </div>
-
-        <div class="weeks">
-          <span>Week 1</span>
-          <span>Week 2</span>
-          <span>Week 3</span>
-          <span>Week 4</span>
-        </div>
-
-      </div>
-
-
-      <div class="status-card market-card">
-
-        <h2>Account status</h2>
-
-        <div class="status-top">
-
-          <span>Profile ready</span>
-
-          <span class="status-active">
-            Active
-          </span>
-
-        </div>
-
-        <div class="progress">
-          <div></div>
-        </div>
-
-        <div class="profile-percent">
-          Profile setup · 80%
-        </div>
-
-        <div class="pending-box">
-
-          <strong>
-            Demo account
-          </strong>
-
-          <p>
-            Your demonstration profile is ready for
-            future backend integration.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <div id="plans" class="section-label">
-      PLANS
-    </div>
-
-    <section class="plans">
-
-      <div class="plan">
-
-        <div class="plan-name">STARTER</div>
-
-        <div class="plan-price">$100</div>
-
-        <p>
-          Basic access and account tools.
-        </p>
-
-        <button
-          class="plan-button"
-          onclick="demoPlan('Starter')"
-        >
-          View plan
-        </button>
-
-      </div>
-
-
-      <div class="plan popular">
-
-        <div class="popular-label">
-          POPULAR
-        </div>
-
-        <div class="plan-name">STANDARD</div>
-
-        <div class="plan-price">$500</div>
-
-        <p>
-          Expanded features and reporting.
-        </p>
-
-        <button
-          class="plan-button"
-          onclick="demoPlan('Standard')"
-        >
-          View plan
-        </button>
-
-      </div>
-
-
-      <div class="plan">
-
-        <div class="plan-name">ADVANCED</div>
-
-        <div class="plan-price">$1,000</div>
-
-        <p>
-          Advanced account controls.
-        </p>
-
-        <button
-          class="plan-button"
-          onclick="demoPlan('Advanced')"
-        >
-          View plan
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <div class="pending-box" style="margin-top:16px">
-
-      <strong>
-        DEMONSTRATION NOTICE
-      </strong>
-
-      <p>
-        These plans are interface examples only. No real
-        financial products, investment returns, payments,
-        mining, or investment activity are provided.
-      </p>
-
-    </div>
-
-
-    <div id="wallet" class="section-label">
-      WALLET
-    </div>
-
-    <section class="wallet-grid">
-
-      <div class="wallet-card">
-
-        <div class="card-label">
-          Your Wallet
-        </div>
-
-        <div class="wallet-balance">
-          $3,240.75
-        </div>
-
-        <div class="card-sub">
-          Demo wallet balance
-        </div>
-
-        <div class="wallet-actions">
-
-          <button
-            class="wallet-action main"
-            onclick="demoWallet('Deposit')"
-          >
-            Deposit
-          </button>
-
-          <button
-            class="wallet-action"
-            onclick="demoWallet('Withdraw')"
-          >
-            Withdraw
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="wallet-card">
-
-        <div class="card-label">
-          Pending activity
-        </div>
-
-        <div style="margin-top:15px;font-size:18px;font-weight:900">
-          Withdrawal
-        </div>
-
-        <div class="pending" style="margin-top:8px">
-          $150.00 · Pending
-        </div>
-
-        <div class="card-sub" style="margin-top:12px">
-          Aug 17, 2026 · Demonstration transaction
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <div id="transactions" class="section-label">
-      ACTIVITY
-    </div>
-
-    <section class="transactions">
-
-      <h3 style="margin:0 0 15px;font-size:16px">
-        Transactions
-      </h3>
-
-      <div style="color:#718198;font-size:10px;margin-bottom:14px">
-        Recent demo activity.
-      </div>
-
-      <table class="table">
-
-        <thead>
-
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Amount</th>
-          </tr>
-
-        </thead>
-
-        <tbody>
-
-          <tr>
-            <td>Aug 18, 2026</td>
-            <td>Deposit</td>
-            <td class="complete">Completed</td>
-            <td class="positive">+$200.00</td>
-          </tr>
-
-          <tr>
-            <td>Aug 17, 2026</td>
-            <td>Withdrawal</td>
-            <td class="pending-status">Pending</td>
-            <td class="pending">-$150.00</td>
-          </tr>
-
-          <tr>
-            <td>Aug 16, 2026</td>
-            <td>Account bonus</td>
-            <td class="complete">Completed</td>
-            <td class="positive">+$10.00</td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </section>
-
-
-    <div class="section-label">
-      SECURITY
-    </div>
-
-    <section class="security">
-
-      <div class="security-card">
-
-        <div class="security-icon">
-          ◇
-        </div>
-
-        <h2>
-          Two-factor authentication
-        </h2>
-
-        <p>
-          A production version should use server-side
-          authentication, hashed passwords, secure sessions,
-          and optional 2FA.
-        </p>
-
-        <button
-          class="security-button"
-          onclick="demoSecurity()"
-        >
-          Set up 2FA
-        </button>
-
-      </div>
-
-
-      <div class="security-card">
-
-        <div class="security-icon">
-          ✓
-        </div>
-
-        <h2>
-          Demo protection
-        </h2>
-
-        <p>
-          This browser-only prototype stores demonstration
-          account information locally and does not provide
-          production financial authentication.
-        </p>
-
-        <button
-          class="security-button"
-          onclick="demoSecurity()"
-        >
-          Security details
-        </button>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <footer class="footer">
-
-    NEXORA demonstration interface.
-    No real financial products, returns, payments,
-    deposits, withdrawals, mining, or investment activity
-    are provided by this prototype.
-
-  </footer>
-
-</div>
-
-
-<div
-  id="modal"
-  class="modal"
-  onclick="modalBackground(event)"
->
-
-  <div class="modal-box">
-
-    <button
-      class="close"
-      onclick="closeModal()"
-    >
-      ×
-    </button>
-
-    <h2 id="modalTitle">
-      Demo action
-    </h2>
-
-    <p id="modalText">
-      This is a demonstration interface only.
-      No real financial transaction will occur.
-    </p>
-
-    <input
-      id="modalAmount"
-      class="modal-input"
-      type="number"
-      min="0"
-      step="0.01"
-      placeholder="Demo amount"
-    >
-
-    <button
-      class="modal-button"
-      onclick="demoAction()"
-    >
-      Continue in Demo
-    </button>
-
-  </div>
-
-</div>
-
-
-<script>
-const KEY="nexora_premium_demo_account";
-
-let loginMode=false;
-
-function $(id){
-  return document.getElementById(id);
-}
-
-function getAccount(){
-  try{
-    return JSON.parse(
-      localStorage.getItem(KEY)||"null"
-    );
-  }catch(e){
-    return null;
-  }
-}
-
-function saveAccount(account){
-  localStorage.setItem(
-    KEY,
-    JSON.stringify(account)
-  );
-}
-
-function updateAuthMode(){
-
-  $("authTitle").textContent=
-    loginMode
-      ?"Welcome back"
-      :"Create your account";
-
-  $("authSub").textContent=
-    loginMode
-      ?"Login to your NEXORA demonstration account."
-      :"Set up your NEXORA demonstration account.";
-
-  $("authButton").textContent=
-    loginMode
-      ?"Login"
-      :"Create account";
-
-  $("switchLabel").textContent=
-    loginMode
-      ?"New here?"
-      :"Already have an account?";
-
-  $("switchMode").textContent=
-    loginMode
-      ?"Create account"
-      :"Login";
-
-  $("name").style.display=
-    loginMode
-      ?"none"
-      :"block";
-
-  $("name").required=!loginMode;
-}
-
-$("switchMode").onclick=function(){
-
-  loginMode=!loginMode;
-
-  updateAuthMode();
-};
-
-$("authForm").onsubmit=function(e){
-
-  e.preventDefault();
-
-  const email=
-    $("email").value.trim().toLowerCase();
-
-  const password=
-    $("password").value;
-
-  if(loginMode){
-
-    const old=getAccount();
-
-    if(
-      !old ||
-      old.email!==email ||
-      old.password!==password
-    ){
-
-      alert(
-        "Demo login failed. Use the same details used to create the demo account."
-      );
-
-      return;
+/* =========================================================
+   NEXORA AUTHENTICATION
+   Login / Signup / Session / Logout
+   ========================================================= */
+
+const Auth = {
+
+  async signup(name, email, password) {
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Unable to create account");
     }
 
-    showApp(old);
+    return data;
+  },
 
-    return;
+
+  async login(email, password) {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        password
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Invalid email or password");
+    }
+
+    return data;
+  },
+
+
+  async session() {
+    const response = await fetch("/api/auth/session", {
+      method: "GET",
+      credentials: "include"
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return await response.json();
+  },
+
+
+  async logout() {
+    await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include"
+    });
+
+    window.location.href = "/";
   }
-
-  const name=
-    $("name").value.trim();
-
-  if(!name||!email||!password){
-
-    alert("Please complete all fields.");
-
-    return;
-  }
-
-  if(password.length<6){
-
-    alert(
-      "Use at least 6 characters for the demo password."
-    );
-
-    return;
-  }
-
-  const account={
-    name:name,
-    email:email,
-    password:password,
-    createdAt:new Date().toISOString()
-  };
-
-  saveAccount(account);
-
-  showApp(account);
 };
 
-function showApp(account){
 
-  $("auth").classList.add("hidden");
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
-  $("app").classList.remove("hidden");
+async function loginUser() {
 
-  $("avatar").textContent=
-    account.name
-      .trim()
-      .charAt(0)
-      .toUpperCase()||"N";
-}
+  const email = document
+    .getElementById("loginEmail")
+    .value
+    .trim();
 
-function logout(){
+  const password = document
+    .getElementById("loginPassword")
+    .value;
 
-  localStorage.removeItem(KEY);
-
-  $("app").classList.add("hidden");
-
-  $("auth").classList.remove("hidden");
-
-  $("authForm").reset();
-
-  loginMode=false;
-
-  updateAuthMode();
-
-  window.scrollTo(0,0);
-}
-
-function scrollToId(id){
-
-  const element=$(id);
-
-  if(element){
-    element.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-  }
-}
-
-function openModal(title){
-
-  $("modalTitle").textContent=title;
-
-  $("modalAmount").value="";
-
-  $("modal").classList.add("show");
-
-  if(
-    title==="Security details"||
-    title==="Set up 2FA"
-  ){
-    $("modalAmount").style.display="none";
-  }else{
-    $("modalAmount").style.display="block";
-  }
-}
-
-function closeModal(){
-
-  $("modal").classList.remove("show");
-}
-
-function modalBackground(event){
-
-  if(event.target.id==="modal"){
-    closeModal();
-  }
-}
-
-function demoAction(){
-
-  const title=
-    $("modalTitle").textContent;
-
-  const amount=
-    $("modalAmount").value;
-
-  if(
-    ["Deposit","Withdrawal","Transfer","Withdraw"]
-      .includes(title)&&
-    !amount
-  ){
-
-    alert(
-      "Enter a demonstration amount."
-    );
-
+  if (!email || !password) {
+    alert("Please enter your email and password.");
     return;
   }
 
-  alert(
-    title+
-    " is available as a simulated interface action only."+
-    (amount
-      ?" Demo amount: $"+Number(amount).toFixed(2)
-      :"")
+  try {
+
+    await Auth.login(email, password);
+
+    window.location.href = "/dashboard";
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+}
+
+
+/* =========================================================
+   CREATE ACCOUNT
+   ========================================================= */
+
+async function createAccount() {
+
+  const name = document
+    .getElementById("signupName")
+    .value
+    .trim();
+
+  const email = document
+    .getElementById("signupEmail")
+    .value
+    .trim();
+
+  const password = document
+    .getElementById("signupPassword")
+    .value;
+
+  const confirmPassword = document
+    .getElementById("signupConfirmPassword")
+    .value;
+
+
+  if (!name || !email || !password) {
+    alert("Please complete all fields.");
+    return;
+  }
+
+
+  if (password !== confirmPassword) {
+    alert("Passwords do not match.");
+    return;
+  }
+
+
+  if (password.length < 8) {
+    alert("Password must contain at least 8 characters.");
+    return;
+  }
+
+
+  try {
+
+    await Auth.signup(
+      name,
+      email,
+      password
+    );
+
+    alert("Account created successfully.");
+
+    window.location.href = "/";
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+}
+
+
+/* =========================================================
+   PROTECT DASHBOARD
+   ========================================================= */
+
+async function protectDashboard() {
+
+  const user = await Auth.session();
+
+  if (!user) {
+    window.location.href = "/";
+    return;
+  }
+
+
+  /* Put the real user's information into the dashboard */
+
+  const nameElement =
+    document.getElementById("userName");
+
+  const emailElement =
+    document.getElementById("userEmail");
+
+
+  if (nameElement) {
+    nameElement.textContent =
+      user.name || "User";
+  }
+
+
+  if (emailElement) {
+    emailElement.textContent =
+      user.email || "";
+  }
+}
+
+
+/* =========================================================
+   LOGOUT BUTTON
+   ========================================================= */
+
+function setupLogout() {
+
+  const logoutButton =
+    document.getElementById("logoutBtn");
+
+  if (!logoutButton) {
+    return;
+  }
+
+  logoutButton.addEventListener(
+    "click",
+    async () => {
+
+      logoutButton.disabled = true;
+
+      try {
+
+        await Auth.logout();
+
+      } catch (error) {
+
+        logoutButton.disabled = false;
+
+        alert("Unable to logout.");
+
+      }
+
+    }
   );
-
-  closeModal();
 }
 
-function demoWallet(action){
 
-  openModal(action);
-
-  $("modalText").textContent=
-    action+
-    " is a simulated wallet action. No real money is deposited, withdrawn, transferred, or processed.";
-}
-
-function demoPlan(plan){
-
-  openModal(plan+" Plan");
-
-  $("modalAmount").style.display="none";
-
-  $("modalText").textContent=
-    plan+
-    " is an example plan displayed for interface prototyping. It is not a real investment or financial product.";
-}
-
-function demoSecurity(){
-
-  openModal("Security");
-
-  $("modalAmount").style.display="none";
-
-  $("modalText").textContent=
-    "This prototype demonstrates the placement of security controls. A production application would require server-side authentication, secure sessions, password hashing, and appropriate 2FA implementation.";
-}
+/* =========================================================
+   AUTO INITIALIZATION
+   ========================================================= */
 
 document.addEventListener(
-  "keydown",
-  function(e){
+  "DOMContentLoaded",
+  async () => {
 
-    if(e.key==="Escape"){
-      closeModal();
+    setupLogout();
+
+    /*
+      If this page is the dashboard,
+      make sure the user is authenticated.
+    */
+
+    if (
+      window.location.pathname === "/dashboard" ||
+      document.body.dataset.page === "dashboard"
+    ) {
+
+      await protectDashboard();
+
     }
 
   }
 );
-
-const existing=getAccount();
-
-if(existing){
-  showApp(existing);
-}else{
-  updateAuthMode();
-}
-</script>
-
-</body>
-</html>`;
-
-    return new Response(html,{
-      status:200,
-      headers:{
-        "content-type":"text/html; charset=UTF-8",
-        "cache-control":"no-store"
-      }
-    });
-  }
-};
