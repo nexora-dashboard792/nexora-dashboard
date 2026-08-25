@@ -648,7 +648,9 @@ button{cursor:pointer}
   backdrop-filter:blur(8px);
 }
 
-.modal.show{display:flex}
+.modal.show{
+  display:flex;
+}
 
 .modal-box{
   width:100%;
@@ -1055,16 +1057,15 @@ button{cursor:pointer}
             <div>
 
               <div class="card-label">
-                Total demo balance
+                Total balance
               </div>
 
               <div class="balance">
-                $1,100,000
-                <small>.00</small>
+                $<span id="balanceAmount">1100000.00</span>
               </div>
 
               <div class="balance-description">
-                Simulated account value · USD
+                Account value · USD
               </div>
 
             </div>
@@ -1104,7 +1105,7 @@ button{cursor:pointer}
         </section>
 
 
-        <!-- PENDING IS BESIDE BALANCE -->
+        <!-- PENDING -->
 
         <section class="pending-card">
 
@@ -1203,10 +1204,13 @@ button{cursor:pointer}
         <div class="stat">
 
           <div class="stat-label">
-            Demo balance
+            Balance
           </div>
 
-          <div class="stat-value">
+          <div
+            class="stat-value"
+            id="statBalance"
+          >
             $1.10M
           </div>
 
@@ -1265,89 +1269,92 @@ button{cursor:pointer}
             Recent activity
           </h2>
 
+          <div id="transactionsList">
 
-          <div class="transaction">
+            <div class="transaction">
 
-            <div class="tx-left">
+              <div class="tx-left">
 
-              <div class="tx-icon">
-                ↓
+                <div class="tx-icon">
+                  ↓
+                </div>
+
+                <div>
+
+                  <div class="tx-name">
+                    Demo deposit
+                  </div>
+
+                  <div class="tx-date">
+                    Today · 09:42
+                  </div>
+
+                </div>
+
               </div>
 
-              <div>
-
-                <div class="tx-name">
-                  Demo deposit
-                </div>
-
-                <div class="tx-date">
-                  Today · 09:42
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="tx-value green">
-              +$50,000.00
-            </div>
-
-          </div>
-
-
-          <div class="transaction">
-
-            <div class="tx-left">
-
-              <div class="tx-icon">
-                ↗
-              </div>
-
-              <div>
-
-                <div class="tx-name">
-                  Withdrawal request
-                </div>
-
-                <div class="tx-date">
-                  Today · 08:31
-                </div>
-
+              <div class="tx-value green">
+                +$50,000.00
               </div>
 
             </div>
 
-            <div class="tx-value amber">
-              $25,000.00
-            </div>
 
-          </div>
+            <div class="transaction">
 
+              <div class="tx-left">
 
-          <div class="transaction">
-
-            <div class="tx-left">
-
-              <div class="tx-icon">
-                ◆
-              </div>
-
-              <div>
-
-                <div class="tx-name">
-                  Demo account credit
+                <div class="tx-icon">
+                  ↗
                 </div>
 
-                <div class="tx-date">
-                  Yesterday · 16:20
+                <div>
+
+                  <div class="tx-name">
+                    Withdrawal request
+                  </div>
+
+                  <div class="tx-date">
+                    Today · 08:31
+                  </div>
+
                 </div>
 
               </div>
 
+              <div class="tx-value amber">
+                $25,000.00
+              </div>
+
             </div>
 
-            <div class="tx-value green">
-              +$75,000.00
+
+            <div class="transaction">
+
+              <div class="tx-left">
+
+                <div class="tx-icon">
+                  ◆
+                </div>
+
+                <div>
+
+                  <div class="tx-name">
+                    Demo account credit
+                  </div>
+
+                  <div class="tx-date">
+                    Yesterday · 16:20
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="tx-value green">
+                +$75,000.00
+              </div>
+
             </div>
 
           </div>
@@ -1416,13 +1423,12 @@ button{cursor:pointer}
     </button>
 
     <h2 id="modalTitle">
-      Demo action
+      Deposit
     </h2>
 
     <p id="modalText">
-      This is a demonstration interface. It does not
-      connect to a bank, payment processor, investment
-      service, or cryptocurrency wallet.
+      Enter the amount you want to add to your
+      local test balance.
     </p>
 
     <input
@@ -1431,14 +1437,14 @@ button{cursor:pointer}
       type="number"
       min="0"
       step="0.01"
-      placeholder="Demo amount"
+      placeholder="Enter amount"
     >
 
     <button
       class="modal-button"
       onclick="demoAction()"
     >
-      Continue in Demo
+      Continue
     </button>
 
   </div>
@@ -1447,30 +1453,51 @@ button{cursor:pointer}
 
 
 <script>
+
 const KEY="nexora_demo_account_v3";
+const BALANCE_KEY="nexora_demo_balance_v3";
 
 let loginMode=false;
+
+
+/* =========================
+   BASIC HELPERS
+========================= */
 
 function $(id){
   return document.getElementById(id);
 }
 
+
+/* =========================
+   ACCOUNT
+========================= */
+
 function getAccount(){
+
   try{
+
     return JSON.parse(
       localStorage.getItem(KEY)||"null"
     );
+
   }catch(e){
+
     return null;
+
   }
 }
 
+
 function saveAccount(account){
+
   localStorage.setItem(
     KEY,
     JSON.stringify(account)
   );
+
 }
+
 
 function createAccount(name,email,password){
 
@@ -1482,31 +1509,113 @@ function createAccount(name,email,password){
   };
 
   saveAccount(account);
+
   return account;
 }
+
+
+/* =========================
+   BALANCE
+========================= */
+
+function getBalance(){
+
+  const saved =
+    localStorage.getItem(BALANCE_KEY);
+
+  if(saved===null){
+
+    localStorage.setItem(
+      BALANCE_KEY,
+      "1100000.00"
+    );
+
+    return 1100000;
+
+  }
+
+  const value=Number(saved);
+
+  if(!Number.isFinite(value)){
+    return 1100000;
+  }
+
+  return value;
+}
+
+
+function saveBalance(balance){
+
+  localStorage.setItem(
+    BALANCE_KEY,
+    Number(balance).toFixed(2)
+  );
+
+}
+
+
+function formatMoney(amount){
+
+  return Number(amount).toLocaleString(
+    "en-US",
+    {
+      minimumFractionDigits:2,
+      maximumFractionDigits:2
+    }
+  );
+
+}
+
+
+function updateBalanceDisplay(){
+
+  const balance=getBalance();
+
+  $("balanceAmount").textContent=
+    formatMoney(balance);
+
+  $("statBalance").textContent=
+    "$"+(balance/1000000).toFixed(2)+"M";
+
+}
+
+
+/* =========================
+   APP
+========================= */
 
 function showApp(account){
 
   $("auth").classList.add("hidden");
+
   $("app").classList.remove("hidden");
 
-  $("userName").textContent=account.name;
-  $("welcomeName").textContent=account.name;
+  $("userName").textContent=
+    account.name;
 
-  const first=account.name
-    .trim()
-    .charAt(0)
-    .toUpperCase();
+  $("welcomeName").textContent=
+    account.name;
 
-  $("userName").previousElementSibling.textContent=
-    first||"N";
+  const first=
+    account.name
+      .trim()
+      .charAt(0)
+      .toUpperCase();
+
+  $("userName")
+    .previousElementSibling
+    .textContent=
+      first||"N";
+
+  updateBalanceDisplay();
+
 }
+
 
 function logout(){
 
-  localStorage.removeItem(KEY);
-
   $("app").classList.add("hidden");
+
   $("auth").classList.remove("hidden");
 
   $("authForm").reset();
@@ -1514,7 +1623,13 @@ function logout(){
   loginMode=false;
 
   updateAuthMode();
+
 }
+
+
+/* =========================
+   LOGIN / SIGNUP
+========================= */
 
 function updateAuthMode(){
 
@@ -1525,8 +1640,8 @@ function updateAuthMode(){
 
   $("authSub").textContent=
     loginMode
-      ?"Login to your NEXORA demonstration account."
-      :"Set up your NEXORA demonstration account.";
+      ?"Login to your NEXORA account."
+      :"Set up your NEXORA account.";
 
   $("authButton").textContent=
     loginMode
@@ -1548,25 +1663,34 @@ function updateAuthMode(){
       ?"none"
       :"block";
 
-  $("name").required=!loginMode;
+  $("name").required=
+    !loginMode;
+
 }
+
 
 $("switchMode").onclick=function(){
 
   loginMode=!loginMode;
 
   updateAuthMode();
+
 };
+
 
 $("authForm").onsubmit=function(event){
 
   event.preventDefault();
 
   const email=
-    $("email").value.trim().toLowerCase();
+    $("email")
+      .value
+      .trim()
+      .toLowerCase();
 
   const password=
     $("password").value;
+
 
   if(loginMode){
 
@@ -1579,30 +1703,47 @@ $("authForm").onsubmit=function(event){
     ){
 
       alert(
-        "Demo login failed. Use the same details used when creating the demo account."
+        "Login failed. Please use the same details used when creating the account."
       );
 
       return;
+
     }
 
     showApp(old);
+
     return;
+
   }
 
+
   const name=
-    $("name").value.trim();
+    $("name")
+      .value
+      .trim();
+
 
   if(!name||!email||!password){
 
-    alert("Please complete all fields.");
+    alert(
+      "Please complete all fields."
+    );
+
     return;
+
   }
+
 
   if(password.length<6){
 
-    alert("Use at least 6 characters for the demo password.");
+    alert(
+      "Use at least 6 characters for the password."
+    );
+
     return;
+
   }
+
 
   const account=
     createAccount(
@@ -1612,90 +1753,283 @@ $("authForm").onsubmit=function(event){
     );
 
   showApp(account);
+
 };
+
+
+/* =========================
+   MODAL
+========================= */
 
 function openModal(title){
 
-  $("modalTitle").textContent=title;
+  $("modalTitle").textContent=
+    title;
 
   $("modalAmount").value="";
 
+  if(title==="Deposit"){
+
+    $("modalText").textContent=
+      "Enter an amount to add to your local test balance.";
+
+    $("modalAmount").placeholder=
+      "Enter deposit amount";
+
+  }else if(title==="Withdrawal"){
+
+    $("modalText").textContent=
+      "Enter an amount to subtract from your local test balance.";
+
+    $("modalAmount").placeholder=
+      "Enter withdrawal amount";
+
+  }else if(title==="Transfer"){
+
+    $("modalText").textContent=
+      "Enter an amount for a local test transfer.";
+
+    $("modalAmount").placeholder=
+      "Enter transfer amount";
+
+  }else{
+
+    $("modalText").textContent=
+      "This section is currently available as a user-interface test.";
+
+    $("modalAmount").placeholder=
+      "Optional amount";
+
+  }
+
   $("modal").classList.add("show");
+
 }
+
 
 function closeModal(){
 
-  $("modal").classList.remove("show");
+  $("modal")
+    .classList
+    .remove("show");
+
 }
+
 
 function modalBackground(event){
 
   if(event.target.id==="modal"){
+
     closeModal();
+
   }
+
 }
+
+
+/* =========================
+   DEPOSIT / WITHDRAW / TRANSFER
+========================= */
 
 function demoAction(){
 
   const title=
-    $("modalTitle").textContent;
+    $("modalTitle")
+      .textContent;
+
+  const rawAmount=
+    $("modalAmount")
+      .value;
 
   const amount=
-    $("modalAmount").value;
+    Number(rawAmount);
+
 
   if(
     ["Deposit","Withdrawal","Transfer"]
-      .includes(title)&&
-    !amount
+      .includes(title)
   ){
 
+    if(
+      rawAmount===""||
+      !Number.isFinite(amount)||
+      amount<=0
+    ){
+
+      alert(
+        "Please enter a valid amount."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /* DEPOSIT */
+
+  if(title==="Deposit"){
+
+    const currentBalance=
+      getBalance();
+
+    const newBalance=
+      currentBalance+amount;
+
+    saveBalance(newBalance);
+
+    updateBalanceDisplay();
+
+
     alert(
-      "Enter a demonstration amount."
+      "Deposit successful.\n\n"+
+      "Amount added: $"+
+      formatMoney(amount)+
+      "\n\n"+
+      "New balance: $"+
+      formatMoney(newBalance)
     );
 
+
+    closeModal();
+
     return;
+
   }
+
+
+  /* WITHDRAWAL */
+
+  if(title==="Withdrawal"){
+
+    const currentBalance=
+      getBalance();
+
+
+    if(amount>currentBalance){
+
+      alert(
+        "Insufficient test balance."
+      );
+
+      return;
+
+    }
+
+
+    const newBalance=
+      currentBalance-amount;
+
+    saveBalance(newBalance);
+
+    updateBalanceDisplay();
+
+
+    alert(
+      "Withdrawal recorded.\n\n"+
+      "Amount: $"+
+      formatMoney(amount)+
+      "\n\n"+
+      "Remaining balance: $"+
+      formatMoney(newBalance)
+    );
+
+
+    closeModal();
+
+    return;
+
+  }
+
+
+  /* TRANSFER */
+
+  if(title==="Transfer"){
+
+    alert(
+      "Transfer recorded for local testing.\n\n"+
+      "Amount: $"+
+      formatMoney(amount)
+    );
+
+    closeModal();
+
+    return;
+
+  }
+
+
+  /* OTHER SECTIONS */
 
   alert(
     title+
-    " recorded as a simulated demonstration action."+
-    (amount
-      ?" Amount: $"+Number(amount).toFixed(2)
-      :"")
+    " section opened."
   );
 
   closeModal();
+
 }
+
+
+/* =========================
+   ESC KEY
+========================= */
 
 document.addEventListener(
   "keydown",
   function(event){
 
     if(event.key==="Escape"){
+
       closeModal();
+
     }
 
   }
 );
 
-const existing=getAccount();
+
+/* =========================
+   START APP
+========================= */
+
+const existing=
+  getAccount();
+
 
 if(existing){
+
   showApp(existing);
+
 }else{
+
   updateAuthMode();
+
 }
+
+
+/* INITIAL BALANCE */
+
+updateBalanceDisplay();
+
 </script>
 
 </body>
 </html>`;
 
-    return new Response(html,{
-      status:200,
-      headers:{
-        "content-type":"text/html; charset=UTF-8",
-        "cache-control":"no-store"
+    return new Response(
+      html,
+      {
+        status:200,
+        headers:{
+          "content-type":
+            "text/html; charset=UTF-8",
+
+          "cache-control":
+            "no-store"
+        }
       }
-    });
+    );
   }
 };
