@@ -1,1320 +1,718 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#05070d">
-<meta name="description" content="NEXORA — premium financial dashboard prototype">
-<title>NEXORA — Premium Demo</title>
-<style>
-*{box-sizing:border-box}
-:root{
-  --bg:#05070d;
-  --bg2:#090d16;
-  --card:rgba(15,21,34,.82);
-  --line:rgba(255,255,255,.08);
-  --text:#f7f9ff;
-  --muted:#7e8ba0;
-  --blue:#7188ff;
-  --cyan:#55dcff;
-  --green:#43d7a0;
-  --gold:#f3bd62;
-  --red:#ff6c80;
-}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  color:var(--text);
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(85,220,255,.10),transparent 27%),
-    radial-gradient(circle at 90% 5%,rgba(113,136,255,.14),transparent 30%),
-    linear-gradient(145deg,#05070d,#09111d 55%,#04060b);
-  min-height:100vh;
-}
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.10;
-  background-image:
-    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
-  background-size:42px 42px;
-}
-button,input{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-button:focus-visible,input:focus-visible{
-  outline:2px solid var(--cyan);
-  outline-offset:2px;
-}
-/* AUTH */
-#auth{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
-.auth-card{
-  width:100%;
-  max-width:455px;
-  padding:38px;
-  border:1px solid var(--line);
-  border-radius:28px;
-  background:linear-gradient(145deg,rgba(17,25,40,.96),rgba(7,11,18,.96));
-  box-shadow:0 40px 120px rgba(0,0,0,.62);
-}
-.brand{
-  font-size:28px;
-  font-weight:950;
-  letter-spacing:5px;
-}
-.brand span,.logo span{color:var(--cyan)}
-.auth-card h1{
-  margin:48px 0 8px;
-  font-size:31px;
-  letter-spacing:-1px;
-}
-.auth-card p{
-  color:var(--muted);
-  line-height:1.65;
-  font-size:13px;
-}
-.input{
-  width:100%;
-  margin:7px 0;
-  padding:14px;
-  color:white;
-  background:#060c15;
-  border:1px solid var(--line);
-  border-radius:11px;
-  outline:none;
-}
-.input:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(113,136,255,.12);
-}
-.primary{
-  width:100%;
-  margin-top:12px;
-  padding:14px;
-  border:0;
-  border-radius:11px;
-  color:white;
-  font-weight:900;
-  background:linear-gradient(135deg,#778cff,#506ee7);
-}
-.switch{
-  margin-top:20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:12px;
-}
-.switch button{
-  border:0;
-  background:none;
-  color:var(--cyan);
-  font-weight:850;
-}
-/* HEADER */
-#app{min-height:100vh}
-.header{
-  position:sticky;
-  top:0;
-  z-index:30;
-  height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 5vw;
-  border-bottom:1px solid var(--line);
-  background:rgba(5,7,13,.78);
-  backdrop-filter:blur(24px);
-}
-.logo{
-  font-size:22px;
-  font-weight:950;
-  letter-spacing:4px;
-}
-.header-nav{
-  display:flex;
-  gap:24px;
-}
-.header-nav button{
-  border:0;
-  background:none;
-  color:#8491a5;
-  font-size:11px;
-  font-weight:750;
-}
-.header-nav button:hover{color:white}
-.header-right{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.demo-pill{
-  padding:6px 9px;
-  border:1px solid rgba(243,189,98,.18);
-  border-radius:20px;
-  color:var(--gold);
-  background:rgba(243,189,98,.05);
-  font-size:8px;
-  font-weight:950;
-  letter-spacing:.8px;
-}
-.avatar{
-  width:36px;
-  height:36px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:linear-gradient(135deg,#7188ff,#55dcff);
-  font-size:12px;
-  font-weight:950;
-}
-/* HERO */
-.hero{
-  max-width:1250px;
-  margin:auto;
-  padding:68px 25px 40px;
-  text-align:center;
-}
-.hero-kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  padding:7px 12px;
-  border:1px solid rgba(85,220,255,.16);
-  border-radius:30px;
-  color:var(--cyan);
-  background:rgba(85,220,255,.045);
-  font-size:8px;
-  font-weight:950;
-  letter-spacing:1.6px;
-}
-.hero-kicker:before{
-  content:"";
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--cyan);
-  box-shadow:0 0 12px var(--cyan);
-}
-.hero h1{
-  max-width:900px;
-  margin:21px auto 14px;
-  font-size:clamp(43px,7vw,78px);
-  line-height:.94;
-  letter-spacing:-4px;
-}
-.gradient{
-  background:linear-gradient(90deg,#fff,#8fe7ff,#8091ff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.hero p{
-  max-width:650px;
-  margin:auto;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.75;
-}
-.hero-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:28px;
-}
-.hero-button{
-  padding:12px 20px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  color:white;
-  background:#111a29;
-  font-size:10px;
-  font-weight:850;
-}
-.hero-button.primary-button{
-  border-color:#7188ff;
-  background:#7188ff;
-}
-/* MAIN */
-.main{
-  max-width:1250px;
-  margin:auto;
-  padding:0 25px 70px;
-}
-.section-label{
-  margin:30px 0 13px;
-  color:#6f8096;
-  font-size:8px;
-  font-weight:950;
-  letter-spacing:1.8px;
-}
-.card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:linear-gradient(145deg,rgba(17,26,42,.9),rgba(8,13,21,.9));
-  box-shadow:0 18px 60px rgba(0,0,0,.16);
-}
-/* TOP STATS */
-.stats{
-  display:grid;
-  grid-template-columns:1.35fr 1fr 1fr 1fr;
-  gap:14px;
-}
-.stat{
-  min-height:135px;
-  padding:20px;
-}
-.stat-label{
-  color:#718197;
-  font-size:8px;
-  font-weight:900;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-.stat-value{
-  margin-top:14px;
-  font-size:25px;
-  font-weight:950;
-  letter-spacing:-1px;
-}
-.stat-sub{
-  margin-top:7px;
-  color:#64758a;
-  font-size:9px;
-}
-.positive{color:var(--green)}
-.pending{color:var(--gold)}
-/* MARKET */
-.market{
-  display:grid;
-  grid-template-columns:1fr 2fr;
-  gap:14px;
-}
-.market-card{padding:22px}
-.coin{
-  display:flex;
-  align-items:center;
-  gap:11px;
-}
-.coin-icon{
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  color:#9aacff;
-  background:rgba(113,136,255,.11);
-  font-weight:950;
-}
-.coin-name{
-  font-size:13px;
-  font-weight:900;
-}
-.coin-symbol{
-  margin-top:3px;
-  color:#718197;
-  font-size:9px;
-}
-.market-price{
-  margin-top:26px;
-  font-size:30px;
-  font-weight:950;
-}
-.market-change{
-  margin-top:5px;
-  color:var(--green);
-  font-size:10px;
-  font-weight:850;
-}
-.market-note{
-  margin-top:25px;
-  color:#5f7187;
-  font-size:8px;
-}
-.chart-card{
-  min-height:185px;
-  padding:21px;
-  overflow:hidden;
-}
-.chart-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-.chart-head strong{font-size:12px}
-.chart-tabs{
-  display:flex;
-  gap:4px;
-}
-.chart-tabs span{
-  padding:5px 7px;
-  border-radius:5px;
-  color:#687a90;
-  font-size:7px;
-}
-.chart-tabs span.active{
-  color:white;
-  background:#18263b;
-}
-.chart{
-  height:116px;
-  margin-top:9px;
-}
-.chart svg,.big-chart svg{
-  width:100%;
-  height:100%;
-}
-.chart-note{
-  color:#5e7086;
-  font-size:8px;
-}
-/* OVERVIEW */
-.overview{
-  display:grid;
-  grid-template-columns:1.5fr .8fr;
-  gap:14px;
-}
-.balance-chart{
-  padding:23px;
-  min-height:270px;
-}
-.balance-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-}
-.balance-head h2{
-  margin:0;
-  font-size:16px;
-}
-.balance-head small{
-  color:var(--muted);
-}
-.big-chart{
-  height:165px;
-  margin-top:22px;
-}
-.weeks{
-  display:flex;
-  justify-content:space-between;
-  color:#607289;
-  font-size:8px;
-}
-.status-card{padding:23px}
-.status-card h2{
-  margin:0 0 20px;
-  font-size:16px;
-}
-.status-top{
-  display:flex;
-  justify-content:space-between;
-}
-.status-active{
-  color:var(--green);
-  font-size:10px;
-  font-weight:900;
-}
-.progress{
-  height:7px;
-  margin-top:20px;
-  border-radius:10px;
-  overflow:hidden;
-  background:#172234;
-}
-.progress div{
-  width:82%;
-  height:100%;
-  border-radius:10px;
-  background:linear-gradient(90deg,var(--cyan),var(--blue));
-}
-.profile-percent{
-  margin-top:8px;
-  color:#72839a;
-  font-size:8px;
-}
-.notice{
-  margin-top:20px;
-  padding:14px;
-  border:1px solid rgba(243,189,98,.14);
-  border-radius:11px;
-  background:rgba(243,189,98,.035);
-}
-.notice strong{
-  color:var(--gold);
-  font-size:9px;
-}
-.notice p{
-  margin:6px 0 0;
-  color:#74859a;
-  font-size:8px;
-  line-height:1.6;
-}
-/* PLANS */
-.plans{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
-}
-.plan{
-  position:relative;
-  padding:23px;
-  overflow:hidden;
-}
-.plan.popular{
-  border-color:rgba(113,136,255,.38);
-  box-shadow:0 25px 70px rgba(57,79,180,.12);
-}
-.popular-label{
-  position:absolute;
-  top:14px;
-  right:14px;
-  padding:5px 7px;
-  border-radius:5px;
-  color:white;
-  background:#7188ff;
-  font-size:7px;
-  font-weight:950;
-}
-.plan-name{
-  color:#78899e;
-  font-size:8px;
-  font-weight:950;
-  letter-spacing:1.2px;
-}
-.plan-price{
-  margin-top:12px;
-  font-size:28px;
-  font-weight:950;
-}
-.plan p{
-  min-height:40px;
-  color:#718298;
-  font-size:9px;
-  line-height:1.6;
-}
-.plan-button,.security-button{
-  width:100%;
-  padding:10px;
-  border:1px solid var(--line);
-  border-radius:8px;
-  color:white;
-  background:#121d2b;
-  font-size:9px;
-  font-weight:850;
-}
-/* WALLET */
-.wallet-grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:14px;
-}
-.wallet-card{padding:24px}
-.wallet-balance{
-  margin-top:13px;
-  font-size:39px;
-  font-weight:950;
-}
-.wallet-actions{
-  display:flex;
-  gap:8px;
-  margin-top:25px;
-}
-.wallet-action{
-  flex:1;
-  padding:11px;
-  border:1px solid var(--line);
-  border-radius:9px;
-  color:white;
-  background:#121d2b;
-  font-size:9px;
-  font-weight:850;
-}
-.wallet-action.main{
-  border-color:#7188ff;
-  background:#7188ff;
-}
-/* ACTIVITY */
-.transactions{
-  padding:23px;
-  overflow-x:auto;
-}
-.transactions h3{
-  margin:0 0 5px;
-  font-size:16px;
-}
-.transactions-note{
-  margin-bottom:14px;
-  color:#718198;
-  font-size:9px;
-}
-.table{
-  width:100%;
-  min-width:600px;
-  border-collapse:collapse;
-}
-.table th{
-  padding:11px 8px;
-  text-align:left;
-  color:#5e7086;
-  font-size:7px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-.table td{
-  padding:14px 8px;
-  border-top:1px solid var(--line);
-  color:#d5dce5;
-  font-size:9px;
-}
-.complete{
-  color:var(--green);
-  font-weight:850;
-}
-.pending-status{
-  color:var(--gold);
-  font-weight:850;
-}
-/* SECURITY */
-.security{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-.security-card{padding:23px}
-.security-icon{
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  color:var(--cyan);
-  background:rgba(85,220,255,.08);
-}
-.security-card h2{
-  margin:14px 0 7px;
-  font-size:15px;
-}
-.security-card p{
-  color:#718298;
-  font-size:9px;
-  line-height:1.7;
-}
-.security-button{width:auto}
-/* FOOTER */
-.footer{
-  max-width:1250px;
-  margin:auto;
-  padding:30px 25px 60px;
-  color:#53647a;
-  text-align:center;
-  font-size:8px;
-  line-height:1.7;
-}
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(9px);
-}
-.modal.show{display:flex}
-.modal-box{
-  width:100%;
-  max-width:430px;
-  padding:28px;
-  border:1px solid var(--line);
-  border-radius:20px;
-  background:#0d1725;
-  box-shadow:0 35px 100px rgba(0,0,0,.65);
-}
-.close{
-  float:right;
-  border:0;
-  background:none;
-  color:#8997a9;
-  font-size:24px;
-}
-.modal-box h2{
-  margin:0 35px 8px 0;
-}
-.modal-box p{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.7;
-}
-.modal-input{
-  width:100%;
-  padding:12px;
-  color:white;
-  background:#060d16;
-  border:1px solid var(--line);
-  border-radius:9px;
-  outline:none;
-}
-.modal-button{
-  width:100%;
-  margin-top:10px;
-  padding:12px;
-  border:0;
-  border-radius:9px;
-  color:white;
-  background:#7188ff;
-  font-weight:850;
-}
-/* MOBILE */
-@media(max-width:1000px){
-  .header-nav{display:none}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .market,.overview,.wallet-grid,.security{grid-template-columns:1fr}
-}
-@media(max-width:700px){
-  .header{padding:0 16px}
-  .hero{padding-top:45px}
-  .hero h1{
-    font-size:45px;
-    letter-spacing:-2.5px;
-  }
-  .main{
-    padding-left:14px;
-    padding-right:14px;
-  }
-  .stats,.plans{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column}
-  .hero-button{width:100%}
-  .wallet-actions{flex-direction:column}
-  .demo-pill{display:none}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>NEXORA — Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div id="auth">
-  <div class="auth-card">
-    <div class="brand">NEX<span>ORA</span></div>
-    <h1 id="authTitle">Create your account</h1>
-    <p id="authSub">
-      Enter your details to open the NEXORA demonstration dashboard.
-    </p>
-    <form id="authForm">
-      <input
-        id="name"
-        class="input"
-        placeholder="Full name"
-        autocomplete="name"
-        required
-      >
-      <input
-        id="email"
-        class="input"
-        type="email"
-        placeholder="Email address"
-        autocomplete="email"
-        required
-      >
-      <input
-        id="password"
-        class="input"
-        type="password"
-        placeholder="Password"
-        autocomplete="new-password"
-        required
-      >
-      <button class="primary" id="authButton" type="submit">
-        Create account
-      </button>
-    </form>
-    <div class="switch">
-      <span id="switchLabel">Already have an account?</span>
-      <button id="switchMode" type="button">Login</button>
-    </div>
-  </div>
-</div>
-<div id="app" class="hidden">
-<header class="header">
-  <div class="logo">NEX<span>ORA</span></div>
-  <nav class="header-nav">
-    <button onclick="scrollToId('dashboard')">Dashboard</button>
-    <button onclick="scrollToId('plans')">Plans</button>
-    <button onclick="scrollToId('wallet')">Wallet</button>
-    <button onclick="scrollToId('transactions')">Activity</button>
-  </nav>
-  <div class="header-right">
-    <div class="demo-pill">DEMO ENVIRONMENT</div>
-    <div class="avatar" id="avatar">N</div>
-    <button
-      onclick="logout()"
-      style="border:0;background:none;color:#77869a;font-size:9px"
-    >
-      Sign out
-    </button>
-  </div>
-</header>
-<section id="dashboard" class="hero">
-  <div class="hero-kicker">
-    NEXT-GENERATION ACCOUNT PROTOTYPE
-  </div>
-  <h1>
-    Your money.<br>
-    <span class="gradient">Reimagined.</span>
-  </h1>
-  <p>
-    A premium NEXORA interface concept built entirely as a
-    browser-based prototype. Explore the dashboard, wallet,
-    plans and activity experience.
-  </p>
-  <div class="hero-actions">
-    <button
-      class="hero-button primary-button"
-      onclick="scrollToId('wallet')"
-    >
-      Open Wallet →
-    </button>
-    <button
-      class="hero-button"
-      onclick="scrollToId('plans')"
-    >
-      Explore Plans
-    </button>
-  </div>
-</section>
-<main class="main">
-<div class="section-label">ACCOUNT SNAPSHOT</div>
-<section class="stats">
-  <div class="card stat">
-    <div class="stat-label">Total Balance</div>
-    <div class="stat-value">$3,240.75</div>
-    <div class="stat-sub">Illustrative demo balance</div>
-  </div>
-  <div class="card stat">
-    <div class="stat-label">Example Earnings</div>
-    <div class="stat-value">$1,240.50</div>
-    <div class="stat-sub positive">+8.2% example figure</div>
-  </div>
-  <div class="card stat">
-    <div class="stat-label">Active Plans</div>
-    <div class="stat-value">02</div>
-    <div class="stat-sub">Prototype data</div>
-  </div>
-  <div class="card stat">
-    <div class="stat-label">Referral Example</div>
-    <div class="stat-value">$320.25</div>
-    <div class="stat-sub positive">+4.1% example figure</div>
-  </div>
-</section>
-<div class="section-label">MARKET PREVIEW</div>
-<section class="market">
-  <div class="card market-card">
-    <div class="coin">
-      <div class="coin-icon">Ξ</div>
-      <div>
-        <div class="coin-name">Ethereum</div>
-        <div class="coin-symbol">ETH / USDT</div>
+
+  <!-- =========================
+       APP
+  ========================== -->
+
+  <div id="app">
+
+    <!-- HEADER -->
+    <header class="header">
+
+      <div class="brand-area">
+        <div class="logo">N</div>
+
+        <div class="brand-text">
+          <div class="brand">NEXORA</div>
+          <div class="brand-sub">MINE · INVEST · GROW</div>
+        </div>
       </div>
-    </div>
-    <div class="market-price">$—</div>
-    <div class="market-change">+0.00%</div>
-    <div class="market-note">
-      Illustrative market interface — not live data.
-    </div>
-  </div>
-  <div class="card chart-card">
-    <div class="chart-head">
-      <strong>ETH / USDT</strong>
-      <div class="chart-tabs">
-        <span class="active">1D</span>
-        <span>1W</span>
-        <span>1M</span>
-        <span>1Y</span>
-      </div>
-    </div>
-    <div class="chart">
-      <svg viewBox="0 0 800 120" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#7188ff" stop-opacity=".24"/>
-            <stop offset="100%" stop-color="#7188ff" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <path
-          d="M0 91 C55 82 72 96 118 78 S180 65 220 75
-          S282 44 330 57 S390 68 430 42 S490 52 535 31
-          S600 52 645 35 S710 46 760 19 S785 25 800 12
-          L800 120 L0 120 Z"
-          fill="url(#area)"
-        />
-        <path
-          d="M0 91 C55 82 72 96 118 78 S180 65 220 75
-          S282 44 330 57 S390 68 430 42 S490 52 535 31
-          S600 52 645 35 S710 46 760 19 S785 25 800 12"
-          fill="none"
-          stroke="#7188ff"
-          stroke-width="2.5"
-        />
-      </svg>
-    </div>
-    <div class="chart-note">
-      Chart is decorative prototype data.
-    </div>
-  </div>
-</section>
-<div class="section-label">OVERVIEW</div>
-<section class="overview">
-  <div class="card balance-chart">
-    <div class="balance-head">
-      <div>
-        <h2>Balance overview</h2>
-        <small>Illustrative history</small>
-      </div>
-      <div class="demo-pill">DEMO</div>
-    </div>
-    <div class="big-chart">
-      <svg viewBox="0 0 900 170" preserveAspectRatio="none">
-        <defs>
-          <linearGradient id="balanceArea" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#55dcff" stop-opacity=".20"/>
-            <stop offset="100%" stop-color="#55dcff" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <path
-          d="M0 145 C70 138 95 119 155 128
-          S230 96 285 107 S360 83 415 91
-          S485 59 535 72 S605 44 655 54
-          S735 27 790 38 S855 17 900 23
-          L900 170 L0 170 Z"
-          fill="url(#balanceArea)"
-        />
-        <path
-          d="M0 145 C70 138 95 119 155 128
-          S230 96 285 107 S360 83 415 91
-          S485 59 535 72 S605 44 655 54
-          S735 27 790 38 S855 17 900 23"
-          fill="none"
-          stroke="#55dcff"
-          stroke-width="2.5"
-        />
-      </svg>
-    </div>
-    <div class="weeks">
-      <span>Week 1</span>
-      <span>Week 2</span>
-      <span>Week 3</span>
-      <span>Week 4</span>
-    </div>
-  </div>
-  <div class="card status-card">
-    <h2>Account status</h2>
-    <div class="status-top">
-      <span>Profile ready</span>
-      <span class="status-active">Active</span>
-    </div>
-    <div class="progress">
-      <div></div>
-    </div>
-    <div class="profile-percent">
-      Profile setup · 82%
-    </div>
-    <div class="notice">
-      <strong>PROTOTYPE MODE</strong>
-      <p>
-        This interface is designed for demonstration.
-        No real financial transaction is processed.
-      </p>
-    </div>
-  </div>
-</section>
-<div id="plans" class="section-label">PLANS</div>
-<section class="plans">
-  <div class="card plan">
-    <div class="plan-name">STARTER</div>
-    <div class="plan-price">$100</div>
-    <p>
-      Basic account interface and dashboard access.
-    </p>
-    <button
-      class="plan-button"
-      onclick="demoPlan('Starter')"
-    >
-      View plan
-    </button>
-  </div>
-  <div class="card plan popular">
-    <div class="popular-label">POPULAR</div>
-    <div class="plan-name">STANDARD</div>
-    <div class="plan-price">$500</div>
-    <p>
-      Expanded prototype features and reporting.
-    </p>
-    <button
-      class="plan-button"
-      onclick="demoPlan('Standard')"
-    >
-      View plan
-    </button>
-  </div>
-  <div class="card plan">
-    <div class="plan-name">ADVANCED</div>
-    <div class="plan-price">$1,000</div>
-    <p>
-      Advanced account-control interface concept.
-    </p>
-    <button
-      class="plan-button"
-      onclick="demoPlan('Advanced')"
-    >
-      View plan
-    </button>
-  </div>
-</section>
-<div class="notice">
-  <strong>DEMONSTRATION NOTICE</strong>
-  <p>
-    The balances, plans, earnings, market figures and
-    transactions shown here are fictional interface data.
-    This GitHub-only prototype does not provide real
-    investment, mining, payment, deposit or withdrawal
-    services.
-  </p>
-</div>
-<div id="wallet" class="section-label">WALLET</div>
-<section class="wallet-grid">
-  <div class="card wallet-card">
-    <div class="stat-label">YOUR DEMO WALLET</div>
-    <div class="wallet-balance">$3,240.75</div>
-    <div class="stat-sub">
-      Illustrative wallet balance
-    </div>
-    <div class="wallet-actions">
-      <button
-        class="wallet-action main"
-        onclick="demoWallet('Deposit')"
-      >
-        Deposit
+
+      <button class="logout-btn" onclick="logout()">
+        Logout
       </button>
-      <button
-        class="wallet-action"
-        onclick="demoWallet('Withdraw')"
-      >
-        Withdraw
+
+    </header>
+
+
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+
+      <button class="nav-item active" onclick="showPage('dashboard', this)">
+        <span>⌂</span>
+        <span>Dashboard</span>
       </button>
-    </div>
+
+      <button class="nav-item" onclick="showPage('plans', this)">
+        <span>▣</span>
+        <span>My Plans</span>
+      </button>
+
+      <button class="nav-item" onclick="showPage('wallet', this)">
+        <span>▤</span>
+        <span>Wallet</span>
+      </button>
+
+      <button class="nav-item" onclick="showPage('transactions', this)">
+        <span>⇄</span>
+        <span>Transactions</span>
+      </button>
+
+      <button class="nav-item" onclick="showPage('security', this)">
+        <span>◇</span>
+        <span>Security</span>
+      </button>
+
+      <button class="nav-item" onclick="showPage('settings', this)">
+        <span>⚙</span>
+        <span>Settings</span>
+      </button>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+
+      <!-- =========================
+           DASHBOARD
+      ========================== -->
+
+      <section id="dashboard" class="page active">
+
+        <div class="account-label">
+          ACCOUNT
+        </div>
+
+        <h1>Dashboard</h1>
+
+        <p class="welcome">
+          Welcome back, <strong>Jody Swift.</strong>
+        </p>
+
+        <button class="manage-wallet"
+                onclick="showPageByName('wallet')">
+          Manage Wallet
+        </button>
+
+
+        <!-- STAT CARDS -->
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-title">
+              Total Balance
+            </div>
+
+            <div class="stat-value">
+              $3,240.75
+            </div>
+
+            <div class="stat-description">
+              Demo balance
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-title">
+              Total Earnings
+            </div>
+
+            <div class="stat-value">
+              $1,240.50
+            </div>
+
+            <div class="stat-positive">
+              +8.2%
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-title">
+              Active Plans
+            </div>
+
+            <div class="stat-value">
+              2
+            </div>
+
+            <div class="stat-description">
+              Example data
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-title">
+              Referral Earnings
+            </div>
+
+            <div class="stat-value">
+              $320.25
+            </div>
+
+            <div class="stat-positive">
+              +4.1%
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- BALANCE CHART -->
+
+        <div class="chart-card">
+
+          <div class="chart-header">
+            <h2>Balance overview</h2>
+            <span>Demo</span>
+          </div>
+
+          <div class="chart">
+
+            <div class="bar" style="height:35%"></div>
+            <div class="bar" style="height:48%"></div>
+            <div class="bar" style="height:42%"></div>
+            <div class="bar" style="height:63%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:74%"></div>
+            <div class="bar" style="height:68%"></div>
+            <div class="bar" style="height:91%"></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACCOUNT STATUS -->
+
+        <div class="status-card">
+
+          <div>
+            <h3>Account status</h3>
+            <p>Demo account is active</p>
+          </div>
+
+          <div class="active-status">
+            <span class="status-dot"></span>
+            Active
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           PLANS
+      ========================== -->
+
+      <section id="plans" class="page">
+
+        <div class="account-label">
+          INVESTMENTS
+        </div>
+
+        <h1>My Plans</h1>
+
+        <p class="welcome">
+          Your active investment plans.
+        </p>
+
+
+        <div class="plan-grid">
+
+          <div class="plan-card">
+
+            <div class="plan-top">
+              <span class="plan-badge">
+                ACTIVE
+              </span>
+
+              <span class="plan-rate">
+                +8.2%
+              </span>
+            </div>
+
+            <h2>Growth Plan</h2>
+
+            <p>Example investment plan</p>
+
+            <div class="plan-amount">
+              $1,500.00
+            </div>
+
+            <div class="plan-info">
+              <span>Duration</span>
+              <strong>90 Days</strong>
+            </div>
+
+          </div>
+
+
+          <div class="plan-card">
+
+            <div class="plan-top">
+              <span class="plan-badge">
+                ACTIVE
+              </span>
+
+              <span class="plan-rate">
+                +6.5%
+              </span>
+            </div>
+
+            <h2>Premium Plan</h2>
+
+            <p>Example investment plan</p>
+
+            <div class="plan-amount">
+              $1,000.00
+            </div>
+
+            <div class="plan-info">
+              <span>Duration</span>
+              <strong>60 Days</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           WALLET
+      ========================== -->
+
+      <section id="wallet" class="page">
+
+        <div class="account-label">
+          WALLET
+        </div>
+
+        <h1>Wallet</h1>
+
+        <p class="welcome">
+          Manage your demo wallet.
+        </p>
+
+
+        <div class="wallet-card">
+
+          <div class="stat-title">
+            AVAILABLE BALANCE
+          </div>
+
+          <div class="wallet-amount">
+            $3,240.75
+          </div>
+
+          <div class="wallet-label">
+            Demo balance
+          </div>
+
+        </div>
+
+
+        <div class="action-grid">
+
+          <button class="action-card"
+                  onclick="demoAction('Deposit')">
+
+            <span class="action-icon">↓</span>
+
+            <strong>Deposit</strong>
+
+            <small>Add funds</small>
+
+          </button>
+
+
+          <button class="action-card"
+                  onclick="demoAction('Withdraw')">
+
+            <span class="action-icon">↑</span>
+
+            <strong>Withdraw</strong>
+
+            <small>Request withdrawal</small>
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           TRANSACTIONS
+      ========================== -->
+
+      <section id="transactions" class="page">
+
+        <div class="account-label">
+          ACTIVITY
+        </div>
+
+        <h1>Transactions</h1>
+
+        <p class="welcome">
+          Recent wallet activity.
+        </p>
+
+
+        <div class="transactions-card">
+
+          <div class="transaction">
+
+            <div class="transaction-icon">
+              ↓
+            </div>
+
+            <div class="transaction-info">
+
+              <strong>Deposit</strong>
+
+              <span>Aug 20, 2026</span>
+
+            </div>
+
+            <div class="transaction-value positive">
+              +$500.00
+            </div>
+
+          </div>
+
+
+          <div class="transaction">
+
+            <div class="transaction-icon">
+              ↗
+            </div>
+
+            <div class="transaction-info">
+
+              <strong>Plan earnings</strong>
+
+              <span>Aug 18, 2026</span>
+
+            </div>
+
+            <div class="transaction-value positive">
+              +$125.50
+            </div>
+
+          </div>
+
+
+          <div class="transaction">
+
+            <div class="transaction-icon">
+              ↓
+            </div>
+
+            <div class="transaction-info">
+
+              <strong>Referral bonus</strong>
+
+              <span>Aug 15, 2026</span>
+
+            </div>
+
+            <div class="transaction-value positive">
+              +$80.25
+            </div>
+
+          </div>
+
+
+          <div class="transaction">
+
+            <div class="transaction-icon">
+              ↑
+            </div>
+
+            <div class="transaction-info">
+
+              <strong>Withdrawal</strong>
+
+              <span>Aug 12, 2026</span>
+
+            </div>
+
+            <div class="transaction-value negative">
+              -$200.00
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           SECURITY
+      ========================== -->
+
+      <section id="security" class="page">
+
+        <div class="account-label">
+          ACCOUNT
+        </div>
+
+        <h1>Security</h1>
+
+        <p class="welcome">
+          Manage your account security.
+        </p>
+
+
+        <div class="settings-card">
+
+          <div class="setting-row">
+
+            <div>
+              <strong>Account protection</strong>
+              <p>Demo security status</p>
+            </div>
+
+            <span class="secure-badge">
+              Secure
+            </span>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+              <strong>Password</strong>
+              <p>Last updated recently</p>
+            </div>
+
+            <button class="small-button"
+                    onclick="demoAction('Password change')">
+              Change
+            </button>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+              <strong>Two-factor authentication</strong>
+              <p>Additional account protection</p>
+            </div>
+
+            <button class="toggle"
+                    onclick="toggleSecurity(this)">
+              OFF
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =========================
+           SETTINGS
+      ========================== -->
+
+      <section id="settings" class="page">
+
+        <div class="account-label">
+          ACCOUNT
+        </div>
+
+        <h1>Settings</h1>
+
+        <p class="welcome">
+          Manage your account preferences.
+        </p>
+
+
+        <div class="settings-card">
+
+          <div class="setting-row">
+
+            <div>
+              <strong>Display name</strong>
+              <p>Jody Swift</p>
+            </div>
+
+            <button class="small-button"
+                    onclick="demoAction('Edit profile')">
+              Edit
+            </button>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+              <strong>Email notifications</strong>
+              <p>Receive account notifications</p>
+            </div>
+
+            <button class="toggle active"
+                    onclick="toggleSecurity(this)">
+              ON
+            </button>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+              <strong>Demo environment</strong>
+              <p>This dashboard uses example data.</p>
+            </div>
+
+            <span class="demo-badge">
+              DEMO
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
   </div>
-  <div class="card wallet-card">
-    <div class="stat-label">PENDING ACTIVITY</div>
-    <div style="margin-top:15px;font-size:19px;font-weight:900">
-      Withdrawal
-    </div>
-    <div class="pending" style="margin-top:8px">
-      $150.00 · Pending
-    </div>
-    <div class="stat-sub" style="margin-top:12px">
-      Demonstration transaction
-    </div>
-  </div>
-</section>
-<div id="transactions" class="section-label">ACTIVITY</div>
-<section class="card transactions">
-  <h3>Recent activity</h3>
-  <div class="transactions-note">
-    Fictional transactions for interface demonstration.
-  </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Type</th>
-        <th>Status</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Aug 18, 2026</td>
-        <td>Demo deposit</td>
-        <td class="complete">Completed</td>
-        <td class="positive">+$200.00</td>
-      </tr>
-      <tr>
-        <td>Aug 17, 2026</td>
-        <td>Demo withdrawal</td>
-        <td class="pending-status">Pending</td>
-        <td class="pending">-$150.00</td>
-      </tr>
-      <tr>
-        <td>Aug 16, 2026</td>
-        <td>Demo bonus</td>
-        <td class="complete">Completed</td>
-        <td class="positive">+$10.00</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<div class="section-label">SECURITY</div>
-<section class="security">
-  <div class="card security-card">
-    <div class="security-icon">◇</div>
-    <h2>Two-factor authentication</h2>
-    <p>
-      Production applications should use server-side
-      authentication, secure sessions, password hashing
-      and appropriate 2FA.
-    </p>
-    <button
-      class="security-button"
-      onclick="demoSecurity()"
-    >
-      Security details
-    </button>
-  </div>
-  <div class="card security-card">
-    <div class="security-icon">✓</div>
-    <h2>GitHub-only prototype</h2>
-    <p>
-      This version runs entirely in the browser and uses
-      local demo data. It does not connect to a payment
-      processor or financial backend.
-    </p>
-    <button
-      class="security-button"
-      onclick="demoSecurity()"
-    >
-      View details
-    </button>
-  </div>
-</section>
-</main>
-<footer class="footer">
-  NEXORA — Premium account interface prototype.<br>
-  Fictional demonstration data only. No real financial
-  products, investment returns, deposits, withdrawals,
-  payments or mining services are provided.
-</footer>
-</div>
-<div id="modal" class="modal" onclick="modalBackground(event)">
-  <div class="modal-box">
-    <button class="close" onclick="closeModal()">×</button>
-    <h2 id="modalTitle">Demo action</h2>
-    <p id="modalText">
-      This is a demonstration interface only.
-      No real financial transaction will occur.
-    </p>
-    <input
-      id="modalAmount"
-      class="modal-input"
-      type="number"
-      min="0"
-      step="0.01"
-      placeholder="Demo amount"
-    >
-    <button
-      class="modal-button"
-      onclick="demoAction()"
-    >
-      Continue in Demo
-    </button>
-  </div>
-</div>
-<script>
-const STORAGE_KEY="nexora_github_demo_v2";
-let loginMode=false;
-function $(id){
-  return document.getElementById(id);
-}
-function getAccount(){
-  try{
-    return JSON.parse(
-      localStorage.getItem(STORAGE_KEY)||"null"
-    );
-  }catch(error){
-    return null;
-  }
-}
-function saveAccount(account){
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(account)
-  );
-}
-function updateAuthMode(){
-  $("authTitle").textContent=
-    loginMode ? "Welcome back" : "Create your account";
-  $("authSub").textContent=
-    loginMode
-      ? "Login to your NEXORA demonstration dashboard."
-      : "Enter your details to open the NEXORA demonstration dashboard.";
-  $("authButton").textContent=
-    loginMode ? "Login" : "Create account";
-  $("switchLabel").textContent=
-    loginMode ? "New here?" : "Already have an account?";
-  $("switchMode").textContent=
-    loginMode ? "Create account" : "Login";
-  $("name").style.display=
-    loginMode ? "none" : "block";
-  $("name").required=!loginMode;
-}
-$("switchMode").onclick=function(){
-  loginMode=!loginMode;
-  updateAuthMode();
-};
-$("authForm").onsubmit=function(event){
-  event.preventDefault();
-  const email=
-    $("email").value.trim().toLowerCase();
-  const password=
-    $("password").value;
-  if(loginMode){
-    const account=getAccount();
-    if(
-      !account ||
-      account.email!==email ||
-      account.password!==password
-    ){
-      alert(
-        "Demo login failed. Use the same details used to create the demo account."
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    function showPage(pageId, clickedButton) {
+
+      // Hide every page
+      const pages = document.querySelectorAll(".page");
+
+      pages.forEach(function(page) {
+        page.classList.remove("active");
+      });
+
+
+      // Show selected page
+      const selectedPage = document.getElementById(pageId);
+
+      if (selectedPage) {
+        selectedPage.classList.add("active");
+      }
+
+
+      // Remove active state from navigation
+      const navItems = document.querySelectorAll(".nav-item");
+
+      navItems.forEach(function(item) {
+        item.classList.remove("active");
+      });
+
+
+      // Add active state to clicked navigation item
+      if (clickedButton) {
+        clickedButton.classList.add("active");
+      }
+
+
+      // Scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+
+    function showPageByName(pageId) {
+
+      const navItems = document.querySelectorAll(".nav-item");
+
+      let matchingButton = null;
+
+      navItems.forEach(function(button) {
+
+        const text = button.innerText.toLowerCase();
+
+        if (
+          (pageId === "wallet" && text.includes("wallet")) ||
+          (pageId === "dashboard" && text.includes("dashboard"))
+        ) {
+          matchingButton = button;
+        }
+
+      });
+
+      showPage(pageId, matchingButton);
+    }
+
+
+    function logout() {
+
+      const confirmed = confirm(
+        "This is a demo logout. Return to the demo landing page?"
       );
-      return;
+
+      if (confirmed) {
+        alert("Demo logout activated.");
+      }
+
     }
-    showApp(account);
-    return;
-  }
-  const name=
-    $("name").value.trim();
-  if(!name || !email || !password){
-    alert("Please complete all fields.");
-    return;
-  }
-  if(password.length<6){
-    alert(
-      "For this demo, use at least 6 characters."
-    );
-    return;
-  }
-  const account={
-    name,
-    email,
-    password,
-    createdAt:new Date().toISOString()
-  };
-  saveAccount(account);
-  showApp(account);
-};
-function showApp(account){
-  $("auth").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  const firstLetter=
-    account.name
-      .trim()
-      .charAt(0)
-      .toUpperCase();
-  $("avatar").textContent=
-    firstLetter || "N";
-  window.scrollTo(0,0);
-}
-function logout(){
-  $("app").classList.add("hidden");
-  $("auth").classList.remove("hidden");
-  $("authForm").reset();
-  loginMode=true;
-  updateAuthMode();
-  window.scrollTo(0,0);
-}
-function scrollToId(id){
-  const element=$(id);
-  if(element){
-    element.scrollIntoView({
-      behavior:"smooth",
-      block:"start"
-    });
-  }
-}
-function openModal(title,text,amount=true){
-  $("modalTitle").textContent=title;
-  $("modalText").textContent=
-    text ||
-    "This is a demonstration interface only. No real financial transaction will occur.";
-  $("modalAmount").value="";
-  $("modalAmount").style.display=
-    amount ? "block" : "none";
-  $("modal").classList.add("show");
-}
-function closeModal(){
-  $("modal").classList.remove("show");
-}
-function modalBackground(event){
-  if(event.target.id==="modal"){
-    closeModal();
-  }
-}
-function demoAction(){
-  const title=
-    $("modalTitle").textContent;
-  const amount=
-    $("modalAmount").value;
-  const requiresAmount=
-    title==="Deposit" ||
-    title==="Withdraw";
-  if(requiresAmount && !amount){
-    alert("Enter a demonstration amount.");
-    return;
-  }
-  alert(
-    title+
-    " is simulated only."+
-    (
-      amount
-      ? " Demo amount: $"+Number(amount).toFixed(2)
-      : ""
-    )
-  );
-  closeModal();
-}
-function demoWallet(action){
-  openModal(
-    action,
-    action+
-    " is a simulated wallet action. No real money is deposited, withdrawn, transferred or processed.",
-    true
-  );
-}
-function demoPlan(plan){
-  openModal(
-    plan+" Plan",
-    plan+
-    " is an example interface plan for product prototyping. It is not a real financial or investment product.",
-    false
-  );
-}
-function demoSecurity(){
-  openModal(
-    "Security details",
-    "This GitHub-only prototype has no production authentication backend. A real application would require server-side authentication, secure password handling, session protection and appropriate security controls.",
-    false
-  );
-}
-document.addEventListener(
-  "keydown",
-  function(event){
-    if(event.key==="Escape"){
-      closeModal();
+
+
+    function demoAction(action) {
+
+      alert(
+        action +
+        " is currently a demo action."
+      );
+
     }
-  }
-);
-const existing=getAccount();
-if(existing){
-  showApp(existing);
-}else{
-  updateAuthMode();
-}
-</script>
+
+
+    function toggleSecurity(button) {
+
+      const enabled = button.classList.toggle("active");
+
+      button.textContent = enabled
+        ? "ON"
+        : "OFF";
+
+    }
+
+  </script>
+
 </body>
 </html>
